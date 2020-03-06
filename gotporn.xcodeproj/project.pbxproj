@@ -16,6 +16,8 @@
 		50104BA02412B2CC00D6E658 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B9F2412B2CC00D6E658 /* ApiManager.swift */; };
 		50104BA22412B2E500D6E658 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BA12412B2E500D6E658 /* Globals.swift */; };
 		50104BA42412B49C00D6E658 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BA32412B49C00D6E658 /* Settings.swift */; };
+		50104BA62412D19200D6E658 /* RestoreSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BA52412D19200D6E658 /* RestoreSessionViewController.swift */; };
+		50104BA92412DB2800D6E658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BA82412DB2800D6E658 /* Main.storyboard */; };
 		7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		50104B9F2412B2CC00D6E658 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		50104BA12412B2E500D6E658 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		50104BA32412B49C00D6E658 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		50104BA52412D19200D6E658 /* RestoreSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreSessionViewController.swift; sourceTree = "<group>"; };
+		50104BA82412DB2800D6E658 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gotporn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gotporn.debug.xcconfig"; path = "Target Support Files/Pods-gotporn/Pods-gotporn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +87,7 @@
 		50104B942412AD9400D6E658 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				50104BA72412DAE600D6E658 /* TabBarController */,
 				50104B982412B01300D6E658 /* Auth */,
 			);
 			path = UI;
@@ -99,6 +104,7 @@
 		50104B982412B01300D6E658 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				50104BA52412D19200D6E658 /* RestoreSessionViewController.swift */,
 				50104B992412B04400D6E658 /* AuthViewController.swift */,
 				50104B9B2412B05600D6E658 /* Auth.storyboard */,
 			);
@@ -121,6 +127,14 @@
 				50104B9F2412B2CC00D6E658 /* ApiManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		50104BA72412DAE600D6E658 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				50104BA82412DB2800D6E658 /* Main.storyboard */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		9933C5FCEA92005A0C438AB9 /* Frameworks */ = {
@@ -203,6 +217,7 @@
 				50104B9C2412B05600D6E658 /* Auth.storyboard in Resources */,
 				50104B8D2412A94600D6E658 /* LaunchScreen.storyboard in Resources */,
 				50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */,
+				50104BA92412DB2800D6E658 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50104BA42412B49C00D6E658 /* Settings.swift in Sources */,
+				50104BA62412D19200D6E658 /* RestoreSessionViewController.swift in Sources */,
 				50104BA02412B2CC00D6E658 /* ApiManager.swift in Sources */,
 				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
 				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,
@@ -400,7 +416,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 548U86CDFJ;
 				INFOPLIST_FILE = gotporn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -420,7 +436,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 548U86CDFJ;
 				INFOPLIST_FILE = gotporn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

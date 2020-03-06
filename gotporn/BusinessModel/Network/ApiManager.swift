@@ -30,17 +30,15 @@ class ApiManager: NSObject {
             self.signInCompletion = nil
         }
         
+        VKSdk.authorize(["video"])
+    }
+    
+    func wakeUpSession(completion: @escaping (Bool) -> Void) {
         VKSdk.wakeUpSession(["video"]) { (state, error) in
-            switch state {
-                
-            case .authorized:
-                self.signInCompletion?(true)
-                
-            case .initialized:
-                VKSdk.authorize(["video"])
-                
-            default:
-                fatalError("unhandled VKSdk session state: \(state)")
+            if case .authorized = state {
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }
@@ -52,19 +50,21 @@ enum Result<T> {
 }
 
 extension ApiManager: VKSdkDelegate {
-    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
+    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult) {
         print(#function)
     }
     
     func vkSdkUserAuthorizationFailed() {
         print(#function)
+        signInCompletion?(false)
     }
     
-    func vkSdkTokenHasExpired(_ expiredToken: VKAccessToken!) {
+    func vkSdkTokenHasExpired(_ expiredToken: VKAccessToken) {
         print(#function)
     }
     
-    func vkSdkAuthorizationStateUpdated(with result: VKAuthorizationResult!) {
+    func vkSdkAuthorizationStateUpdated(with result: VKAuthorizationResult) {
+        signInCompletion?(result.state == .authorized)
         print(#function)
     }
     
