@@ -18,9 +18,6 @@ class AppCoordinator {
     
     init() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        _ = api
-        requestAuthentication()
-        return
         
         let vc = auth.instantiateInitialViewController { coder -> RestoreSessionViewController? in
             return RestoreSessionViewController(coder: coder) { [unowned self] authorized in
