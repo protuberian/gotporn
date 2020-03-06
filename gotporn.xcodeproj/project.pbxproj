@@ -1,0 +1,459 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50104B812412A94400D6E658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B802412A94400D6E658 /* AppDelegate.swift */; };
+		50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50104B892412A94600D6E658 /* Assets.xcassets */; };
+		50104B8D2412A94600D6E658 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104B8B2412A94600D6E658 /* LaunchScreen.storyboard */; };
+		50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B962412ADD100D6E658 /* AppCoordinator.swift */; };
+		50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B992412B04400D6E658 /* AuthViewController.swift */; };
+		50104B9C2412B05600D6E658 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104B9B2412B05600D6E658 /* Auth.storyboard */; };
+		50104BA02412B2CC00D6E658 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B9F2412B2CC00D6E658 /* ApiManager.swift */; };
+		50104BA22412B2E500D6E658 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BA12412B2E500D6E658 /* Globals.swift */; };
+		50104BA42412B49C00D6E658 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BA32412B49C00D6E658 /* Settings.swift */; };
+		7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0F986BCFAFF42D7EDA9006F9 /* Pods-gotporn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gotporn.release.xcconfig"; path = "Target Support Files/Pods-gotporn/Pods-gotporn.release.xcconfig"; sourceTree = "<group>"; };
+		50104B7D2412A94400D6E658 /* gotporn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gotporn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50104B802412A94400D6E658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		50104B892412A94600D6E658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50104B8C2412A94600D6E658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		50104B8E2412A94600D6E658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50104B962412ADD100D6E658 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		50104B992412B04400D6E658 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		50104B9B2412B05600D6E658 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		50104B9F2412B2CC00D6E658 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		50104BA12412B2E500D6E658 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		50104BA32412B49C00D6E658 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gotporn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gotporn.debug.xcconfig"; path = "Target Support Files/Pods-gotporn/Pods-gotporn.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50104B7A2412A94400D6E658 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50104B742412A94400D6E658 = {
+			isa = PBXGroup;
+			children = (
+				50104B7F2412A94400D6E658 /* gotporn */,
+				50104B7E2412A94400D6E658 /* Products */,
+				D689838FEA825F1ACBBADF92 /* Pods */,
+				9933C5FCEA92005A0C438AB9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		50104B7E2412A94400D6E658 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50104B7D2412A94400D6E658 /* gotporn.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50104B7F2412A94400D6E658 /* gotporn */ = {
+			isa = PBXGroup;
+			children = (
+				50104B802412A94400D6E658 /* AppDelegate.swift */,
+				50104B9D2412B28400D6E658 /* BusinessModel */,
+				50104B952412AD9F00D6E658 /* Navigation */,
+				50104B942412AD9400D6E658 /* UI */,
+				50104B892412A94600D6E658 /* Assets.xcassets */,
+				50104B8B2412A94600D6E658 /* LaunchScreen.storyboard */,
+				50104B8E2412A94600D6E658 /* Info.plist */,
+			);
+			path = gotporn;
+			sourceTree = "<group>";
+		};
+		50104B942412AD9400D6E658 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				50104B982412B01300D6E658 /* Auth */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		50104B952412AD9F00D6E658 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				50104B962412ADD100D6E658 /* AppCoordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		50104B982412B01300D6E658 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				50104B992412B04400D6E658 /* AuthViewController.swift */,
+				50104B9B2412B05600D6E658 /* Auth.storyboard */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		50104B9D2412B28400D6E658 /* BusinessModel */ = {
+			isa = PBXGroup;
+			children = (
+				50104B9E2412B2A800D6E658 /* Network */,
+				50104BA12412B2E500D6E658 /* Globals.swift */,
+				50104BA32412B49C00D6E658 /* Settings.swift */,
+			);
+			path = BusinessModel;
+			sourceTree = "<group>";
+		};
+		50104B9E2412B2A800D6E658 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				50104B9F2412B2CC00D6E658 /* ApiManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9933C5FCEA92005A0C438AB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D689838FEA825F1ACBBADF92 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */,
+				0F986BCFAFF42D7EDA9006F9 /* Pods-gotporn.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50104B7C2412A94400D6E658 /* gotporn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50104B912412A94600D6E658 /* Build configuration list for PBXNativeTarget "gotporn" */;
+			buildPhases = (
+				2DDC64BB07455C0572C807DA /* [CP] Check Pods Manifest.lock */,
+				50104B792412A94400D6E658 /* Sources */,
+				50104B7A2412A94400D6E658 /* Frameworks */,
+				50104B7B2412A94400D6E658 /* Resources */,
+				2DC0AEC4DB9F60175304BF42 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gotporn;
+			productName = gotporn;
+			productReference = 50104B7D2412A94400D6E658 /* gotporn.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50104B752412A94400D6E658 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = kimdenis;
+				TargetAttributes = {
+					50104B7C2412A94400D6E658 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 50104B782412A94400D6E658 /* Build configuration list for PBXProject "gotporn" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50104B742412A94400D6E658;
+			productRefGroup = 50104B7E2412A94400D6E658 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50104B7C2412A94400D6E658 /* gotporn */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50104B7B2412A94400D6E658 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50104B9C2412B05600D6E658 /* Auth.storyboard in Resources */,
+				50104B8D2412A94600D6E658 /* LaunchScreen.storyboard in Resources */,
+				50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2DC0AEC4DB9F60175304BF42 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gotporn/Pods-gotporn-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gotporn/Pods-gotporn-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gotporn/Pods-gotporn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2DDC64BB07455C0572C807DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gotporn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50104B792412A94400D6E658 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50104BA42412B49C00D6E658 /* Settings.swift in Sources */,
+				50104BA02412B2CC00D6E658 /* ApiManager.swift in Sources */,
+				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
+				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,
+				50104BA22412B2E500D6E658 /* Globals.swift in Sources */,
+				50104B812412A94400D6E658 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		50104B8B2412A94600D6E658 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50104B8C2412A94600D6E658 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50104B8F2412A94600D6E658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		50104B902412A94600D6E658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50104B922412A94600D6E658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 548U86CDFJ;
+				INFOPLIST_FILE = gotporn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.kimdenis.gotporn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		50104B932412A94600D6E658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F986BCFAFF42D7EDA9006F9 /* Pods-gotporn.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 548U86CDFJ;
+				INFOPLIST_FILE = gotporn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.kimdenis.gotporn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50104B782412A94400D6E658 /* Build configuration list for PBXProject "gotporn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50104B8F2412A94600D6E658 /* Debug */,
+				50104B902412A94600D6E658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50104B912412A94600D6E658 /* Build configuration list for PBXNativeTarget "gotporn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50104B922412A94600D6E658 /* Debug */,
+				50104B932412A94600D6E658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50104B752412A94400D6E658 /* Project object */;
+}
