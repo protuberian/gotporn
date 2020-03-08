@@ -17,6 +17,8 @@ class AppCoordinator {
     private let main = UIStoryboard(name: "Main", bundle: nil)
     
     init() {
+        _ = db
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let vc = auth.instantiateInitialViewController { coder -> RestoreSessionViewController? in

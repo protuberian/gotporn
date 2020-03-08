@@ -9,3 +9,4 @@
 import Foundation
 
 let api = ApiManager()
+let db = Database()

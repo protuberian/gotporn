@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SearchViewController: KeyboardObserverViewController {
     @IBOutlet var tableView: UITableView!
@@ -16,11 +17,33 @@ class SearchViewController: KeyboardObserverViewController {
     private let panRecognizer = UIPanGestureRecognizer()
     private var additionalSafeAreaMaxBottomValue: CGFloat = 0
     
+    private var model: NSFetchedResultsController<Video> = {
+        let request: NSFetchRequest<Video> = Video.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
+        let controller = NSFetchedResultsController(fetchRequest: request,
+                                                    managedObjectContext: db.container.viewContext,
+                                                    sectionNameKeyPath: nil,
+                                                    cacheName: nil)
+        return controller
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         panRecognizer.delegate = self
         panRecognizer.addTarget(self, action: #selector(handlePan(recognizer:)))
         view.addGestureRecognizer(panRecognizer)
+        
+        model.delegate = self
+        
+        try? model.performFetch()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tableView.contentInset.top = view.safeAreaInsets.top
+        tableView.contentInset.bottom = view.safeAreaInsets.bottom + searchBar.frame.height
     }
     
     override func keyboardWillChangeFrame(notification: Notification) {
@@ -37,6 +60,7 @@ class SearchViewController: KeyboardObserverViewController {
         
         additionalSafeAreaInsets.bottom = max(0, overlap)
         additionalSafeAreaMaxBottomValue = additionalSafeAreaInsets.bottom
+        
         view.layoutIfNeeded()
     }
     
@@ -62,13 +86,47 @@ extension SearchViewController: UIGestureRecognizerDelegate {
 }
 
 extension SearchViewController: UISearchBarDelegate {
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .bottom
+    }
+    
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(false)
         guard let query = searchBar.text, query.count > 0 else { return }
         let parameters = SearchParameters(query: query)
         api.search(parameters: parameters)
+    }
+}
+
+extension SearchViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+    }
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return model.sections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.sections![section].numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoCell
+        let video = model.object(at: indexPath)
+        cell.updateWith(imageURL: video.photo320!, title: video.title!, duration: Int(video.duration))
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

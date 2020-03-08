@@ -16,6 +16,7 @@ struct SearchResult {
     
     init?(response: Data) {
         let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         do {
             let dto = try decoder.decode(VideoSearchResultDTO.self, from: response)
@@ -37,7 +38,11 @@ struct VideoSearchResultDTO: Codable {
         let items: [Video]
         
         struct Video: Codable {
+            let id: Int
             let title: String
+            let duration: Int
+            let accessKey: String?
+            let photo320: URL
         }
     }
 }
