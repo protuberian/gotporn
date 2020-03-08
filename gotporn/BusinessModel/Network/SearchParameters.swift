@@ -10,4 +10,7 @@ import Foundation
 
 struct SearchParameters {
     var query: String
+    var offset: UInt
+    var count: UInt //200 max
+    
 }

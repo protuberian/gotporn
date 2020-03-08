@@ -4,11 +4,13 @@
         <attribute name="accessKey" optional="YES" attributeType="String"/>
         <attribute name="duration" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="ownerId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="photo320" attributeType="URI"/>
+        <attribute name="player" attributeType="URI"/>
         <attribute name="sortIndex" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Video" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Video" positionX="-63" positionY="-18" width="128" height="163"/>
     </elements>
 </model>

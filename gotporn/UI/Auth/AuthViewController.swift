@@ -19,7 +19,7 @@ class AuthViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("use init?(coder:, completion:)")
+        fatalError("use init?(coder: completion:)")
     }
     
     override func viewDidLoad() {

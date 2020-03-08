@@ -39,10 +39,23 @@ struct VideoSearchResultDTO: Codable {
         
         struct Video: Codable {
             let id: Int
+            let ownerId: Int
             let title: String
             let duration: Int
             let accessKey: String?
-            let photo320: URL
+            let image: [Image]
+            let player: URL?
+            let contentRestricted: Int?
+            
+            var thumb: URL {
+                let bigImages = image.filter({$0.width >= 320})
+                return bigImages.first?.url ?? image[0].url
+            }
+        }
+        
+        struct Image: Codable {
+            let url: URL
+            let width: Int
         }
     }
 }

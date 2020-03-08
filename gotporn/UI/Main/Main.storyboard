@@ -7,25 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
-        <scene sceneID="0pQ-Rf-FGS">
-            <objects>
-                <tableViewController id="pY7-JY-KmJ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W4P-Kd-rJU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="pY7-JY-KmJ" id="SJ4-kn-U3g"/>
-                            <outlet property="delegate" destination="pY7-JY-KmJ" id="Tyk-kH-5fQ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Kcn-aL-Pi3"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wi8-rg-Xf6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-833" y="274"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="35K-Db-BuO">
             <objects>
@@ -36,12 +17,41 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pY7-JY-KmJ" kind="relationship" relationship="rootViewController" id="nCU-g4-dTo"/>
+                        <segue destination="cTZ-xD-m7S" kind="relationship" relationship="rootViewController" id="scu-1Y-L7Y"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEg-0y-1IJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1845" y="274"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="ghG-ik-mDq">
+            <objects>
+                <viewController id="cTZ-xD-m7S" customClass="SettingsViewController" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1wH-Io-rd7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-Cw-Qw3">
+                                <rect key="frame" x="136" y="269" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="buttonLogoutTap:" destination="cTZ-xD-m7S" eventType="touchUpInside" id="dc3-Yb-zPF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ccX-Cw-Qw3" firstAttribute="centerX" secondItem="1wH-Io-rd7" secondAttribute="centerX" id="Jlf-w9-qMp"/>
+                            <constraint firstItem="ccX-Cw-Qw3" firstAttribute="centerY" secondItem="1wH-Io-rd7" secondAttribute="centerY" id="vWF-1p-6EI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="r5f-Mr-IoL"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oR0-6q-Znl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MVy-5X-CQh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-834" y="274"/>
         </scene>
         <!--Watch-->
         <scene sceneID="uWV-er-s6h">
@@ -68,7 +78,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-7M-kzD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" delaysContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-7M-kzD">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="56"/>

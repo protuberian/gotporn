@@ -26,6 +26,9 @@
 		50104BB7241524BA00D6E658 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BB6241524BA00D6E658 /* ErrorHandling.swift */; };
 		50104BBA2415272E00D6E658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50104BB82415272E00D6E658 /* Model.xcdatamodeld */; };
 		50104BC32415306600D6E658 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC22415306600D6E658 /* VideoCell.swift */; };
+		50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC52415486100D6E658 /* PlayerViewController.swift */; };
+		50104BC82415487200D6E658 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BC72415487200D6E658 /* Player.storyboard */; };
+		50104BCA2415508600D6E658 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC92415508600D6E658 /* SettingsViewController.swift */; };
 		7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,9 @@
 		50104BB6241524BA00D6E658 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		50104BB92415272E00D6E658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		50104BC22415306600D6E658 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		50104BC52415486100D6E658 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		50104BC72415487200D6E658 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
+		50104BC92415508600D6E658 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gotporn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gotporn.debug.xcconfig"; path = "Target Support Files/Pods-gotporn/Pods-gotporn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,8 +111,9 @@
 			children = (
 				50104BBF2415304000D6E658 /* Cells */,
 				50104BAC2412E75C00D6E658 /* Base */,
-				50104BA72412DAE600D6E658 /* Main */,
 				50104B982412B01300D6E658 /* Auth */,
+				50104BA72412DAE600D6E658 /* Main */,
+				50104BC42415483D00D6E658 /* Player */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -156,6 +163,7 @@
 			children = (
 				50104BA82412DB2800D6E658 /* Main.storyboard */,
 				50104BAA2412E64F00D6E658 /* SearchViewController.swift */,
+				50104BC92415508600D6E658 /* SettingsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -183,6 +191,15 @@
 				50104BC22415306600D6E658 /* VideoCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		50104BC42415483D00D6E658 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				50104BC52415486100D6E658 /* PlayerViewController.swift */,
+				50104BC72415487200D6E658 /* Player.storyboard */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		9933C5FCEA92005A0C438AB9 /* Frameworks */ = {
@@ -264,6 +281,7 @@
 			files = (
 				50104B9C2412B05600D6E658 /* Auth.storyboard in Resources */,
 				50104B8D2412A94600D6E658 /* LaunchScreen.storyboard in Resources */,
+				50104BC82415487200D6E658 /* Player.storyboard in Resources */,
 				50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */,
 				50104BA92412DB2800D6E658 /* Main.storyboard in Resources */,
 			);
@@ -319,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50104BB224151F4100D6E658 /* SearchResult.swift in Sources */,
+				50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */,
 				50104BA42412B49C00D6E658 /* Settings.swift in Sources */,
 				50104BA62412D19200D6E658 /* RestoreSessionViewController.swift in Sources */,
 				50104BBA2415272E00D6E658 /* Model.xcdatamodeld in Sources */,
@@ -329,6 +348,7 @@
 				50104BB52415246100D6E658 /* Database.swift in Sources */,
 				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
 				50104BB7241524BA00D6E658 /* ErrorHandling.swift in Sources */,
+				50104BCA2415508600D6E658 /* SettingsViewController.swift in Sources */,
 				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,
 				50104BAE2412E78200D6E658 /* KeyboardObserverViewController.swift in Sources */,
 				50104BA22412B2E500D6E658 /* Globals.swift in Sources */,

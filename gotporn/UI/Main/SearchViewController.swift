@@ -27,6 +27,9 @@ class SearchViewController: KeyboardObserverViewController {
         return controller
     }()
     
+    private var needScrollToTop = true
+    
+    //MARK: - Lifecycle & UI
     override func viewDidLoad() {
         super.viewDidLoad()
         panRecognizer.delegate = self
@@ -44,6 +47,11 @@ class SearchViewController: KeyboardObserverViewController {
         super.viewWillLayoutSubviews()
         tableView.contentInset.top = view.safeAreaInsets.top
         tableView.contentInset.bottom = view.safeAreaInsets.bottom + searchBar.frame.height
+        
+        if needScrollToTop {
+            needScrollToTop = false
+            tableView.setContentOffset(CGPoint.init(x: 0, y: -view.safeAreaInsets.top), animated: false)
+        }
     }
     
     override func keyboardWillChangeFrame(notification: Notification) {
@@ -98,17 +106,19 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(false)
         guard let query = searchBar.text, query.count > 0 else { return }
-        let parameters = SearchParameters(query: query)
+        let parameters = SearchParameters(query: query, offset: 3, count: 30)
         api.search(parameters: parameters)
     }
 }
 
+// MARK: - Model observing
 extension SearchViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
 }
 
+// MARK: - UITableView
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -126,7 +136,25 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let video = model.object(at: indexPath)
+        
+        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
+        
+        guard
+            let vc = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
+                return PlayerViewController(coder: coder, url: URL(string: url)!)
+            })
+            else {
+                handleError("not working")
+                return
+        }
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.present(vc, animated: true, completion: nil)
+        }
+        
     }
 }
