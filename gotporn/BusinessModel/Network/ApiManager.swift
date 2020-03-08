@@ -42,6 +42,29 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    func search(parameters: SearchParameters) {
+        let request = VKRequest(method: "video.search", parameters: mapSearchParameters(parameters))
+        request?.execute(resultBlock: { response in
+            guard
+                let data = response?.responseString.data(using: .utf8),
+                let result = SearchResult(response: data)
+            else {
+                print("error mapping response")
+                return
+            }
+            
+            let titles = result.videos.map {$0.title}
+            print(titles)
+            
+        }, errorBlock: { error in
+            print(error)
+        })
+    }
+    
+    private func mapSearchParameters(_ parameters: SearchParameters) -> [AnyHashable: Any] {
+        return ["q": parameters.query]
+    }
 }
 
 enum Result<T> {

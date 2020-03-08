@@ -20,6 +20,8 @@
 		50104BA92412DB2800D6E658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BA82412DB2800D6E658 /* Main.storyboard */; };
 		50104BAB2412E64F00D6E658 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BAA2412E64F00D6E658 /* SearchViewController.swift */; };
 		50104BAE2412E78200D6E658 /* KeyboardObserverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BAD2412E78200D6E658 /* KeyboardObserverViewController.swift */; };
+		50104BB024151B0F00D6E658 /* SearchParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BAF24151B0F00D6E658 /* SearchParameters.swift */; };
+		50104BB224151F4100D6E658 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BB124151F4100D6E658 /* SearchResult.swift */; };
 		7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		50104BA82412DB2800D6E658 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		50104BAA2412E64F00D6E658 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		50104BAD2412E78200D6E658 /* KeyboardObserverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserverViewController.swift; sourceTree = "<group>"; };
+		50104BAF24151B0F00D6E658 /* SearchParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameters.swift; sourceTree = "<group>"; };
+		50104BB124151F4100D6E658 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gotporn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gotporn.debug.xcconfig"; path = "Target Support Files/Pods-gotporn/Pods-gotporn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				50104B9F2412B2CC00D6E658 /* ApiManager.swift */,
+				50104BAF24151B0F00D6E658 /* SearchParameters.swift */,
+				50104BB124151F4100D6E658 /* SearchResult.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -284,9 +290,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50104BB224151F4100D6E658 /* SearchResult.swift in Sources */,
 				50104BA42412B49C00D6E658 /* Settings.swift in Sources */,
 				50104BA62412D19200D6E658 /* RestoreSessionViewController.swift in Sources */,
 				50104BAB2412E64F00D6E658 /* SearchViewController.swift in Sources */,
+				50104BB024151B0F00D6E658 /* SearchParameters.swift in Sources */,
 				50104BA02412B2CC00D6E658 /* ApiManager.swift in Sources */,
 				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
 				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,

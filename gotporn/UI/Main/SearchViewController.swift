@@ -60,3 +60,15 @@ extension SearchViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text, query.count > 0 else { return }
+        let parameters = SearchParameters(query: query)
+        api.search(parameters: parameters)
+    }
+}
