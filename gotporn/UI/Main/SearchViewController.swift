@@ -29,6 +29,8 @@ class SearchViewController: KeyboardObserverViewController {
     
     private var needScrollToTop = true
     
+    private var parameters = SearchParameters(query: "", offset: 0, count: 200)
+    
     //MARK: - Lifecycle & UI
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +108,13 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(false)
         guard let query = searchBar.text, query.count > 0 else { return }
-        let parameters = SearchParameters(query: query, offset: 3, count: 30)
+        parameters.query = query
+        parameters.offset = 0
+        
+        loadMore()
+    }
+    
+    func loadMore() {
         api.search(parameters: parameters)
     }
 }
@@ -156,5 +164,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 //            self.present(vc, animated: true, completion: nil)
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: 0)-1 {
+            parameters.offset = UInt(tableView.numberOfRows(inSection: 0))
+            loadMore()
+        }
     }
 }

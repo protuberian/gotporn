@@ -100,10 +100,19 @@ class ApiManager: NSObject {
 //        })
 //    }
     
+    private var searchInProgress: Bool = false
+    private var restricted: Int = 0
     func search(parameters: SearchParameters) {
+        
+        guard !searchInProgress else { return }
+        searchInProgress = true
+        
         db.save({ context in
-            let request: NSFetchRequest<Video> = Video.fetchRequest()
-            db.fetch(request, inContext: context).forEach { context.delete($0) }
+            if parameters.offset == 0 {
+                self.restricted = 0
+                let request: NSFetchRequest<Video> = Video.fetchRequest()
+                db.fetch(request, inContext: context).forEach { context.delete($0) }
+            }
             
         }, completion: { _ in
             let request = VKRequest(method: "video.search", parameters: self.mapSearchParameters(parameters))
@@ -117,13 +126,18 @@ class ApiManager: NSObject {
                 }
                 
                 let titles = result.videos.map {$0.title}
+                
+                print("offset: \(parameters.offset)")
+                print("restricted: \(self.restricted)")
+                print("total: \(result.total)")
                 print(titles)
                 
                 
-                db.save { context in
+                db.save({ context in
                     
                     for (index, dto) in result.videos.enumerated() {
                         if dto.contentRestricted == 1 {
+                            self.restricted += 1
                             continue
                         }
                         let request: NSFetchRequest<Video> = Video.fetchRequest()
@@ -138,7 +152,9 @@ class ApiManager: NSObject {
                         video.photo320 = dto.thumb
                         video.player = dto.player
                     }
-                }
+                }, completion: { _ in
+                    self.searchInProgress = false
+                })
                 
             }, errorBlock: { error in
                 print(error)
@@ -149,7 +165,12 @@ class ApiManager: NSObject {
     private func mapSearchParameters(_ parameters: SearchParameters) -> [AnyHashable: Any] {
         return [
             "q": parameters.query,
-            "adult": "1"
+            "offset": parameters.offset,
+            "sort": 0,
+            "adult": 1,
+            "hd": 1,
+            "filters":"mp4",
+            "longer": 300
         ]
     }
     
