@@ -29,7 +29,7 @@ class SearchViewController: KeyboardObserverViewController {
     
     private var needScrollToTop = true
     
-    private var parameters = SearchParameters(query: "", offset: 0, count: 200)
+    private var parameters = SearchParameters(query: "", offset: 0, count: 20)
     
     //MARK: - Lifecycle & UI
     override func viewDidLoad() {
@@ -148,11 +148,24 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         let video = model.object(at: indexPath)
         
-        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
+//        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
+        let variants = [
+//            video.qhls,
+            video.q1080,
+            video.q720,
+            video.q480,
+            video.q360,
+            video.q240
+            ].compactMap({$0})
+        
+        guard let url = variants.first else {
+            print("video not found")
+            return
+        }
         
         guard
             let vc = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
-                return PlayerViewController(coder: coder, url: URL(string: url)!)
+                return PlayerViewController(coder: coder, url: url)
             })
             else {
                 handleError("not working")
@@ -168,8 +181,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: 0)-1 {
-            parameters.offset = UInt(tableView.numberOfRows(inSection: 0))
-            loadMore()
+            
+            let newOffset = UInt(tableView.numberOfRows(inSection: 0))
+            if newOffset != parameters.offset {
+                parameters.offset = newOffset
+                loadMore()
+            }
         }
     }
 }

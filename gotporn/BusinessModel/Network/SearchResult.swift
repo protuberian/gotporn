@@ -16,7 +16,6 @@ struct SearchResult {
     
     init?(response: Data) {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         do {
             let dto = try decoder.decode(VideoSearchResultDTO.self, from: response)
@@ -24,7 +23,7 @@ struct SearchResult {
             videos = dto.response.items
             return
         } catch {
-            print(error)
+            handleError(error)
         }
         return nil
     }
@@ -46,10 +45,41 @@ struct VideoSearchResultDTO: Codable {
             let image: [Image]
             let player: URL?
             let contentRestricted: Int?
+            let files: Files?
+            
+            enum CodingKeys: String, CodingKey {
+                case id = "id"
+                case ownerId = "owner_id"
+                case title = "title"
+                case duration = "duration"
+                case accessKey = "accessKey"
+                case image = "image"
+                case player = "player"
+                case contentRestricted = "content_restricted"
+                case files = "files"
+            }
             
             var thumb: URL {
                 let bigImages = image.filter({$0.width >= 320})
                 return bigImages.first?.url ?? image[0].url
+            }
+        }
+        
+        struct Files: Codable {
+            let q240: URL?
+            let q360: URL?
+            let q480: URL?
+            let q720: URL?
+            let q1080: URL?
+            let qhls: URL
+            
+            enum CodingKeys: String, CodingKey {
+                case q240 = "mp4_240"
+                case q360 = "mp4_360"
+                case q480 = "mp4_480"
+                case q720 = "mp4_720"
+                case q1080 = "mp4_1080"
+                case qhls = "hls"
             }
         }
         

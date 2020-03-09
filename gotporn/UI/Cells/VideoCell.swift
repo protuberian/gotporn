@@ -28,7 +28,10 @@ class VideoCell: UITableViewCell {
     }
     
     func updateWith(imageURL: URL, title: String, duration: Int) {
-        titleLabel.text = title
+        let min = duration/60
+        let sec = duration % 60
+        
+        titleLabel.text = String(format: "[%02i:%02i] %@", min, sec, title)
         
         thumbLoadingTask?.cancel()
         thumbLoadingTask = api.getImage(url: imageURL) { [weak self] image in

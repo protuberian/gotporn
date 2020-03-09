@@ -7,10 +7,16 @@
         <attribute name="ownerId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="photo320" attributeType="URI"/>
         <attribute name="player" attributeType="URI"/>
+        <attribute name="q240" optional="YES" attributeType="URI"/>
+        <attribute name="q360" optional="YES" attributeType="URI"/>
+        <attribute name="q480" optional="YES" attributeType="URI"/>
+        <attribute name="q720" optional="YES" attributeType="URI"/>
+        <attribute name="q1080" optional="YES" attributeType="URI"/>
+        <attribute name="qhls" optional="YES" attributeType="URI"/>
         <attribute name="sortIndex" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Video" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Video" positionX="-63" positionY="-18" width="128" height="253"/>
     </elements>
 </model>

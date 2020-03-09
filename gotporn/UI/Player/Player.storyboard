@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JWh-ii-LMA">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,15 +12,104 @@
             <objects>
                 <viewController id="JWh-ii-LMA" customClass="PlayerViewController" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kgp-Qm-f7M">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBw-Qf-e0h" customClass="PlayerView" customModule="gotporn" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRf-WA-ejx">
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-nB-FIH">
+                                        <rect key="frame" x="504" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="26t-zU-bew"/>
+                                            <constraint firstAttribute="width" constant="64" id="j9Q-rV-dAX"/>
+                                        </constraints>
+                                        <state key="normal" image="multiply" catalog="system"/>
+                                        <connections>
+                                            <action selector="closeTap:" destination="JWh-ii-LMA" eventType="touchUpInside" id="qiH-Qn-Tsk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1c-gh-HOQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="82" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="4dp-Sp-Fdr"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="mirror"/>
+                                        <connections>
+                                            <action selector="mirrorTap:" destination="JWh-ii-LMA" eventType="touchUpInside" id="SJr-Xy-F4f"/>
+                                        </connections>
+                                    </button>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FoF-sc-Fl2">
+                                        <rect key="frame" x="331" y="274" width="227" height="2"/>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="FoF-sc-Fl2" firstAttribute="width" secondItem="YRf-WA-ejx" secondAttribute="width" multiplier="2:5" id="59x-bp-EB5"/>
+                                    <constraint firstItem="b1c-gh-HOQ" firstAttribute="leading" secondItem="p89-B1-xR7" secondAttribute="leading" id="GNC-Hq-T3t"/>
+                                    <constraint firstItem="b1c-gh-HOQ" firstAttribute="top" secondItem="p89-B1-xR7" secondAttribute="top" id="HfH-z6-GcW"/>
+                                    <constraint firstItem="qRK-nB-FIH" firstAttribute="top" secondItem="p89-B1-xR7" secondAttribute="top" id="S1H-ae-4CZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="FoF-sc-Fl2" secondAttribute="trailing" constant="10" id="iQR-43-r8Z"/>
+                                    <constraint firstItem="p89-B1-xR7" firstAttribute="trailing" secondItem="qRK-nB-FIH" secondAttribute="trailing" id="iUp-pM-FLe"/>
+                                    <constraint firstItem="p89-B1-xR7" firstAttribute="bottom" secondItem="FoF-sc-Fl2" secondAttribute="bottom" constant="44" id="ibC-xT-6cr"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="p89-B1-xR7"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="bmr-nB-6wy" appends="YES" id="UhS-Jt-iXs"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="Zgh-Bk-E8J"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="RBw-Qf-e0h" firstAttribute="leading" secondItem="kgp-Qm-f7M" secondAttribute="leading" id="94q-SK-1rZ"/>
+                            <constraint firstAttribute="trailing" secondItem="RBw-Qf-e0h" secondAttribute="trailing" id="ZH0-wM-15o"/>
+                            <constraint firstItem="YRf-WA-ejx" firstAttribute="top" secondItem="kgp-Qm-f7M" secondAttribute="top" id="bxV-bI-6MJ"/>
+                            <constraint firstAttribute="bottom" secondItem="RBw-Qf-e0h" secondAttribute="bottom" id="hb7-7y-v1o"/>
+                            <constraint firstItem="YRf-WA-ejx" firstAttribute="leading" secondItem="kgp-Qm-f7M" secondAttribute="leading" id="j5r-Mq-Dgt"/>
+                            <constraint firstAttribute="trailing" secondItem="YRf-WA-ejx" secondAttribute="trailing" id="lhk-1i-CHQ"/>
+                            <constraint firstAttribute="bottom" secondItem="YRf-WA-ejx" secondAttribute="bottom" id="qR3-eL-0uL"/>
+                            <constraint firstItem="RBw-Qf-e0h" firstAttribute="top" secondItem="kgp-Qm-f7M" secondAttribute="top" id="wVd-0h-qbS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Z3X-79-gNj"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="u6U-nL-GYs" appends="YES" id="2cz-7C-3tj"/>
+                            <outletCollection property="gestureRecognizers" destination="Rpn-76-pfV" appends="YES" id="gxo-co-dW6"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="controlView" destination="YRf-WA-ejx" id="Rzb-xJ-e4E"/>
+                        <outlet property="playerView" destination="RBw-Qf-e0h" id="TcW-wN-s4k"/>
+                        <outlet property="progressView" destination="FoF-sc-Fl2" id="JEy-7v-P3m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UV0-1v-7CM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="bmr-nB-6wy">
+                    <connections>
+                        <action selector="tapControlView:" destination="JWh-ii-LMA" id="AV8-yo-yz8"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="u6U-nL-GYs">
+                    <connections>
+                        <action selector="tapPlayerView:" destination="JWh-ii-LMA" id="wZJ-ko-Lfr"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Rpn-76-pfV">
+                    <connections>
+                        <action selector="handlePan:" destination="JWh-ii-LMA" id="23b-oa-ALC"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-71" y="133"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="multiply" catalog="system" width="64" height="54"/>
+    </resources>
 </document>

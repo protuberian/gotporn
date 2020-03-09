@@ -23,8 +23,10 @@ class RestoreSessionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        api.wakeUpSession { [weak self] authorized in
-            self?.completion(authorized)
-        }
+//        api.wakeUpSession { [weak self] authorized in
+//            self?.completion(authorized)
+//        }
+        
+        completion(true)
     }
 }
