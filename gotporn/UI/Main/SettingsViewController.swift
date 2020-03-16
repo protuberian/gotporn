@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import VK_ios_sdk
 
 class SettingsViewController: UIViewController {
+    
+    var onLogout: () -> Void = {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,6 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func buttonLogoutTap(_ sender: Any) {
-        VKSdk.forceLogout()
+        onLogout()
     }
 }

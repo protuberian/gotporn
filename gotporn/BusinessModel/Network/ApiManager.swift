@@ -7,55 +7,67 @@
 //
 
 import Foundation
-import VK_ios_sdk
 import CoreData
 import UIKit
 
-let token = "token"
+let authURL = "https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username={USERNAME}&password={PASSWORD}&scope=video"
 
 class ApiManager: NSObject {
     
+    var token: String? {
+        get {
+            Settings.value(.token)
+        }
+        set {
+            Settings.set(value: newValue, for: .token)
+        }
+    }
+    
     var authorized: Bool {
-        return VKSdk.accessToken() != nil
+        return token != nil
     }
     
     let urlSession = URLSession(configuration: URLSessionConfiguration.default)
     
-    private var signInCompletion: ((Bool) -> Void)?
-    
-    override init() {
-        super.init()
-        VKSdk.initialize(withAppId: "7348606", apiVersion: "5.103")
-//        VKSdk.initialize(withAppId: "3140623")
-        VKSdk.instance()?.register(self)
-
-        URLCache.shared = URLCache(memoryCapacity: 512*1024*1024, diskCapacity: 512*1024*1024)
-    }
-    
-    func signIn(completion: @escaping (Bool) -> Void) {
-        
-        signInCompletion = { result in
-            completion(result)
-            self.signInCompletion = nil
-        }
-        
-        VKSdk.authorize(["video"])
-    }
-    
-    func wakeUpSession(completion: @escaping (Bool) -> Void) {
-        VKSdk.wakeUpSession(["video"]) { (state, error) in
-            if case .authorized = state {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
     private var searchInProgress: Bool = false
     private var restricted: Int = 0
     
-    func search(parameters: SearchParameters) {
+    override init() {
+        super.init()
+        URLCache.shared = URLCache(memoryCapacity: 512*1024*1024, diskCapacity: 512*1024*1024)
+    }
+    
+    func signIn(login: String, password: String, completion: @escaping (Bool) -> Void) {
+        let safeLogin = login.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let safePassword = password.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url: String = authURL
+            .replacingOccurrences(of: "{USERNAME}", with: safeLogin!)
+            .replacingOccurrences(of: "{PASSWORD}", with: safePassword!)
+        
+        let task = urlSession.dataTask(with: URL(string: url)!) { (data, response, error) in
+            
+            if let error = error {
+                handleError(error)
+            }
+            
+            guard let data = data else {
+                completion(false)
+                return
+            }
+            
+            do {
+                let dto = try JSONDecoder().decode(AuthResponse.self, from: data)
+                self.token = dto.accessToken
+                completion(true)
+            } catch {
+                handleError(error)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    
+    func search(parameters: SearchParameters, completion: (() -> Void)?) {
         guard !searchInProgress else { return }
         searchInProgress = true
         
@@ -68,6 +80,7 @@ class ApiManager: NSObject {
         }, completion: { _ in
             self.performSearch(parameters: parameters) {
                 self.searchInProgress = false
+                completion?()
             }
         })
     
@@ -102,7 +115,6 @@ class ApiManager: NSObject {
             db.save { context in
 
                 for (index, dto) in result.videos.enumerated() {
-                    print(dto.contentRestricted)
                     if dto.contentRestricted == 1 {
                         self.restricted += 1
                         continue
@@ -138,15 +150,15 @@ class ApiManager: NSObject {
             URLQueryItem(name: "v", value: "5.103"),
             URLQueryItem(name: "q", value: parameters.query),
             URLQueryItem(name: "sort", value: "0"),
-            URLQueryItem(name: "hd", value: "1"),
+//            URLQueryItem(name: "hd", value: "1"),
             URLQueryItem(name: "adult", value: "1"),
-            URLQueryItem(name: "filters", value: "mp4,long"),
-            URLQueryItem(name: "search_own", value: "0"),
+            URLQueryItem(name: "filters", value: "mp4"),
+//            URLQueryItem(name: "search_own", value: "0"),
             URLQueryItem(name: "offset", value: String(parameters.offset)),
-            URLQueryItem(name: "longer", value: "30"),
-            URLQueryItem(name: "shorter", value: "3600"),
-            URLQueryItem(name: "count", value: String(min(200, parameters.count))),
-            URLQueryItem(name: "extended", value: "1")
+            URLQueryItem(name: "longer", value: "300"),
+//            URLQueryItem(name: "shorter", value: "3600"),
+            URLQueryItem(name: "count", value: String(min(200, parameters.count)))
+//            URLQueryItem(name: "extended", value: "1")
         ]
     }
     
@@ -171,30 +183,4 @@ class ApiManager: NSObject {
 enum Result<T> {
     case success(T)
     case failure(Error)
-}
-
-extension ApiManager: VKSdkDelegate {
-    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult) {
-        print(#function)
-    }
-    
-    func vkSdkUserAuthorizationFailed() {
-        print(#function)
-        signInCompletion?(false)
-    }
-    
-    func vkSdkTokenHasExpired(_ expiredToken: VKAccessToken) {
-        print(#function)
-    }
-    
-    func vkSdkAuthorizationStateUpdated(with result: VKAuthorizationResult) {
-        signInCompletion?(result.state == .authorized)
-        print(#function)
-    }
-    
-    func vkSdkAccessTokenUpdated(_ newToken: VKAccessToken?, oldToken: VKAccessToken?) {
-        print(#function)
-        print(newToken?.accessToken)
-        print(oldToken?.accessToken)
-    }
 }

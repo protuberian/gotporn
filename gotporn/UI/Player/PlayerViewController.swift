@@ -18,6 +18,10 @@ class PlayerViewController: UIViewController {
     @IBOutlet var controlView: UIView!
     @IBOutlet var progressView: UIProgressView!
     
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     var mirrorMode: Bool = false {
         didSet {
             playerView.transform = CGAffineTransform(scaleX: mirrorMode ? -1 : 1, y: 1)
@@ -31,6 +35,7 @@ class PlayerViewController: UIViewController {
     init?(coder: NSCoder, url: URL) {
         self.url = url
         super.init(coder: coder)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -49,23 +54,14 @@ class PlayerViewController: UIViewController {
             }
             
             self?.progressView.progress = Float(time.seconds/duration.seconds)
-            
             print(time.seconds/duration.seconds)
         })
-        
     }
     
     deinit {
         if let observer = timeObserver {
             player.removeTimeObserver(observer)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,16 +82,16 @@ class PlayerViewController: UIViewController {
     
     @IBAction func tapPlayerView(_ sender: Any) {
         controlView.isHidden = false
+        player.play()
     }
     
     @IBAction func tapControlView(_ sender: Any) {
         controlView.isHidden = true
-        navigationController?.setNavigationBarHidden(true, animated: true)
         player.play()
     }
     
     @IBAction func closeTap(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     private var seekStarPosition: CMTime!

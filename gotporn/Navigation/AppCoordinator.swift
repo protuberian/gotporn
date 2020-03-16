@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import VK_ios_sdk
 
 class AppCoordinator {
     
@@ -17,10 +16,11 @@ class AppCoordinator {
     private let main = UIStoryboard(name: "Main", bundle: nil)
     
     init() {
-        _ = db
-        
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+        openApplicationInitialScreen()
+    }
+    
+    private func openApplicationInitialScreen() {
         let vc = auth.instantiateInitialViewController { coder -> RestoreSessionViewController? in
             return RestoreSessionViewController(coder: coder) { [unowned self] authorized in
                 if authorized {
@@ -36,7 +36,9 @@ class AppCoordinator {
     private func requestAuthentication() {
         let vc = auth.instantiateViewController(identifier: "AuthViewController") { coder -> AuthViewController? in
             return AuthViewController(coder: coder) { [unowned self] in
-                self.presentMain()
+                DispatchQueue.main.async {
+                    self.presentMain()
+                }
             }
         }
         
@@ -50,6 +52,15 @@ class AppCoordinator {
         
         if let source = currentView, let target = vc?.view {
             UIView.transition(from: source, to: target, duration: 0.25, options: [], completion: nil)
+        }
+        
+        if
+            let stack = (vc as? UITabBarController)?.viewControllers?.last as? UINavigationController,
+            let settings = stack.topViewController as? SettingsViewController {
+            settings.onLogout = { [unowned self] in
+                api.token = nil
+                self.openApplicationInitialScreen()
+            }
         }
     }
 }

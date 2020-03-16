@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import VK_ios_sdk
 
 struct SearchResult {
     
@@ -23,6 +22,7 @@ struct SearchResult {
             videos = dto.response.items
             return
         } catch {
+            print(error)
             handleError(error)
         }
         return nil
@@ -42,7 +42,8 @@ struct VideoSearchResultDTO: Codable {
             let title: String
             let duration: Int
             let accessKey: String?
-            let image: [Image]
+            let image: [Image]?
+            let firstFrame: [Image]?
             let player: URL?
             let contentRestricted: Int?
             let files: Files?
@@ -54,14 +55,15 @@ struct VideoSearchResultDTO: Codable {
                 case duration = "duration"
                 case accessKey = "accessKey"
                 case image = "image"
+                case firstFrame = "first_frame"
                 case player = "player"
                 case contentRestricted = "content_restricted"
                 case files = "files"
             }
             
             var thumb: URL {
-                let bigImages = image.filter({$0.width >= 320})
-                return bigImages.first?.url ?? image[0].url
+                let bigImages = (image ?? firstFrame ?? []).filter({$0.width >= 320})
+                return bigImages.first?.url ?? image?.first?.url ?? firstFrame?.first?.url ?? URL(string: "https://static.thenounproject.com/png/20804-200.png")!
             }
         }
         

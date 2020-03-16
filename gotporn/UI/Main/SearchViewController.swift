@@ -43,6 +43,11 @@ class SearchViewController: KeyboardObserverViewController {
         try? model.performFetch()
         
         tableView.rowHeight = UITableView.automaticDimension
+        if let query: String = Settings.value(.searchText) {
+            searchBar.text = query
+            parameters.query = query
+            parameters.offset = UInt(tableView.numberOfRows(inSection: 0))
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -110,12 +115,16 @@ extension SearchViewController: UISearchBarDelegate {
         guard let query = searchBar.text, query.count > 0 else { return }
         parameters.query = query
         parameters.offset = 0
-        
+        Settings.set(value: query, for: .searchText)
         loadMore()
     }
     
     func loadMore() {
-        api.search(parameters: parameters)
+        
+        api.search(parameters: parameters, completion: { [weak self] in
+            guard let self = self else { return }
+            self.parameters.offset += self.parameters.count
+        })
     }
 }
 
@@ -151,7 +160,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 //        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
         let variants = [
 //            video.qhls,
-            video.q1080,
+//            video.q1080,
             video.q720,
             video.q480,
             video.q360,
@@ -173,20 +182,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         DispatchQueue.main.async {
-            self.navigationController?.pushViewController(vc, animated: true)
-//            self.present(vc, animated: true, completion: nil)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }
         
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: 0)-1 {
-            
-            let newOffset = UInt(tableView.numberOfRows(inSection: 0))
-            if newOffset != parameters.offset {
-                parameters.offset = newOffset
-                loadMore()
-            }
+            loadMore()
         }
     }
 }

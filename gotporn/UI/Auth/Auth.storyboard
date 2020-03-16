@@ -39,31 +39,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j42-yt-8dX">
-                                <rect key="frame" x="20" y="262" width="280" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="huW-Nx-OdM"/>
-                                </constraints>
-                                <state key="normal" title="Sign in"/>
-                                <connections>
-                                    <action selector="signInButtonTap:" destination="IFB-HR-xVC" eventType="touchUpInside" id="bN1-Ez-hgr"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="czi-Ik-Bv3">
+                                <rect key="frame" x="40" y="210" width="240" height="148"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VYd-gP-aQM">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="AVU-mL-XW0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" textContentType="email"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mS8-iP-Iqe">
+                                        <rect key="frame" x="0.0" y="52" width="240" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="kzo-ZO-maz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="send" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j42-yt-8dX">
+                                        <rect key="frame" x="0.0" y="104" width="240" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="qeS-9x-C4Z"/>
+                                        </constraints>
+                                        <state key="normal" title="Sign in"/>
+                                        <connections>
+                                            <action selector="signInButtonTap:" destination="IFB-HR-xVC" eventType="touchUpInside" id="whp-fp-Xl5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="j42-yt-8dX" firstAttribute="trailing" secondItem="edu-LZ-wfF" secondAttribute="trailingMargin" id="7nW-bv-Uep"/>
-                            <constraint firstItem="j42-yt-8dX" firstAttribute="centerY" secondItem="edu-LZ-wfF" secondAttribute="centerY" id="euX-ym-EJc"/>
-                            <constraint firstItem="j42-yt-8dX" firstAttribute="leading" secondItem="edu-LZ-wfF" secondAttribute="leadingMargin" id="ljf-2F-VSV"/>
+                            <constraint firstItem="czi-Ik-Bv3" firstAttribute="centerY" secondItem="edu-LZ-wfF" secondAttribute="centerY" id="Kun-Ig-Tin"/>
+                            <constraint firstItem="czi-Ik-Bv3" firstAttribute="leading" secondItem="edu-LZ-wfF" secondAttribute="leadingMargin" id="NcO-G1-L4L"/>
+                            <constraint firstItem="czi-Ik-Bv3" firstAttribute="centerX" secondItem="edu-LZ-wfF" secondAttribute="centerX" id="QeC-Yk-iuw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="czi-Ik-Bv3" secondAttribute="trailing" id="gBw-GL-mqT"/>
                         </constraints>
-                        <edgeInsets key="layoutMargins" top="20" left="20" bottom="20" right="20"/>
+                        <edgeInsets key="layoutMargins" top="20" left="40" bottom="20" right="40"/>
                         <viewLayoutGuide key="safeArea" id="vWZ-8B-jEY"/>
                     </view>
                     <navigationItem key="navigationItem" id="uRB-Ks-hS2"/>
+                    <connections>
+                        <outlet property="login" destination="VYd-gP-aQM" id="UpM-Oj-SC5"/>
+                        <outlet property="password" destination="mS8-iP-Iqe" id="zZF-kn-E1H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQy-Fa-rlJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-274" y="-525"/>
+            <point key="canvasLocation" x="-275.625" y="-525"/>
         </scene>
     </scenes>
 </document>

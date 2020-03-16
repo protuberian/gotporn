@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,7 +29,8 @@
 		50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC52415486100D6E658 /* PlayerViewController.swift */; };
 		50104BC82415487200D6E658 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BC72415487200D6E658 /* Player.storyboard */; };
 		50104BCA2415508600D6E658 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC92415508600D6E658 /* SettingsViewController.swift */; };
-		7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */; };
+		507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507C7BB6241FD58F00B44BAE /* AuthResponse.swift */; };
+		AA8957BDF725E5342D47A7C9 /* Pods_gotporn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C77AF29E2E00AD1E4043258 /* Pods_gotporn.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +59,8 @@
 		50104BC52415486100D6E658 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		50104BC72415487200D6E658 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		50104BC92415508600D6E658 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gotporn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		507C7BB6241FD58F00B44BAE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		5C77AF29E2E00AD1E4043258 /* Pods_gotporn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gotporn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE400408241202E258193E80 /* Pods-gotporn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gotporn.debug.xcconfig"; path = "Target Support Files/Pods-gotporn/Pods-gotporn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C384EBFEB6F143DBD986BB9 /* libPods-gotporn.a in Frameworks */,
+				AA8957BDF725E5342D47A7C9 /* Pods_gotporn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				50104B9F2412B2CC00D6E658 /* ApiManager.swift */,
+				507C7BB6241FD58F00B44BAE /* AuthResponse.swift */,
 				50104BAF24151B0F00D6E658 /* SearchParameters.swift */,
 				50104BB124151F4100D6E658 /* SearchResult.swift */,
 			);
@@ -205,7 +208,7 @@
 		9933C5FCEA92005A0C438AB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7AD26635A7F0CF82606B7A4E /* libPods-gotporn.a */,
+				5C77AF29E2E00AD1E4043258 /* Pods_gotporn.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -230,7 +233,6 @@
 				50104B792412A94400D6E658 /* Sources */,
 				50104B7A2412A94400D6E658 /* Frameworks */,
 				50104B7B2412A94400D6E658 /* Resources */,
-				2DC0AEC4DB9F60175304BF42 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -290,23 +292,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2DC0AEC4DB9F60175304BF42 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-gotporn/Pods-gotporn-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-gotporn/Pods-gotporn-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gotporn/Pods-gotporn-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2DDC64BB07455C0572C807DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +325,7 @@
 				50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */,
 				50104BA42412B49C00D6E658 /* Settings.swift in Sources */,
 				50104BA62412D19200D6E658 /* RestoreSessionViewController.swift in Sources */,
+				507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */,
 				50104BBA2415272E00D6E658 /* Model.xcdatamodeld in Sources */,
 				50104BAB2412E64F00D6E658 /* SearchViewController.swift in Sources */,
 				50104BC32415306600D6E658 /* VideoCell.swift in Sources */,
