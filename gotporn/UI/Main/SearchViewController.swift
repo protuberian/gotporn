@@ -158,7 +158,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let video = model.object(at: indexPath)
         
 //        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
-        let variants = [
+        var variants = [
 //            video.qhls,
 //            video.q1080,
             video.q720,
@@ -167,6 +167,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             video.q240
             ].compactMap({$0})
         
+        if variants.count == 0 {
+            variants = [
+                video.q1080,
+                video.qhls
+                ].compactMap({$0})
+        }
         guard let url = variants.first else {
             print("video not found")
             return
