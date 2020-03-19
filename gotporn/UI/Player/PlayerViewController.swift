@@ -16,7 +16,9 @@ class PlayerViewController: UIViewController {
     
     @IBOutlet var playerView: PlayerView!
     @IBOutlet var controlView: UIView!
+    @IBOutlet var progressLabel: UILabel!
     @IBOutlet var progressView: UIProgressView!
+    @IBOutlet var volumeView: UIProgressView!
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -35,7 +37,6 @@ class PlayerViewController: UIViewController {
     init?(coder: NSCoder, url: URL) {
         self.url = url
         super.init(coder: coder)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -49,13 +50,17 @@ class PlayerViewController: UIViewController {
         playerView.player = AVPlayer(url: url)
         
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 30), queue: DispatchQueue.main, using: { [weak self] time in
-            guard let duration = self?.player.currentItem?.duration, duration.isValid else {
+            guard let duration = self?.player.currentItem?.duration, duration.isNumeric else {
                 return
             }
-            
-            self?.progressView.progress = Float(time.seconds/duration.seconds)
-            print(time.seconds/duration.seconds)
+            self?.timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
         })
+        
+        volumeView.transform = CGAffineTransform(rotationAngle: -(.pi/2))
+        if let volume: Float = Settings.value(.volume) {
+            setVolume(volume)
+        }
+        hideVolumeView()
     }
     
     deinit {
@@ -76,6 +81,14 @@ class PlayerViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
     
+    private func timeProgressChanged(seconds: Double, duration: Double) {
+        progressView.progress = Float(seconds/duration)
+        let formatter = DateComponentsFormatter()
+        if let now = formatter.string(from: seconds), let total = formatter.string(from: duration) {
+            progressLabel.text = "\(now)/\(total)"
+        }
+    }
+    
     @IBAction func mirrorTap(_ sender: Any) {
         mirrorMode = !mirrorMode
     }
@@ -94,28 +107,110 @@ class PlayerViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private var seekStarPosition: CMTime!
+    private var panBeganAtVolume: Float?
+    private var panBeganAtTimePosition: CMTime?
+    private var panBehavior: PanControlBehavior = .shiftingTime
+    
+    enum PanControlBehavior {
+        case changesVolume
+        case shiftingTime
+        case settingTime
+    }
+    
+    func clamp<T>(_ arg: T, _ limit1: T, _ limit2: T) -> T where T: Comparable {
+        
+        let minimum = min(limit1, limit2)
+        let maximum = max(limit1, limit2)
+        
+        return min(maximum, max(minimum, arg))
+    }
+    
+    private func shiftTime(translation: CGFloat) {
+        guard let panStart = panBeganAtTimePosition else {
+            return
+        }
+        
+        let secondsPerPoint: CGFloat = 1
+        let dt = Double(translation * secondsPerPoint)
+        setTime(seconds: panStart.seconds + dt)
+    }
+    
+    private func setTime(location: CGFloat) {
+        guard let duration = player.currentItem?.duration else {
+            return
+        }
+        setTime(seconds: Double(location) * duration.seconds)
+    }
+    
+    private func updateVolume(translation: CGFloat) {
+        guard let panBeganAtVolume = panBeganAtVolume else { return }
+        
+        let volumeControlHeight: CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) * 0.5
+        let targetVolume = panBeganAtVolume + Float(translation / volumeControlHeight * -1)
+        
+        setVolume(clamp(targetVolume, 0, 1))
+        
+        print(player.volume)
+    }
+    
+    private func setVolume(_ volume: Float) {
+        Settings.set(value: volume, for: .volume)
+        player.volume = volume
+        volumeView.progress = volume
+        volumeView.isHidden = false
+        
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideVolumeView), object: nil)
+        perform(#selector(hideVolumeView), with: nil, afterDelay: 1.5)
+    }
+    
+    private func setTime(seconds: Double) {
+        guard let duration = player.currentItem?.duration else { return }
+        
+        let timescale = duration.timescale
+        let trackStart = CMTime(seconds: 0, preferredTimescale: timescale)
+        let target = CMTime(seconds: seconds, preferredTimescale: timescale)
+        
+        let time = clamp(target, trackStart, duration)
+        
+        player.seek(to: time)
+        timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
+    }
+    
+    @objc private func hideVolumeView() {
+        volumeView.isHidden = true
+    }
     
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
         
+        let translation = sender.translation(in: view)
+        
         switch sender.state {
+            
         case .began:
-            seekStarPosition = player.currentTime()
-        case .changed:
-            let translation = sender.translation(in: view)
-            
-            let dt = Double(translation.x * 1)
-            
-            let shifted = CMTime(seconds: seekStarPosition.seconds + dt, preferredTimescale: seekStarPosition.timescale)
-            
-            guard let duration = player.currentItem?.duration else {
-                return
+            if progressView.frame.insetBy(dx: -20, dy: -20).contains(sender.location(in: view)) {
+                panBehavior = .settingTime
+            } else {
+                if abs(translation.y) > abs(translation.x) {
+                    panBeganAtVolume = player.volume
+                    panBehavior = .changesVolume
+                } else {
+                    panBehavior = .shiftingTime
+                    panBeganAtTimePosition = player.currentTime()
+                }
             }
             
-            let persent = player.currentTime().seconds / duration.seconds
-            print(persent)
+        case .changed:
+            switch panBehavior {
+            case .shiftingTime:
+                shiftTime(translation: translation.x)
+            case .settingTime:
+                setTime(location: sender.location(in: progressView).x / progressView.frame.width)
+            case .changesVolume:
+                updateVolume(translation: translation.y)
+            }
             
-            player.seek(to: min(shifted, duration))
+        case .ended:
+            player.play()
         default:
             break
         }

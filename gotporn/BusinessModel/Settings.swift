@@ -25,4 +25,5 @@ struct Settings {
 enum SettingsKey: String {
     case token
     case searchText
+    case volume
 }
