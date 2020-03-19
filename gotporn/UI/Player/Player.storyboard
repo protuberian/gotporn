@@ -94,7 +94,7 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="p89-B1-xR7"/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="bmr-nB-6wy" appends="YES" id="UhS-Jt-iXs"/>
+                                    <outletCollection property="gestureRecognizers" destination="bmr-nB-6wy" appends="YES" id="Zq7-AR-Ooa"/>
                                 </connections>
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kmy-MN-BMD">
@@ -126,6 +126,7 @@
                     </view>
                     <connections>
                         <outlet property="controlView" destination="YRf-WA-ejx" id="Rzb-xJ-e4E"/>
+                        <outlet property="panRecognizer" destination="Rpn-76-pfV" id="AEZ-vC-BEf"/>
                         <outlet property="playerView" destination="RBw-Qf-e0h" id="TcW-wN-s4k"/>
                         <outlet property="progressLabel" destination="Yd7-Gc-CEu" id="G12-EP-YcB"/>
                         <outlet property="progressView" destination="FoF-sc-Fl2" id="JEy-7v-P3m"/>
@@ -135,12 +136,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UV0-1v-7CM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bmr-nB-6wy">
                     <connections>
-                        <action selector="tapControlView:" destination="JWh-ii-LMA" id="AV8-yo-yz8"/>
+                        <action selector="tapView:" destination="JWh-ii-LMA" id="hPs-JD-bjs"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="u6U-nL-GYs">
                     <connections>
-                        <action selector="tapPlayerView:" destination="JWh-ii-LMA" id="wZJ-ko-Lfr"/>
+                        <action selector="tapView:" destination="JWh-ii-LMA" id="cV4-ta-kyf"/>
                     </connections>
                 </tapGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="Rpn-76-pfV">

@@ -19,6 +19,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet var progressLabel: UILabel!
     @IBOutlet var progressView: UIProgressView!
     @IBOutlet var volumeView: UIProgressView!
+    @IBOutlet var panRecognizer: UIPanGestureRecognizer!
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -53,7 +54,9 @@ class PlayerViewController: UIViewController {
             guard let duration = self?.player.currentItem?.duration, duration.isNumeric else {
                 return
             }
-            self?.timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
+            if self?.panRecognizer.state == .possible {
+                self?.timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
+            }
         })
         
         volumeView.transform = CGAffineTransform(rotationAngle: -(.pi/2))
@@ -89,17 +92,27 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    #warning("todo: rework hack. disable tap recognizer, enable after")
+    private var nextTouchUpDisabled = false
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first, progressView.frame.insetBy(dx: -20, dy: -20).contains(touch.location(in: view)) {
+            setTime(location: touch.location(in: progressView).x / progressView.frame.width)
+            controlView.isHidden = false
+            nextTouchUpDisabled = true
+        }
+    }
+    
     @IBAction func mirrorTap(_ sender: Any) {
         mirrorMode = !mirrorMode
     }
     
-    @IBAction func tapPlayerView(_ sender: Any) {
-        controlView.isHidden = false
-        player.play()
-    }
-    
-    @IBAction func tapControlView(_ sender: Any) {
-        controlView.isHidden = true
+    @IBAction func tapView(_ sender: Any) {
+        if nextTouchUpDisabled {
+            nextTouchUpDisabled = false
+            return
+        }
+        controlView.isHidden = !controlView.isHidden
         player.play()
     }
     
@@ -181,7 +194,6 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
-        
         let translation = sender.translation(in: view)
         
         switch sender.state {
@@ -198,6 +210,7 @@ class PlayerViewController: UIViewController {
                     panBeganAtTimePosition = player.currentTime()
                 }
             }
+            nextTouchUpDisabled = false
             
         case .changed:
             switch panBehavior {
