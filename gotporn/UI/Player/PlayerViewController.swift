@@ -122,7 +122,7 @@ class PlayerViewController: UIViewController {
     
     private var panBeganAtVolume: Float?
     private var panBeganAtTimePosition: CMTime?
-    private var panBehavior: PanControlBehavior = .shiftingTime
+    private var panBehavior: PanControlBehavior?
     
     enum PanControlBehavior {
         case changesVolume
@@ -193,37 +193,52 @@ class PlayerViewController: UIViewController {
         volumeView.isHidden = true
     }
     
+    private func resolvePanBehavior(location: CGPoint, translation: CGPoint) {
+        guard translation != .zero else {
+            panBehavior = nil
+            return
+        }
+        
+        if progressView.frame.insetBy(dx: -20, dy: -20).contains(location) {
+            panBehavior = .settingTime
+        } else {
+            if abs(translation.y) > abs(translation.x) {
+                panBeganAtVolume = player.volume
+                panBehavior = .changesVolume
+            } else {
+                panBehavior = .shiftingTime
+                panBeganAtTimePosition = player.currentTime()
+            }
+        }
+    }
+    
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: view)
         
         switch sender.state {
             
         case .began:
-            if progressView.frame.insetBy(dx: -20, dy: -20).contains(sender.location(in: view)) {
-                panBehavior = .settingTime
-            } else {
-                if abs(translation.y) > abs(translation.x) {
-                    panBeganAtVolume = player.volume
-                    panBehavior = .changesVolume
-                } else {
-                    panBehavior = .shiftingTime
-                    panBeganAtTimePosition = player.currentTime()
-                }
-            }
+            resolvePanBehavior(location: sender.location(in: view), translation: translation)
             nextTouchUpDisabled = false
             
         case .changed:
-            switch panBehavior {
-            case .shiftingTime:
-                shiftTime(translation: translation.x)
-            case .settingTime:
-                setTime(location: sender.location(in: progressView).x / progressView.frame.width)
-            case .changesVolume:
-                updateVolume(translation: translation.y)
+            if let panBehavior = panBehavior {
+                switch panBehavior {
+                case .shiftingTime:
+                    shiftTime(translation: translation.x)
+                case .settingTime:
+                    setTime(location: sender.location(in: progressView).x / progressView.frame.width)
+                case .changesVolume:
+                    updateVolume(translation: translation.y)
+                }
+            } else {
+                resolvePanBehavior(location: sender.location(in: view), translation: translation)
             }
             
         case .ended:
+            panBehavior = nil
             player.play()
+            
         default:
             break
         }
