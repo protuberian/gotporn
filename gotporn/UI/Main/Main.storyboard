@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ns5-t0-Ejk">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +13,7 @@
                 <navigationController hidesBarsWhenVerticallyCompact="YES" id="ns5-t0-Ejk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Watch" image="video.fill" catalog="system" id="2lt-Me-M8g"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tul-Gc-cM3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O2O-Ow-zJ1">
@@ -32,31 +32,31 @@
             <objects>
                 <viewController storyboardIdentifier="SearchViewController" id="6Sm-C8-snr" customClass="SearchViewController" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vrc-C5-zzT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" delaysContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-7M-kzD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" delaysContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-7M-kzD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="56"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="VideoCell" id="Ljv-2E-DPt" customClass="VideoCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="108.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="108.33333587646484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ljv-2E-DPt" id="KPh-C7-mF5">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="108.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="108.33333587646484"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QTG-Vp-9EU">
-                                                    <rect key="frame" x="0.0" y="4" width="178" height="100"/>
+                                                    <rect key="frame" x="0.0" y="4" width="177.66666666666666" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="gEi-jh-i1L"/>
                                                         <constraint firstAttribute="width" secondItem="QTG-Vp-9EU" secondAttribute="height" multiplier="16:9" id="lEo-bW-fPz"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K/DA - POP/STARS (ft. Madison Beer, (G)I-DLE, Jaira Burns) | Music Video - League of Legends" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkG-9e-AGR">
-                                                    <rect key="frame" x="186" y="4" width="119" height="93.5"/>
+                                                    <rect key="frame" x="185.66666666666663" y="4.0000000000000036" width="174.33333333333337" height="62.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -84,8 +84,17 @@
                                     <outlet property="prefetchDataSource" destination="6Sm-C8-snr" id="2hF-Ys-hh4"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" searchBarStyle="prominent" showsBookmarkButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-5L-2VR">
-                                <rect key="frame" x="0.0" y="512" width="320" height="56"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5N-tJ-fhn">
+                                <rect key="frame" x="0.0" y="722" width="375" height="90"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MvM-gJ-3ZF">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="systemMaterial"/>
+                            </visualEffectView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" showsBookmarkButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-5L-2VR">
+                                <rect key="frame" x="0.0" y="722" width="375" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="6Sm-C8-snr" id="HOw-V8-2qU"/>
@@ -97,8 +106,12 @@
                             <constraint firstItem="URZ-wu-9m2" firstAttribute="bottom" secondItem="uaJ-5L-2VR" secondAttribute="bottom" id="8QX-99-fo2"/>
                             <constraint firstItem="uaJ-5L-2VR" firstAttribute="trailing" secondItem="URZ-wu-9m2" secondAttribute="trailing" id="DlT-PP-AXE"/>
                             <constraint firstAttribute="trailing" secondItem="n4c-7M-kzD" secondAttribute="trailing" id="JPn-TI-Vbt"/>
+                            <constraint firstItem="uaJ-5L-2VR" firstAttribute="top" secondItem="I5N-tJ-fhn" secondAttribute="top" id="KS3-0t-wRe"/>
+                            <constraint firstItem="I5N-tJ-fhn" firstAttribute="leading" secondItem="vrc-C5-zzT" secondAttribute="leading" id="R8s-9Y-gha"/>
                             <constraint firstItem="uaJ-5L-2VR" firstAttribute="leading" secondItem="URZ-wu-9m2" secondAttribute="leading" id="WC4-lx-MAt"/>
+                            <constraint firstAttribute="bottom" secondItem="I5N-tJ-fhn" secondAttribute="bottom" id="aO4-ao-aie"/>
                             <constraint firstAttribute="bottom" secondItem="n4c-7M-kzD" secondAttribute="bottom" id="fuD-IB-Am3"/>
+                            <constraint firstItem="I5N-tJ-fhn" firstAttribute="trailing" secondItem="vrc-C5-zzT" secondAttribute="trailing" id="otY-4u-bOS"/>
                             <constraint firstItem="n4c-7M-kzD" firstAttribute="leading" secondItem="vrc-C5-zzT" secondAttribute="leading" id="stE-RA-zzA"/>
                             <constraint firstItem="n4c-7M-kzD" firstAttribute="top" secondItem="vrc-C5-zzT" secondAttribute="top" id="w7q-BA-szJ"/>
                         </constraints>
@@ -113,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zH0-M2-cdW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-834.375" y="-420.42253521126759"/>
+            <point key="canvasLocation" x="-834.39999999999998" y="-420.44334975369458"/>
         </scene>
     </scenes>
     <resources>
