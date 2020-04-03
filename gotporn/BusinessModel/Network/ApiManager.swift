@@ -172,7 +172,7 @@ class ApiManager {
             URLQueryItem(name: "filters", value: "mp4"),
 //            URLQueryItem(name: "search_own", value: "0"),
             URLQueryItem(name: "offset", value: String(parameters.offset)),
-            URLQueryItem(name: "longer", value: "300"),
+            URLQueryItem(name: "longer", value: "240"),
 //            URLQueryItem(name: "shorter", value: "3600"),
             URLQueryItem(name: "count", value: String(min(200, parameters.count)))
 //            URLQueryItem(name: "extended", value: "1")
