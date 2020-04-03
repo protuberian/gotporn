@@ -29,7 +29,7 @@ class ApiManager {
     
     let urlSession: URLSession
     
-    private var searchInProgress: Bool = false
+    private(set) var searchInProgress: Bool = false
     private var restricted: Int = 0
     
     init() {
@@ -117,7 +117,8 @@ class ApiManager {
 
             let titles = result.videos.map {$0.title}
             print("offset: \(parameters.offset)")
-            print("restricted: \(self.restricted)")
+            print("restricted before: \(self.restricted)")
+            let startIndex = Int(parameters.offset) - self.restricted
             print("total: \(result.total) (\(result.total/Int(parameters.count))) pages")
             print(titles)
 
@@ -133,7 +134,7 @@ class ApiManager {
                     let video = db.fetch(request, inContext: context).first ?? Video(context: context)
                     video.id = Int64(dto.id)
                     video.ownerId = Int64(dto.ownerId)
-                    video.sortIndex = Int64(index + Int(parameters.offset))
+                    video.sortIndex = Int64(startIndex + index)
                     video.title = dto.title
                     video.duration = Int64(dto.duration)
                     video.accessKey = dto.accessKey
@@ -146,6 +147,8 @@ class ApiManager {
                     video.q1080 = dto.files?.q1080
                     video.qhls = dto.files?.qhls
                 }
+                
+                print("restricted after: \(self.restricted)")
             }
 
         }
@@ -171,7 +174,8 @@ class ApiManager {
         ]
     }
     
-    func getImage(url: URL, completion: @escaping (UIImage?) -> Void) -> URLSessionDataTask {
+    @discardableResult
+    func getImage(url: URL, completion: ((UIImage?) -> Void)? = nil) -> URLSessionDataTask {
         let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 20)
         
         let task = urlSession.dataTask(with: request) { (data, response, error) in
@@ -181,7 +185,7 @@ class ApiManager {
                 image = UIImage(data: data)
             }
             DispatchQueue.main.async {
-                completion(image)
+                completion?(image)
             }
         }
         task.resume()

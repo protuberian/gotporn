@@ -232,16 +232,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
-        
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
-        let loaded = tableView.numberOfRows(inSection: 0)
-        if let max = indexPaths.sorted().last, max.row + 10 > loaded {
+        let lastRow = tableView.numberOfRows(inSection: 0) - 1
+        if let max = indexPaths.sorted().last, max.row + 1 > lastRow {
             loadMore()
         }
         
-        print(indexPaths)
+        for url in indexPaths.compactMap({ model.object(at: $0).photo320 }) {
+            api.getImage(url: url)
+        }
     }
 }
