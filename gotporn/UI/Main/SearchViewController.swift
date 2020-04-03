@@ -28,7 +28,7 @@ class SearchViewController: KeyboardObserverViewController {
     }()
     
     private var needScrollToTop = true
-    
+    private var ignoredErrors = 0
     private var parameters = SearchParameters(query: "", offset: 0, count: 20)
     
     //MARK: - Lifecycle & UI
@@ -45,17 +45,20 @@ class SearchViewController: KeyboardObserverViewController {
         } catch {
             handleError(error)
         }
+        
+        DispatchQueue.main.async {
+            if let query: String = Settings.value(.searchText) {
+                //force reload invalidated data
+                self.searchBar.text = query
+                self.parameters.query = query
+                self.loadMore()
+            }
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let query: String = Settings.value(.searchText) {
-            //force reload invalidated data
-            self.searchBar.text = query
-            self.parameters.query = query
-            self.loadMore()
-        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -129,9 +132,27 @@ extension SearchViewController: UISearchBarDelegate {
     
     func loadMore() {
         
-        api.search(parameters: parameters, completion: { [weak self] in
+        api.search(parameters: parameters, completion: { [weak self] count, total in
             guard let self = self else { return }
             self.parameters.offset += self.parameters.count
+            
+            var loadNext = false
+            if count == nil && self.ignoredErrors < 3 {
+                self.ignoredErrors += 1
+                loadNext = true
+            }
+            if count == 0 {
+                loadNext = true
+            }
+            if let total = total, self.parameters.offset > total {
+                loadNext = false
+            }
+            
+            if loadNext {
+                DispatchQueue.main.async {
+                    self.loadMore()
+                }
+            }
         })
     }
 }
@@ -154,8 +175,10 @@ extension SearchViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .top)
         case .update:
-            print("update cell")
-            assertionFailure("not implemented")
+            if let cell = tableView.cellForRow(at: indexPath!) as? VideoCell, let video = anObject as? Video {
+                cell.updateWith(imageURL: video.photo320!, title: video.title!, duration: Int(video.duration))
+            }
+            
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         @unknown default:
@@ -236,9 +259,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
+        print(indexPaths)
+        
         let lastRow = tableView.numberOfRows(inSection: 0) - 1
         if let max = indexPaths.sorted().last, max.row + 1 > lastRow {
-            loadMore()
+            DispatchQueue.main.async {
+                self.loadMore()
+            }
         }
         
         for url in indexPaths.compactMap({ model.object(at: $0).photo320 }) {

@@ -73,8 +73,11 @@ class ApiManager {
         task.resume()
     }
     
-    func search(parameters: SearchParameters, completion: (() -> Void)?) {
-        guard !searchInProgress else { return }
+    func search(parameters: SearchParameters, completion: ((Int?, Int?) -> Void)?) {
+        guard !searchInProgress else {
+            print("canceled, search in progress")
+            return
+        }
         searchInProgress = true
         
         db.save({ context in
@@ -82,20 +85,19 @@ class ApiManager {
                 self.restricted = 0
                 let request: NSFetchRequest<Video> = Video.fetchRequest()
                 db.fetch(request, inContext: context).forEach {
-                    print("delete \($0)")
                     context.delete($0)
                 }
             }
         }, completion: { _ in
-            self.performSearch(parameters: parameters) {
+            self.performSearch(parameters: parameters) { count, total in
+                completion?(count, total)
                 self.searchInProgress = false
-                completion?()
             }
         })
     
     }
     
-    func performSearch(parameters: SearchParameters, completion: @escaping () -> Void) {
+    func performSearch(parameters: SearchParameters, completion: @escaping (Int?, Int?) -> Void) {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.vk.com"
@@ -106,29 +108,29 @@ class ApiManager {
         print(request)
 
         let task = self.urlSession.dataTask(with: request) { (data, response, error) in
-            completion()
             guard
                 let data = data,
                 let result = SearchResult(response: data)
                 else {
                     print("error mapping response")
+                    completion(nil, nil)
                     return
             }
 
-            let titles = result.videos.map {$0.title}
+            
+            print("total: \(result.total) (\(result.total/Int(parameters.count))) pages")
             print("offset: \(parameters.offset)")
             print("restricted before: \(self.restricted)")
             let startIndex = Int(parameters.offset) - self.restricted
-            print("total: \(result.total) (\(result.total/Int(parameters.count))) pages")
-            print(titles)
-
-            db.save { context in
-
+            
+            var validItems = 0
+            db.save({ context in
                 for (index, dto) in result.videos.enumerated() {
                     if dto.contentRestricted == 1 {
                         self.restricted += 1
                         continue
                     }
+                    validItems += 1
                     let request: NSFetchRequest<Video> = Video.fetchRequest()
                     request.predicate = NSPredicate(format: "id = %@", NSNumber(value: dto.id))
                     let video = db.fetch(request, inContext: context).first ?? Video(context: context)
@@ -149,8 +151,12 @@ class ApiManager {
                 }
                 
                 print("restricted after: \(self.restricted)")
-            }
-
+                
+                let titles = result.videos.compactMap { $0.contentRestricted == 1 ? nil : $0.title}
+                print(titles)
+            }, completion: { success in
+                completion(success ? validItems : nil, result.total)
+            })
         }
 
         task.resume()
