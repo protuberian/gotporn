@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class RestoreSessionViewController: UIViewController {
     
@@ -23,6 +24,19 @@ class RestoreSessionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        completion(api.authorized)
+        db.container.performBackgroundTask { context in
+            let request: NSFetchRequest<Video> = Video.fetchRequest()
+            do {
+                for video in try context.fetch(request) {
+                    context.delete(video)
+                }
+                try context.save()
+            } catch {
+                handleError(error)
+            }
+            DispatchQueue.main.async {
+                self.completion(api.authorized)
+            }
+        }
     }
 }

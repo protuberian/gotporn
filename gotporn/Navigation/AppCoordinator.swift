@@ -53,14 +53,5 @@ class AppCoordinator {
         if let source = currentView, let target = vc?.view {
             UIView.transition(from: source, to: target, duration: 0.25, options: [], completion: nil)
         }
-        
-        if
-            let stack = (vc as? UITabBarController)?.viewControllers?.last as? UINavigationController,
-            let settings = stack.topViewController as? SettingsViewController {
-            settings.onLogout = { [unowned self] in
-                api.token = nil
-                self.openApplicationInitialScreen()
-            }
-        }
     }
 }

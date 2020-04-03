@@ -94,7 +94,6 @@ class ApiManager {
                 self.searchInProgress = false
             }
         })
-    
     }
     
     func performSearch(parameters: SearchParameters, completion: @escaping (Int?, Int?) -> Void) {

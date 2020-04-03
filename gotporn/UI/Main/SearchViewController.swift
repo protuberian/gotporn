@@ -30,11 +30,10 @@ class SearchViewController: KeyboardObserverViewController {
         view.addGestureRecognizer(panRecognizer)
         
         model.delegate = self
-        if let query: String = Settings.value(.searchText) {
+        
+        if let query: String = Settings.value(.searchText), query.count > 0 {
             searchBar.text = query
-            DispatchQueue.main.async {
-                self.model.query = query
-            }
+            model.query = query
         }
     }
     
@@ -114,7 +113,6 @@ extension SearchViewController: VideoSearchModelDelegate {
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        print(#function)
         assertionFailure("not implemented")
     }
     

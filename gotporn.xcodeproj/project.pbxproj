@@ -28,7 +28,6 @@
 		50104BC32415306600D6E658 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC22415306600D6E658 /* VideoCell.swift */; };
 		50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC52415486100D6E658 /* PlayerViewController.swift */; };
 		50104BC82415487200D6E658 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BC72415487200D6E658 /* Player.storyboard */; };
-		50104BCA2415508600D6E658 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC92415508600D6E658 /* SettingsViewController.swift */; };
 		5021038B24377AC000BBC68F /* VideoSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5021038A24377AC000BBC68F /* VideoSearchModel.swift */; };
 		507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507C7BB6241FD58F00B44BAE /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +56,6 @@
 		50104BC22415306600D6E658 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		50104BC52415486100D6E658 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		50104BC72415487200D6E658 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
-		50104BC92415508600D6E658 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5021038A24377AC000BBC68F /* VideoSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSearchModel.swift; sourceTree = "<group>"; };
 		507C7BB6241FD58F00B44BAE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +160,6 @@
 			children = (
 				50104BA82412DB2800D6E658 /* Main.storyboard */,
 				50104BAA2412E64F00D6E658 /* SearchViewController.swift */,
-				50104BC92415508600D6E658 /* SettingsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -287,7 +284,6 @@
 				50104BB52415246100D6E658 /* Database.swift in Sources */,
 				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
 				50104BB7241524BA00D6E658 /* ErrorHandling.swift in Sources */,
-				50104BCA2415508600D6E658 /* SettingsViewController.swift in Sources */,
 				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,
 				50104BAE2412E78200D6E658 /* KeyboardObserverViewController.swift in Sources */,
 				50104BA22412B2E500D6E658 /* Globals.swift in Sources */,
