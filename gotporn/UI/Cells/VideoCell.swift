@@ -15,12 +15,6 @@ class VideoCell: UITableViewCell {
     
     private var thumbLoadingTask: URLSessionDataTask?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         thumb.image = nil

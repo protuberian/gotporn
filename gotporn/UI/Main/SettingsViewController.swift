@@ -16,7 +16,6 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
     @IBAction func buttonLogoutTap(_ sender: Any) {
         onLogout()
     }

@@ -24,6 +24,5 @@ class RestoreSessionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         completion(api.authorized)
-//        completion(false)
     }
 }

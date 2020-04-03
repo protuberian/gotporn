@@ -17,19 +17,9 @@ class SearchViewController: KeyboardObserverViewController {
     private let panRecognizer = UIPanGestureRecognizer()
     private var additionalSafeAreaMaxBottomValue: CGFloat = 0
     
-    private var model: NSFetchedResultsController<Video> = {
-        let request: NSFetchRequest<Video> = Video.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
-        let controller = NSFetchedResultsController(fetchRequest: request,
-                                                    managedObjectContext: db.container.viewContext,
-                                                    sectionNameKeyPath: nil,
-                                                    cacheName: nil)
-        return controller
-    }()
+    let model = VideoSearchModel()
     
     private var needScrollToTop = true
-    private var ignoredErrors = 0
-    private var parameters = SearchParameters(query: "", offset: 0, count: 20)
     
     //MARK: - Lifecycle & UI
     override func viewDidLoad() {
@@ -40,25 +30,12 @@ class SearchViewController: KeyboardObserverViewController {
         view.addGestureRecognizer(panRecognizer)
         
         model.delegate = self
-        do {
-            try model.performFetch()
-        } catch {
-            handleError(error)
-        }
-        
-        DispatchQueue.main.async {
-            if let query: String = Settings.value(.searchText) {
-                //force reload invalidated data
-                self.searchBar.text = query
-                self.parameters.query = query
-                self.loadMore()
+        if let query: String = Settings.value(.searchText) {
+            searchBar.text = query
+            DispatchQueue.main.async {
+                self.model.query = query
             }
         }
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func viewWillLayoutSubviews() {
@@ -68,7 +45,7 @@ class SearchViewController: KeyboardObserverViewController {
         
         if needScrollToTop {
             needScrollToTop = false
-            tableView.setContentOffset(CGPoint.init(x: 0, y: -view.safeAreaInsets.top), animated: false)
+            tableView.setContentOffset(CGPoint(x: 0, y: -view.safeAreaInsets.top), animated: false)
         }
     }
     
@@ -124,41 +101,14 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(false)
         guard let query = searchBar.text, query.count > 0 else { return }
-        parameters.query = query
-        parameters.offset = 0
-        Settings.set(value: query, for: .searchText)
-        loadMore()
-    }
-    
-    func loadMore() {
         
-        api.search(parameters: parameters, completion: { [weak self] count, total in
-            guard let self = self else { return }
-            self.parameters.offset += self.parameters.count
-            
-            var loadNext = false
-            if count == nil && self.ignoredErrors < 3 {
-                self.ignoredErrors += 1
-                loadNext = true
-            }
-            if count == 0 {
-                loadNext = true
-            }
-            if let total = total, self.parameters.offset > total {
-                loadNext = false
-            }
-            
-            if loadNext {
-                DispatchQueue.main.async {
-                    self.loadMore()
-                }
-            }
-        })
+        Settings.set(value: query, for: .searchText)
+        model.query = query
     }
 }
 
 // MARK: - Model observing
-extension SearchViewController: NSFetchedResultsControllerDelegate {
+extension SearchViewController: VideoSearchModelDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
@@ -176,9 +126,8 @@ extension SearchViewController: NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [indexPath!], with: .top)
         case .update:
             if let cell = tableView.cellForRow(at: indexPath!) as? VideoCell, let video = anObject as? Video {
-                cell.updateWith(imageURL: video.photo320!, title: video.title!, duration: Int(video.duration))
+                cell.updateWith(video: video)
             }
-            
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         @unknown default:
@@ -195,11 +144,11 @@ extension SearchViewController: NSFetchedResultsControllerDelegate {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.sections?.count ?? 0
+        return model.sectionsCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.sections![section].numberOfObjects
+        return model.videosCount(in: section)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -212,43 +161,26 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoCell
-        let video = model.object(at: indexPath)
-        cell.updateWith(imageURL: video.photo320!, title: video.title!, duration: Int(video.duration))
+        cell.updateWith(video: model.video(at: indexPath))
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let video = model.object(at: indexPath)
+        let video = model.video(at: indexPath)
         
-//        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
-        var variants = [
-//            video.qhls,
-//            video.q1080,
-            video.q720,
-            video.q480,
-            video.q360,
-            video.q240
-            ].compactMap({$0})
-        
-        if variants.count == 0 {
-            variants = [
-                video.q1080,
-                video.qhls
-                ].compactMap({$0})
-        }
-        guard let url = variants.first else {
-            print("video not found")
+        guard let url = video.videoURL else {
+            handleError("video unavailable")
             return
         }
         
-        guard
-            let vc = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
-                return PlayerViewController(coder: coder, url: url)
-            })
-            else {
-                handleError("not working")
-                return
+        let playerViewController = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
+            return PlayerViewController(coder: coder, url: url)
+        })
+        
+        guard let vc = playerViewController else {
+            handleError("Error initializing PlayerViewController")
+            return
         }
         
         DispatchQueue.main.async {
@@ -264,12 +196,44 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
         let lastRow = tableView.numberOfRows(inSection: 0) - 1
         if let max = indexPaths.sorted().last, max.row + 1 > lastRow {
             DispatchQueue.main.async {
-                self.loadMore()
+                self.model.loadMore()
             }
         }
         
-        for url in indexPaths.compactMap({ model.object(at: $0).photo320 }) {
+        //cache images
+        for url in indexPaths.compactMap({ model.video(at: $0).photoURL }) {
             api.getImage(url: url)
         }
+    }
+}
+
+//MARK: - Extensions
+extension VideoCell {
+    func updateWith(video: Video) {
+        updateWith(imageURL: video.photo320!, title: video.title!, duration: Int(video.duration))
+    }
+}
+
+extension Video {
+    var photoURL: URL {
+        return photo320!
+    }
+    
+    var videoURL: URL? {
+//        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
+        var variants = [
+//            qhls,
+//            q1080,
+            q720,
+            q480,
+            q360,
+            q240
+            ].compactMap({$0})
+        
+        //fallback
+        if variants.count == 0 {
+            variants = [q1080, qhls].compactMap({$0})
+        }
+        return variants.first
     }
 }
