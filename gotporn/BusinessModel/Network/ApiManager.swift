@@ -12,7 +12,7 @@ import UIKit
 
 let authURL = "https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username={USERNAME}&password={PASSWORD}&scope=video"
 
-class ApiManager: NSObject {
+class ApiManager {
     
     var token: String? {
         get {
@@ -27,13 +27,13 @@ class ApiManager: NSObject {
         return token != nil
     }
     
-    let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+    let urlSession: URLSession
     
     private var searchInProgress: Bool = false
     private var restricted: Int = 0
     
-    override init() {
-        super.init()
+    init() {
+        urlSession = URLSession(configuration: .default)
         URLCache.shared = URLCache(memoryCapacity: 512*1024*1024, diskCapacity: 512*1024*1024)
     }
     
@@ -55,6 +55,12 @@ class ApiManager: NSObject {
                 return
             }
             
+            #if DEBUG
+            if let responseString = String(data: data, encoding: .utf8) {
+                print(responseString)
+            }
+            #endif
+            
             do {
                 let dto = try JSONDecoder().decode(AuthResponse.self, from: data)
                 self.token = dto.accessToken
@@ -75,7 +81,10 @@ class ApiManager: NSObject {
             if parameters.offset == 0 {
                 self.restricted = 0
                 let request: NSFetchRequest<Video> = Video.fetchRequest()
-                db.fetch(request, inContext: context).forEach { context.delete($0) }
+                db.fetch(request, inContext: context).forEach {
+                    print("delete \($0)")
+                    context.delete($0)
+                }
             }
         }, completion: { _ in
             self.performSearch(parameters: parameters) {
@@ -109,7 +118,7 @@ class ApiManager: NSObject {
             let titles = result.videos.map {$0.title}
             print("offset: \(parameters.offset)")
             print("restricted: \(self.restricted)")
-            print("total: \(result.total)")
+            print("total: \(result.total) (\(result.total/Int(parameters.count))) pages")
             print(titles)
 
             db.save { context in

@@ -34,19 +34,27 @@ class SearchViewController: KeyboardObserverViewController {
     //MARK: - Lifecycle & UI
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         panRecognizer.delegate = self
         panRecognizer.addTarget(self, action: #selector(handlePan(recognizer:)))
         view.addGestureRecognizer(panRecognizer)
         
         model.delegate = self
+        do {
+            try model.performFetch()
+        } catch {
+            handleError(error)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        try? model.performFetch()
-        
-        tableView.rowHeight = UITableView.automaticDimension
         if let query: String = Settings.value(.searchText) {
-            searchBar.text = query
-            parameters.query = query
-            parameters.offset = UInt(tableView.numberOfRows(inSection: 0))
+            //force reload invalidated data
+            self.searchBar.text = query
+            self.parameters.query = query
+            self.loadMore()
         }
     }
     
@@ -130,13 +138,38 @@ extension SearchViewController: UISearchBarDelegate {
 
 // MARK: - Model observing
 extension SearchViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        print(#function)
+        assertionFailure("not implemented")
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .top)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .top)
+        case .update:
+            print("update cell")
+            assertionFailure("not implemented")
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        @unknown default:
+            fatalError("unknown case")
+        }
+    }
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.reloadData()
+        tableView.endUpdates()
     }
 }
 
 // MARK: - UITableView
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return model.sections?.count ?? 0
@@ -144,6 +177,14 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.sections![section].numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 108.5
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -194,9 +235,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.numberOfRows(inSection: 0)-1 {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        let loaded = tableView.numberOfRows(inSection: 0)
+        if let max = indexPaths.sorted().last, max.row + 10 > loaded {
             loadMore()
         }
+        
+        print(indexPaths)
     }
 }
