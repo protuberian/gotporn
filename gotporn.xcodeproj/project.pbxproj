@@ -29,6 +29,7 @@
 		50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104BC52415486100D6E658 /* PlayerViewController.swift */; };
 		50104BC82415487200D6E658 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BC72415487200D6E658 /* Player.storyboard */; };
 		5021038B24377AC000BBC68F /* VideoSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5021038A24377AC000BBC68F /* VideoSearchModel.swift */; };
+		50210392243B49C300BBC68F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50210391243B49C300BBC68F /* PlayerView.swift */; };
 		507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507C7BB6241FD58F00B44BAE /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		50104BC52415486100D6E658 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		50104BC72415487200D6E658 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		5021038A24377AC000BBC68F /* VideoSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSearchModel.swift; sourceTree = "<group>"; };
+		50210391243B49C300BBC68F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		507C7BB6241FD58F00B44BAE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 		50104BC42415483D00D6E658 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				50210391243B49C300BBC68F /* PlayerView.swift */,
 				50104BC52415486100D6E658 /* PlayerViewController.swift */,
 				50104BC72415487200D6E658 /* Player.storyboard */,
 			);
@@ -288,6 +291,7 @@
 				50104BAE2412E78200D6E658 /* KeyboardObserverViewController.swift in Sources */,
 				50104BA22412B2E500D6E658 /* Globals.swift in Sources */,
 				5021038B24377AC000BBC68F /* VideoSearchModel.swift in Sources */,
+				50210392243B49C300BBC68F /* PlayerView.swift in Sources */,
 				50104B812412A94400D6E658 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
