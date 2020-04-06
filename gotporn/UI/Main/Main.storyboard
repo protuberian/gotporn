@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" delaysContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-7M-kzD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-7M-kzD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="56"/>
@@ -55,8 +55,8 @@
                                                         <constraint firstAttribute="width" secondItem="QTG-Vp-9EU" secondAttribute="height" multiplier="16:9" id="lEo-bW-fPz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K/DA - POP/STARS (ft. Madison Beer, (G)I-DLE, Jaira Burns) | Music Video - League of Legends" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkG-9e-AGR">
-                                                    <rect key="frame" x="185.66666666666663" y="4.0000000000000036" width="174.33333333333337" height="62.333333333333343"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkG-9e-AGR">
+                                                    <rect key="frame" x="185.66666666666663" y="3.9999999999999991" width="174.33333333333337" height="15.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                                 </view>
                                 <blurEffect style="systemMaterial"/>
                             </visualEffectView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" showsBookmarkButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-5L-2VR">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by title" showsBookmarkButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-5L-2VR">
                                 <rect key="frame" x="0.0" y="722" width="375" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no"/>
@@ -117,7 +117,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="URZ-wu-9m2"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Videos" id="0tY-Dd-zdq"/>
+                    <navigationItem key="navigationItem" title="Videos" id="0tY-Dd-zdq">
+                        <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="7rO-IF-Z88">
+                            <connections>
+                                <action selector="settingsTap:" destination="6Sm-C8-snr" id="iX6-HD-buP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="seachBarBottomMargin" destination="8QX-99-fo2" id="Fnw-AN-CFc"/>
                         <outlet property="searchBar" destination="uaJ-5L-2VR" id="OWf-04-V3a"/>
@@ -130,6 +136,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
     </resources>
 </document>

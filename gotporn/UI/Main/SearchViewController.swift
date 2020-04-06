@@ -24,6 +24,7 @@ class SearchViewController: KeyboardObserverViewController {
     //MARK: - Lifecycle & UI
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInsetAdjustmentBehavior = .never
         
         panRecognizer.delegate = self
         panRecognizer.addTarget(self, action: #selector(handlePan(recognizer:)))
@@ -78,6 +79,10 @@ class SearchViewController: KeyboardObserverViewController {
         
         let bottom = view.frame.inset(by: view.safeAreaInsets).maxY + additionalSafeAreaInsets.bottom - location.y
         additionalSafeAreaInsets.bottom = min(additionalSafeAreaMaxBottomValue, bottom)
+    }
+    
+    @IBAction func settingsTap(_ sender: Any) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
 }
 
@@ -188,9 +193,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
-        print(indexPaths)
-        
         let lastRow = tableView.numberOfRows(inSection: 0) - 1
         if let max = indexPaths.sorted().last, max.row + 1 > lastRow {
             DispatchQueue.main.async {

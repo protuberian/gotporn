@@ -30,6 +30,7 @@
 		50104BC82415487200D6E658 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50104BC72415487200D6E658 /* Player.storyboard */; };
 		5021038B24377AC000BBC68F /* VideoSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5021038A24377AC000BBC68F /* VideoSearchModel.swift */; };
 		50210392243B49C300BBC68F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50210391243B49C300BBC68F /* PlayerView.swift */; };
+		506F315F243B9FE400145832 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 506F315E243B9FE400145832 /* Settings.bundle */; };
 		507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507C7BB6241FD58F00B44BAE /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		50104BC72415487200D6E658 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		5021038A24377AC000BBC68F /* VideoSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSearchModel.swift; sourceTree = "<group>"; };
 		50210391243B49C300BBC68F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		506F315E243B9FE400145832 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		507C7BB6241FD58F00B44BAE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				50104B892412A94600D6E658 /* Assets.xcassets */,
 				50104B8B2412A94600D6E658 /* LaunchScreen.storyboard */,
 				50104B8E2412A94600D6E658 /* Info.plist */,
+				506F315E243B9FE400145832 /* Settings.bundle */,
 			);
 			path = gotporn;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				50104B8D2412A94600D6E658 /* LaunchScreen.storyboard in Resources */,
 				50104BC82415487200D6E658 /* Player.storyboard in Resources */,
 				50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */,
+				506F315F243B9FE400145832 /* Settings.bundle in Resources */,
 				50104BA92412DB2800D6E658 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

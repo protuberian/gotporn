@@ -27,4 +27,6 @@ enum SettingsKey: String {
     case searchText
     case volume
     case minimizeStalling
+    case searchHD
+    case searchSort
 }

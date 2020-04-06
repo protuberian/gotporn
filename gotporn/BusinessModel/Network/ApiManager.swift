@@ -105,6 +105,7 @@ class ApiManager {
 
         let request = URLRequest(url: components.url!, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30)
         print(request)
+        print("search: \(parameters.query), offset: \(parameters.offset)")
 
         let task = self.urlSession.dataTask(with: request) { (data, response, error) in
             guard
@@ -115,11 +116,10 @@ class ApiManager {
                     completion(nil, nil)
                     return
             }
-
             
-            print("total: \(result.total) (\(result.total/Int(parameters.count))) pages")
-            print("offset: \(parameters.offset)")
-            print("restricted before: \(self.restricted)")
+            let pages = Double(result.total)/Double(parameters.count)
+            
+            print("total: \(result.total) (\(Int(ceil(pages))) pages)")
             let startIndex = Int(parameters.offset) - self.restricted
             
             var validItems = 0
@@ -148,11 +148,6 @@ class ApiManager {
                     video.q1080 = dto.files?.q1080
                     video.qhls = dto.files?.qhls
                 }
-                
-                print("restricted after: \(self.restricted)")
-                
-                let titles = result.videos.compactMap { $0.contentRestricted == 1 ? nil : $0.title}
-                print(titles)
             }, completion: { success in
                 completion(success ? validItems : nil, result.total)
             })
@@ -162,12 +157,14 @@ class ApiManager {
     }
     
     private func queryItems(_ parameters: SearchParameters) -> [URLQueryItem] {
+        let hd: Bool = Settings.value(.searchHD) ?? false
+        
         return [
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.103"),
             URLQueryItem(name: "q", value: parameters.query),
-            URLQueryItem(name: "sort", value: "0"),
-//            URLQueryItem(name: "hd", value: "1"),
+            URLQueryItem(name: "sort", value: Settings.value(.searchSort)),
+            URLQueryItem(name: "hd", value: hd ? "1" : "0"),
             URLQueryItem(name: "adult", value: "1"),
             URLQueryItem(name: "filters", value: "mp4"),
 //            URLQueryItem(name: "search_own", value: "0"),
