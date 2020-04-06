@@ -25,6 +25,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet var progressView: UIProgressView!
     @IBOutlet var volumeView: UIProgressView!
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var mirrorMode: Bool = false {
         didSet {
@@ -34,6 +35,10 @@ class PlayerViewController: UIViewController {
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     //MARK: - Private properties
@@ -84,6 +89,8 @@ class PlayerViewController: UIViewController {
             setVolume(value: volume)
         }
         hideVolumeView()
+        
+//        activityIndicator.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -146,10 +153,10 @@ class PlayerViewController: UIViewController {
     }
     
     private func setTime(location: CGFloat) {
-        guard let duration = player.currentItem?.duration else {
+        guard let duration = player.currentItem?.duration.seconds, !duration.isNaN, !duration.isZero else {
             return
         }
-        setTime(seconds: Double(location) * duration.seconds)
+        setTime(seconds: Double(location) * duration)
     }
     
     private func setTime(seconds: Double) {

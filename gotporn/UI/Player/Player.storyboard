@@ -3,6 +3,7 @@
     <device id="retina4_0" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,12 +20,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8E-5J-YuA">
+                                <rect key="frame" x="266" y="142" width="36" height="36"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xck-S3-Wfj">
+                                        <rect key="frame" x="8" y="8" width="20" height="20"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" name="VideoOverlay"/>
+                                <constraints>
+                                    <constraint firstItem="xck-S3-Wfj" firstAttribute="leading" secondItem="N8E-5J-YuA" secondAttribute="leading" constant="8" id="HTw-7H-OB0"/>
+                                    <constraint firstAttribute="trailing" secondItem="xck-S3-Wfj" secondAttribute="trailing" constant="8" id="Oep-u4-lRZ"/>
+                                    <constraint firstItem="xck-S3-Wfj" firstAttribute="top" secondItem="N8E-5J-YuA" secondAttribute="top" constant="8" id="dJR-5O-izS"/>
+                                    <constraint firstAttribute="bottom" secondItem="xck-S3-Wfj" secondAttribute="bottom" constant="8" id="urA-pl-5A3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRf-WA-ejx">
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-nB-FIH">
                                         <rect key="frame" x="504" y="0.0" width="64" height="64"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.7024539877" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="VideoOverlay"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="26t-zU-bew"/>
                                             <constraint firstAttribute="width" constant="64" id="j9Q-rV-dAX"/>
@@ -41,7 +63,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1c-gh-HOQ">
                                         <rect key="frame" x="0.0" y="0.0" width="82" height="64"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.7024539877300614" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="VideoOverlay"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="4dp-Sp-Fdr"/>
                                         </constraints>
@@ -58,7 +80,7 @@
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10x-wq-CXe">
                                         <rect key="frame" x="302.5" y="268" width="34.5" height="14.5"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.7024539877" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="VideoOverlay"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="6"/>
@@ -71,7 +93,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FoF-sc-Fl2">
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FoF-sc-Fl2">
                                         <rect key="frame" x="341" y="274" width="227" height="2"/>
                                     </progressView>
                                 </subviews>
@@ -106,7 +128,9 @@
                         <constraints>
                             <constraint firstItem="kmy-MN-BMD" firstAttribute="centerY" secondItem="kgp-Qm-f7M" secondAttribute="centerY" id="0xb-rc-aOf"/>
                             <constraint firstItem="RBw-Qf-e0h" firstAttribute="leading" secondItem="kgp-Qm-f7M" secondAttribute="leading" id="94q-SK-1rZ"/>
+                            <constraint firstItem="N8E-5J-YuA" firstAttribute="centerY" secondItem="kgp-Qm-f7M" secondAttribute="centerY" id="RTc-Oj-zrD"/>
                             <constraint firstAttribute="trailing" secondItem="RBw-Qf-e0h" secondAttribute="trailing" id="ZH0-wM-15o"/>
+                            <constraint firstItem="N8E-5J-YuA" firstAttribute="centerX" secondItem="kgp-Qm-f7M" secondAttribute="centerX" id="aii-hH-bD9"/>
                             <constraint firstItem="kmy-MN-BMD" firstAttribute="centerX" secondItem="Z3X-79-gNj" secondAttribute="leading" constant="8" id="ako-dW-Ggv"/>
                             <constraint firstItem="YRf-WA-ejx" firstAttribute="top" secondItem="kgp-Qm-f7M" secondAttribute="top" id="bxV-bI-6MJ"/>
                             <constraint firstAttribute="bottom" secondItem="RBw-Qf-e0h" secondAttribute="bottom" id="hb7-7y-v1o"/>
@@ -122,6 +146,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="xck-S3-Wfj" id="s4k-fr-PLn"/>
                         <outlet property="controlView" destination="YRf-WA-ejx" id="Rzb-xJ-e4E"/>
                         <outlet property="panRecognizer" destination="Rpn-76-pfV" id="AEZ-vC-BEf"/>
                         <outlet property="playerView" destination="RBw-Qf-e0h" id="TcW-wN-s4k"/>
@@ -148,5 +173,8 @@
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="multiply" catalog="system" width="128" height="111"/>
+        <namedColor name="VideoOverlay">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
