@@ -25,7 +25,8 @@ class PlayerViewController: UIViewController {
     @IBOutlet var progressView: UIProgressView!
     @IBOutlet var volumeView: UIProgressView!
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var loadingIndicatorContainer: UIView!
     
     var mirrorMode: Bool = false {
         didSet {
@@ -42,10 +43,7 @@ class PlayerViewController: UIViewController {
     }
     
     //MARK: - Private properties
-    private var player: AVPlayer {
-        return playerView.player!
-    }
-    
+    private var player: AVPlayer
     private var timeObserver: Any?
     
     #warning("todo: rework hack. disable tap recognizer, enable after")
@@ -58,6 +56,7 @@ class PlayerViewController: UIViewController {
     //MARK: - Lifecycle & inherited
     init?(coder: NSCoder, url: URL) {
         self.url = url
+        self.player = AVPlayer(url: url)
         super.init(coder: coder)
     }
     
@@ -69,40 +68,26 @@ class PlayerViewController: UIViewController {
         if let observer = timeObserver {
             player.removeTimeObserver(observer)
         }
+        
+        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.timeControlStatus))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerView.player = AVPlayer(url: url)
-        
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 30), queue: DispatchQueue.main, using: { [weak self] time in
-            guard let duration = self?.player.currentItem?.duration, duration.isNumeric else {
-                return
-            }
-            if self?.panRecognizer.state == .possible {
-                self?.timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
-            }
-        })
+        playerView.player = player
+        addPlayerObservers()
         
         volumeView.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         if let volume: Float = Settings.value(.volume) {
             setVolume(value: volume)
         }
         hideVolumeView()
-        
-//        activityIndicator.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        player.automaticallyWaitsToMinimizeStalling = false
+        player.automaticallyWaitsToMinimizeStalling = Settings.value(.minimizeStalling) ?? false
         player.play()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        tabBarController?.tabBar.isHidden = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -113,7 +98,32 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        switch keyPath {
+        case #keyPath(AVPlayer.timeControlStatus):
+            if player.timeControlStatus == .paused, !player.automaticallyWaitsToMinimizeStalling {
+                player.play()
+            }
+            loadingIndicatorContainer.isHidden = player.timeControlStatus != .waitingToPlayAtSpecifiedRate
+        default:
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
     //MARK: - Private functions
+    private func addPlayerObservers() {
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 30), queue: DispatchQueue.main, using: { [weak self] time in
+                guard let duration = self?.player.currentItem?.duration, duration.isNumeric else {
+                    return
+                }
+                if self?.panRecognizer.state == .possible {
+                    self?.timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
+                }
+        })
+        
+        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.timeControlStatus), options: [], context: nil)
+    }
+    
     private func resolvePanBehavior(location: CGPoint, translation: CGPoint) {
         guard translation != .zero else {
             panBehavior = nil
@@ -160,7 +170,7 @@ class PlayerViewController: UIViewController {
     }
     
     private func setTime(seconds: Double) {
-        guard let duration = player.currentItem?.duration else { return }
+        guard let duration = player.currentItem?.duration, duration.isNumeric else { return }
         
         let timescale = duration.timescale
         let trackStart = CMTime(seconds: 0, preferredTimescale: timescale)
@@ -168,7 +178,8 @@ class PlayerViewController: UIViewController {
         
         let time = clamp(target, trackStart, duration)
         
-        player.seek(to: time)
+        player.currentItem?.cancelPendingSeeks()
+        player.currentItem?.seek(to: time, completionHandler: nil)
         timeProgressChanged(seconds: time.seconds, duration: duration.seconds)
     }
     
@@ -181,7 +192,7 @@ class PlayerViewController: UIViewController {
         
         setVolume(value: clamp(targetVolume, 0, 1))
         
-        print(player.volume)
+        print("volume: \(player.volume)")
     }
     
     private func setVolume(value: Float) {
@@ -213,7 +224,6 @@ class PlayerViewController: UIViewController {
             return
         }
         controlView.isHidden = !controlView.isHidden
-        player.play()
     }
     
     @IBAction func viewPan(_ sender: UIPanGestureRecognizer) {
@@ -241,7 +251,6 @@ class PlayerViewController: UIViewController {
             
         case .ended:
             panBehavior = nil
-            player.play()
             
         default:
             break

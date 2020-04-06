@@ -23,7 +23,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8E-5J-YuA">
                                 <rect key="frame" x="266" y="142" width="36" height="36"/>
                                 <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xck-S3-Wfj">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xck-S3-Wfj">
                                         <rect key="frame" x="8" y="8" width="20" height="20"/>
                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
@@ -146,8 +146,9 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="xck-S3-Wfj" id="s4k-fr-PLn"/>
                         <outlet property="controlView" destination="YRf-WA-ejx" id="Rzb-xJ-e4E"/>
+                        <outlet property="loadingIndicator" destination="xck-S3-Wfj" id="s4k-fr-PLn"/>
+                        <outlet property="loadingIndicatorContainer" destination="N8E-5J-YuA" id="PkJ-ef-grC"/>
                         <outlet property="panRecognizer" destination="Rpn-76-pfV" id="AEZ-vC-BEf"/>
                         <outlet property="playerView" destination="RBw-Qf-e0h" id="TcW-wN-s4k"/>
                         <outlet property="progressLabel" destination="Yd7-Gc-CEu" id="G12-EP-YcB"/>
@@ -174,7 +175,7 @@
     <resources>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <namedColor name="VideoOverlay">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -164,7 +164,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        view.endEditing(false)
         let video = model.video(at: indexPath)
         
         guard let url = video.videoURL else {
