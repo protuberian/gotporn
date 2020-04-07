@@ -73,90 +73,32 @@ class ApiManager {
         task.resume()
     }
     
-    func search(parameters: SearchParameters, completion: ((Int?, Int?) -> Void)?) {
-        guard !searchInProgress else {
-            print("canceled, search in progress")
-            return
-        }
-        searchInProgress = true
-        
-        db.save({ context in
-            if parameters.offset == 0 {
-                self.restricted = 0
-                let request: NSFetchRequest<Video> = Video.fetchRequest()
-                db.fetch(request, inContext: context).forEach {
-                    context.delete($0)
-                }
-            }
-        }, completion: { _ in
-            self.performSearch(parameters: parameters) { count, total in
-                completion?(count, total)
-                self.searchInProgress = false
-            }
-        })
-    }
-    
-    func performSearch(parameters: SearchParameters, completion: @escaping (Int?, Int?) -> Void) {
+    @discardableResult
+    func search(parameters: SearchParameters, completion: @escaping (Result<SearchResult>) -> Void) -> URLSessionDataTask {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.vk.com"
         components.path = "/method/video.search"
-        components.queryItems = queryItems(parameters)
+        components.queryItems = searchQueryItems(parameters)
 
         let request = URLRequest(url: components.url!, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30)
-        print(request)
+        
+        print("----------")
         print("search: \(parameters.query), offset: \(parameters.offset)")
+        print(request)
 
         let task = self.urlSession.dataTask(with: request) { (data, response, error) in
-            guard
-                let data = data,
-                let result = SearchResult(response: data)
-                else {
-                    print("error mapping response")
-                    completion(nil, nil)
-                    return
+            if let data = data, let result = SearchResult(response: data) {
+                completion(.success(result))
+            } else {
+                completion(.failure(error ?? CustomError(location: location(), body: "Unhandled error")))
             }
-            
-            let pages = Double(result.total)/Double(parameters.count)
-            
-            print("total: \(result.total) (\(Int(ceil(pages))) pages)")
-            let startIndex = Int(parameters.offset) - self.restricted
-            
-            var validItems = 0
-            db.save({ context in
-                for (index, dto) in result.videos.enumerated() {
-                    if dto.contentRestricted == 1 {
-                        self.restricted += 1
-                        continue
-                    }
-                    validItems += 1
-                    let request: NSFetchRequest<Video> = Video.fetchRequest()
-                    request.predicate = NSPredicate(format: "id = %@", NSNumber(value: dto.id))
-                    let video = db.fetch(request, inContext: context).first ?? Video(context: context)
-                    video.id = Int64(dto.id)
-                    video.ownerId = Int64(dto.ownerId)
-                    video.sortIndex = Int64(startIndex + index)
-                    video.title = dto.title
-                    video.duration = Int64(dto.duration)
-                    video.accessKey = dto.accessKey
-                    video.photo320 = dto.thumb
-                    video.player = dto.player
-                    video.q240 = dto.files?.q240
-                    video.q360 = dto.files?.q360
-                    video.q480 = dto.files?.q480
-                    video.q720 = dto.files?.q720
-                    video.q1080 = dto.files?.q1080
-                    video.qhls = dto.files?.qhls
-                }
-            }, completion: { success in
-                completion(success ? validItems : nil, result.total)
-            })
         }
-
         task.resume()
+        return task
     }
     
-    private func queryItems(_ parameters: SearchParameters) -> [URLQueryItem] {
+    private func searchQueryItems(_ parameters: SearchParameters) -> [URLQueryItem] {
         let hd: Bool = Settings.value(.searchHD) ?? false
         
         return [

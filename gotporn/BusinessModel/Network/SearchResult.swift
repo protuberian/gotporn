@@ -65,6 +65,10 @@ struct VideoSearchResultDTO: Codable {
                 let bigImages = (image ?? firstFrame ?? []).filter({$0.width >= 320})
                 return bigImages.first?.url ?? image?.first?.url ?? firstFrame?.first?.url ?? URL(string: "https://static.thenounproject.com/png/20804-200.png")!
             }
+            
+            var uid: String {
+                return "\(ownerId)_\(id)"
+            }
         }
         
         struct Files: Codable {

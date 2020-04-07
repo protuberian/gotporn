@@ -40,6 +40,29 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="56"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="xJc-eX-IF7">
+                                    <rect key="frame" x="0.0" y="164.33333587646484" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ciH-Yz-j2s">
+                                            <rect key="frame" x="177.66666666666666" y="12" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dp-QE-b24">
+                                            <rect key="frame" x="116.33333333333333" y="11.666666666666664" width="142.66666666666669" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="ciH-Yz-j2s" firstAttribute="centerX" secondItem="xJc-eX-IF7" secondAttribute="centerX" id="Apx-IZ-GEt"/>
+                                        <constraint firstItem="8Dp-QE-b24" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xJc-eX-IF7" secondAttribute="leadingMargin" id="CNf-HY-k9W"/>
+                                        <constraint firstItem="8Dp-QE-b24" firstAttribute="centerY" secondItem="xJc-eX-IF7" secondAttribute="centerY" id="Mxx-JQ-e7X"/>
+                                        <constraint firstItem="8Dp-QE-b24" firstAttribute="centerX" secondItem="xJc-eX-IF7" secondAttribute="centerX" id="PUv-4W-kZw"/>
+                                        <constraint firstItem="ciH-Yz-j2s" firstAttribute="centerY" secondItem="xJc-eX-IF7" secondAttribute="centerY" id="SNy-ih-pEu"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="VideoCell" id="Ljv-2E-DPt" customClass="VideoCell" customModule="gotporn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="108.33333587646484"/>
@@ -125,6 +148,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footerLabel" destination="8Dp-QE-b24" id="d2r-Hh-DdD"/>
+                        <outlet property="loadingIndicator" destination="ciH-Yz-j2s" id="sPU-r2-SFi"/>
                         <outlet property="seachBarBottomMargin" destination="8QX-99-fo2" id="Fnw-AN-CFc"/>
                         <outlet property="searchBar" destination="uaJ-5L-2VR" id="OWf-04-V3a"/>
                         <outlet property="tableView" destination="n4c-7M-kzD" id="qD3-1d-pE8"/>

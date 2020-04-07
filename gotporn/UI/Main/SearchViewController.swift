@@ -13,6 +13,8 @@ class SearchViewController: KeyboardObserverViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var seachBarBottomMargin: NSLayoutConstraint!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var footerLabel: UILabel!
     
     private let panRecognizer = UIPanGestureRecognizer()
     private var additionalSafeAreaMaxBottomValue: CGFloat = 0
@@ -20,10 +22,16 @@ class SearchViewController: KeyboardObserverViewController {
     let model = VideoSearchModel()
     
     private var needScrollToTop = true
+    private var showsLoading = false {
+        didSet {
+            updateLoadingState()
+        }
+    }
     
     //MARK: - Lifecycle & UI
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateLoadingState()
         tableView.contentInsetAdjustmentBehavior = .never
         
         panRecognizer.delegate = self
@@ -33,6 +41,7 @@ class SearchViewController: KeyboardObserverViewController {
         model.delegate = self
         
         if let query: String = Settings.value(.searchText), query.count > 0 {
+            showsLoading = true
             searchBar.text = query
             model.query = query
         }
@@ -65,6 +74,23 @@ class SearchViewController: KeyboardObserverViewController {
         additionalSafeAreaMaxBottomValue = additionalSafeAreaInsets.bottom
         
         view.layoutIfNeeded()
+    }
+    
+    func updateLoadingState() {
+        loadViewIfNeeded()
+        footerLabel.isHidden = showsLoading
+        
+        if model.query.count > 0 {
+            footerLabel.text = NSLocalizedString("Total ", comment: "video search table footer text") + "\(tableView.numberOfRows(inSection: 0))"
+        } else {
+            footerLabel.text = nil
+        }
+        
+        if showsLoading {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
     }
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
@@ -107,6 +133,8 @@ extension SearchViewController: UISearchBarDelegate {
         guard let query = searchBar.text, query.count > 0 else { return }
         
         Settings.set(value: query, for: .searchText)
+        
+        showsLoading = true
         model.query = query
     }
 }
@@ -140,6 +168,10 @@ extension SearchViewController: VideoSearchModelDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+    }
+    
+    func videoSearchModelDidLoadAllResults(_ model: VideoSearchModel) {
+        showsLoading = false
     }
 }
 
