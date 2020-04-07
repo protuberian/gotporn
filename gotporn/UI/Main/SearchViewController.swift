@@ -45,8 +45,6 @@ class SearchViewController: KeyboardObserverViewController {
             searchBar.text = query
             model.query = query
         }
-        
-        navigationItem.title = NSLocalizedString("NavTitle", comment: "Navigation title for SearchViewController")
     }
     
     override func viewWillLayoutSubviews() {
@@ -83,7 +81,7 @@ class SearchViewController: KeyboardObserverViewController {
         footerLabel.isHidden = showsLoading
         
         if model.query.count > 0 {
-            let identifier = NSLocalizedString("search_footer", comment: "Search results footer text")
+            let identifier = NSLocalizedString("search_footer", comment: "Used by plurals dict, do not translate")
             footerLabel.text = String.localizedStringWithFormat(identifier, 1)
         } else {
             footerLabel.text = nil

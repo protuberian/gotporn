@@ -28,7 +28,6 @@
 		50210392243B49C300BBC68F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50210391243B49C300BBC68F /* PlayerView.swift */; };
 		50251CD9243CD3FC00B75050 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50251CDB243CD3FC00B75050 /* Localizable.strings */; };
 		503742EE243CCE2000DC9B66 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 503742F0243CCE2000DC9B66 /* Localizable.stringsdict */; };
-		506F315F243B9FE400145832 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 506F315E243B9FE400145832 /* Settings.bundle */; };
 		5079622D243CC64300FDB97A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5079622C243CC64200FDB97A /* LaunchScreen.storyboard */; };
 		507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507C7BB6241FD58F00B44BAE /* AuthResponse.swift */; };
 		50A3CA16243CBAC30072EE64 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A3CA18243CBAC30072EE64 /* Player.storyboard */; };
@@ -64,7 +63,6 @@
 		50251CDF243CDD8F00B75050 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50251CE2243CE31300B75050 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		503742EF243CCE2000DC9B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		506F315E243B9FE400145832 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5079622C243CC64200FDB97A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		507C7BB6241FD58F00B44BAE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		50A3CA17243CBAC30072EE64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Player.storyboard; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				503742F0243CCE2000DC9B66 /* Localizable.stringsdict */,
 				50251CDB243CD3FC00B75050 /* Localizable.strings */,
 				50A3CA24243CBC4D0072EE64 /* InfoPlist.strings */,
-				506F315E243B9FE400145832 /* Settings.bundle */,
 			);
 			path = gotporn;
 			sourceTree = "<group>";
@@ -285,7 +282,6 @@
 				50251CD9243CD3FC00B75050 /* Localizable.strings in Resources */,
 				50A3CA16243CBAC30072EE64 /* Player.storyboard in Resources */,
 				50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */,
-				506F315F243B9FE400145832 /* Settings.bundle in Resources */,
 				50A3CA1D243CBB490072EE64 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
