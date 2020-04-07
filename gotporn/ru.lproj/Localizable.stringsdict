@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>search_footer</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@videos_found@</string>
+		<key>videos_found</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>few</key>
+			<string>Найдено %d видеозаписи</string>
+			<key>many</key>
+			<string>Найдено %d видеозаписей</string>
+			<key>one</key>
+			<string>Найдена %d видеозапись</string>
+			<key>other</key>
+			<string>Найдено %d видеозаписей</string>
+			<key>zero</key>
+			<string>Видеозаписи не найдены</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

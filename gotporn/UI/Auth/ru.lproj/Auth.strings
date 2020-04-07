@@ -1,0 +1,9 @@
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "j42-yt-8dX"; */
+"j42-yt-8dX.normalTitle" = "Войти";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "mS8-iP-Iqe"; */
+"mS8-iP-Iqe.placeholder" = "пароль";
+
+/* Class = "UITextField"; placeholder = "phone or email"; ObjectID = "VYd-gP-aQM"; */
+"VYd-gP-aQM.placeholder" = "телефон или email";
+
