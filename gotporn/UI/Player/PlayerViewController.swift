@@ -89,11 +89,33 @@ class PlayerViewController: UIViewController {
         volumeView.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         setVolume(value: Settings.volume)
         hideVolumeView()
+        
+        applyMacLayoutIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         player.play()
+    }
+    
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        
+        let actions: [String: () -> Void] = [
+            UIKeyCommand.inputLeftArrow: jumpBackwards,
+            UIKeyCommand.inputRightArrow: jumpForward,
+            UIKeyCommand.inputUpArrow: volumeUp,
+            UIKeyCommand.inputDownArrow: volumeDown
+        ]
+        
+        let handledCharacters = presses.compactMap({ $0.key?.charactersIgnoringModifiers }).filter({actions.keys.contains($0)})
+        
+        if handledCharacters.count > 0 {
+            for characters in handledCharacters {
+                actions[characters]?()
+            }
+        } else {
+            super.pressesBegan(presses, with: event)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -117,6 +139,26 @@ class PlayerViewController: UIViewController {
     }
     
     //MARK: - Private functions
+    private func applyMacLayoutIfNeeded() {
+        #if targetEnvironment(macCatalyst)
+        #warning("apply top margin for playerView")
+        additionalSafeAreaInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        
+        progressView.removeFromSuperview()
+        progressLabel.removeFromSuperview()
+        progressLabel.backgroundColor = .black
+        
+        controlView.addSubview(progressLabel)
+        progressLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        progressLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        controlView.addSubview(progressView)
+        progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        progressView.bottomAnchor.constraint(equalTo: progressLabel.topAnchor).isActive = true
+        #endif
+    }
+    
     private func addPlayerObservers() {
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 30), queue: DispatchQueue.main, using: { [weak self] time in
                 guard let duration = self?.player.currentItem?.duration, duration.isNumeric else {
@@ -158,6 +200,14 @@ class PlayerViewController: UIViewController {
     }
     
     //MARK: Time position
+    private func jumpForward() {
+        setTime(seconds: player.currentTime().seconds + Double(Settings.keyboardJumpSeconds))
+    }
+    
+    private func jumpBackwards() {
+        setTime(seconds: player.currentTime().seconds - Double(Settings.keyboardJumpSeconds))
+    }
+    
     private func shiftTime(translation: CGFloat) {
         guard let panStart = panBeganAtTimePosition else {
             return
@@ -190,18 +240,26 @@ class PlayerViewController: UIViewController {
     }
     
     //MARK: Volume
+    private func volumeUp() {
+        setVolume(value: player.volume + Settings.keyboardJumpVolume)
+    }
+    
+    private func volumeDown() {
+        setVolume(value: player.volume - Settings.keyboardJumpVolume)
+    }
+    
     private func setVolume(translation: CGFloat) {
         guard let panBeganAtVolume = panBeganAtVolume else { return }
         
         let volumeControlHeight: CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) * 0.5
         let targetVolume = panBeganAtVolume + Float(translation / volumeControlHeight * -1)
         
-        setVolume(value: clamp(targetVolume, 0, 1))
-        
-//        print("volume: \(player.volume)")
+        setVolume(value: targetVolume)
     }
     
     private func setVolume(value: Float) {
+        let value = clamp(value, 0, 1)
+        
         Settings.volume = value
         player.volume = value
         volumeView.progress = value
@@ -209,6 +267,8 @@ class PlayerViewController: UIViewController {
         
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideVolumeView), object: nil)
         perform(#selector(hideVolumeView), with: nil, afterDelay: 1.5)
+        
+        print("volume: \(player.volume)")
     }
     
     @objc private func hideVolumeView() {

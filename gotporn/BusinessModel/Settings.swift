@@ -17,6 +17,8 @@ enum SettingsKey: String {
     case volume
     case minimizeStalling
     case rightHandedPlayerControls
+    case keyboardJumpSeconds
+    case keyboardJumpVolume
     
     //search
     case searchHD
@@ -59,6 +61,16 @@ struct Settings {
     static var rightHandedPlayerControls: Bool {
         get { return value(.rightHandedPlayerControls) ?? true }
         set { set(value: newValue, for: .rightHandedPlayerControls) }
+    }
+    
+    static var keyboardJumpSeconds: Int {
+        get { return value(.keyboardJumpSeconds) ?? 10 }
+        set { set(value: newValue, for: .keyboardJumpSeconds) }
+    }
+    
+    static var keyboardJumpVolume: Float {
+        get { return value(.keyboardJumpVolume) ?? 0.1 }
+        set { set(value: newValue, for: .keyboardJumpVolume) }
     }
     
     //MARK: Search request related
