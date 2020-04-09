@@ -40,7 +40,7 @@ class SearchViewController: KeyboardObserverViewController {
         
         model.delegate = self
         
-        if let query: String = Settings.value(.searchText), query.count > 0 {
+        if let query = Settings.searchText, query.count > 0 {
             showsLoading = true
             searchBar.text = query
             model.query = query
@@ -133,9 +133,8 @@ extension SearchViewController: UISearchBarDelegate {
         view.endEditing(false)
         guard let query = searchBar.text, query.count > 0 else { return }
         
-        Settings.set(value: query, for: .searchText)
-        
         showsLoading = true
+        Settings.searchText = query
         model.query = query
     }
 }

@@ -58,6 +58,8 @@ class PlayerViewController: UIViewController {
         self.url = url
         self.player = AVPlayer(url: url)
         super.init(coder: coder)
+        
+        player.automaticallyWaitsToMinimizeStalling = Settings.minimizeStalling
     }
     
     required init?(coder: NSCoder) {
@@ -74,19 +76,23 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.semanticContentAttribute = Settings.rightHandedPlayerControls ? .forceLeftToRight : .forceRightToLeft
+        controlView.semanticContentAttribute = Settings.rightHandedPlayerControls ? .forceLeftToRight : .forceRightToLeft
+        
+        progressView.semanticContentAttribute = .playback
+        volumeView.semanticContentAttribute = .playback
+        
         playerView.player = player
         addPlayerObservers()
         
         volumeView.transform = CGAffineTransform(rotationAngle: -(.pi/2))
-        if let volume: Float = Settings.value(.volume) {
-            setVolume(value: volume)
-        }
+        setVolume(value: Settings.volume)
         hideVolumeView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        player.automaticallyWaitsToMinimizeStalling = Settings.value(.minimizeStalling) ?? false
         player.play()
     }
     
@@ -196,7 +202,7 @@ class PlayerViewController: UIViewController {
     }
     
     private func setVolume(value: Float) {
-        Settings.set(value: value, for: .volume)
+        Settings.volume = value
         player.volume = value
         volumeView.progress = value
         volumeView.isHidden = false

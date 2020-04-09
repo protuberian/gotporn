@@ -14,17 +14,9 @@ let authURL = "https://oauth.vk.com/token?grant_type=password&client_id=2274003&
 
 class ApiManager {
     
-    var token: String? {
-        get {
-            Settings.value(.token)
-        }
-        set {
-            Settings.set(value: newValue, for: .token)
-        }
-    }
     
     var authorized: Bool {
-        return token != nil
+        return Settings.token != nil
     }
     
     let urlSession: URLSession
@@ -63,7 +55,7 @@ class ApiManager {
             
             do {
                 let dto = try JSONDecoder().decode(AuthResponse.self, from: data)
-                self.token = dto.accessToken
+                Settings.token = dto.accessToken
                 completion(true)
             } catch {
                 handleError(error)
@@ -99,23 +91,36 @@ class ApiManager {
     }
     
     private func searchQueryItems(_ parameters: SearchParameters) -> [URLQueryItem] {
-        let hd: Bool = Settings.value(.searchHD) ?? false
+        func asString(_ value: Bool) -> String {
+            return value ? "1" : "0"
+        }
         
-        return [
-            URLQueryItem(name: "access_token", value: token),
+        var items = [
+            URLQueryItem(name: "access_token", value: Settings.token),
             URLQueryItem(name: "v", value: "5.103"),
-            URLQueryItem(name: "q", value: parameters.query),
-            URLQueryItem(name: "sort", value: Settings.value(.searchSort)),
-            URLQueryItem(name: "hd", value: hd ? "1" : "0"),
-            URLQueryItem(name: "adult", value: "1"),
             URLQueryItem(name: "filters", value: "mp4"),
-//            URLQueryItem(name: "search_own", value: "0"),
+            
+            URLQueryItem(name: "sort", value: Settings.searchSort.rawValue),
+            URLQueryItem(name: "hd", value: asString(Settings.searchHD)),
+            URLQueryItem(name: "adult", value: asString(Settings.searchAdult)),
+            
+            URLQueryItem(name: "q", value: parameters.query),
             URLQueryItem(name: "offset", value: String(parameters.offset)),
-            URLQueryItem(name: "longer", value: "240"),
-//            URLQueryItem(name: "shorter", value: "3600"),
             URLQueryItem(name: "count", value: String(min(200, parameters.count)))
-//            URLQueryItem(name: "extended", value: "1")
+            
+            //not used
+            //URLQueryItem(name: "search_own", value: "0"),
+            //URLQueryItem(name: "extended", value: "1")
         ]
+        
+        if let min = Settings.searchMinimumDuration {
+            items.append(URLQueryItem(name: "longer", value: "\(min)"))
+        }
+        if let max = Settings.searchMaximumDuration {
+            items.append(URLQueryItem(name: "shorter", value: "\(max)"))
+        }
+        
+        return items
     }
     
     @discardableResult

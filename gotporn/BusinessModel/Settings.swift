@@ -8,25 +8,92 @@
 
 import Foundation
 
+enum SettingsKey: String {
+    //application
+    case token
+    case searchText
+    
+    //player
+    case volume
+    case minimizeStalling
+    case rightHandedPlayerControls
+    
+    //search
+    case searchHD
+    case searchAdult
+    case searchSort
+    case searchMinimumDuration
+    case searchMaximumDuration
+}
+
+enum SearchSort: String {
+    case added = "0"
+    case duration = "1"
+    case relevance = "2"
+}
+
 struct Settings {
-    static func value<T>(_ key: SettingsKey) -> T? {
-        return UserDefaults.standard.object(forKey: key.rawValue) as? T
+    
+    //MARK: Application related
+    static var token: String? {
+        get { return value(.token) }
+        set { set(value: newValue, for: .token) }
     }
     
-    static func set<T>(value: T?, for key: SettingsKey) {
-        return UserDefaults.standard.setValue(value, forKey: key.rawValue)
+    static var searchText: String? {
+        get { return value(.searchText) }
+        set { set(value: newValue, for: .searchText) }
     }
     
-    static func reset() {
-        #warning("todo: reset settings storage")
+    //MARK: Player related
+    static var volume: Float {
+        get { return value(.volume) ?? 1 }
+        set { set(value: newValue, for: .volume) }
+    }
+    
+    static var minimizeStalling: Bool {
+        get { return value(.minimizeStalling) ?? false }
+        set { set(value: newValue, for: .minimizeStalling) }
+    }
+    
+    static var rightHandedPlayerControls: Bool {
+        get { return value(.rightHandedPlayerControls) ?? true }
+        set { set(value: newValue, for: .rightHandedPlayerControls) }
+    }
+    
+    //MARK: Search request related
+    static var searchHD: Bool {
+        get { return value(.searchHD) ?? false }
+        set { set(value: newValue, for: .searchHD) }
+    }
+    
+    static var searchAdult: Bool {
+        get { return value(.searchAdult) ?? true }
+        set { set(value: newValue, for: .searchAdult) }
+    }
+    
+    static var searchSort: SearchSort {
+        get { return value(.searchSort) ?? .added }
+        set { set(value: newValue, for: .searchSort) }
+    }
+    
+    static var searchMinimumDuration: UInt? {
+        get { return value(.searchMinimumDuration) }
+        set { set(value: newValue, for: .searchMinimumDuration) }
+    }
+    
+    static var searchMaximumDuration: UInt? {
+        get { return value(.searchMaximumDuration) }
+        set { set(value: newValue, for: .searchMaximumDuration) }
     }
 }
 
-enum SettingsKey: String {
-    case token
-    case searchText
-    case volume
-    case minimizeStalling
-    case searchHD
-    case searchSort
+//MARK: Private helpers
+
+fileprivate func value<T>(_ key: SettingsKey) -> T? {
+    return UserDefaults.standard.object(forKey: key.rawValue) as? T
+}
+
+fileprivate func set<T>(value: T?, for key: SettingsKey) {
+    return UserDefaults.standard.setValue(value, forKey: key.rawValue)
 }
