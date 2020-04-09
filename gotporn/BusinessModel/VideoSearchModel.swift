@@ -153,7 +153,7 @@ class VideoSearchModel {
                 video.q1080 = dto.files?.q1080
                 video.qhls = dto.files?.qhls
                 
-                print("\(video.sortIndex): \(dto.uid) - \(dto.title)")
+//                print("\(video.sortIndex): \(dto.uid) - \(dto.title)")
             }
         }, completion: { success in
             self.allResultsLoaded = lastPageLoaded

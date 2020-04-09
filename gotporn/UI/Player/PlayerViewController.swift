@@ -198,7 +198,7 @@ class PlayerViewController: UIViewController {
         
         setVolume(value: clamp(targetVolume, 0, 1))
         
-        print("volume: \(player.volume)")
+//        print("volume: \(player.volume)")
     }
     
     private func setVolume(value: Float) {
