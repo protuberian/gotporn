@@ -80,9 +80,9 @@ class SearchViewController: KeyboardObserverViewController {
         loadViewIfNeeded()
         footerLabel.isHidden = showsLoading
         
-        if model.query.count > 0 {
+        if model.query.count > 0, model.sectionsCount > 0 {
             let identifier = NSLocalizedString("search_footer", comment: "Used by plurals dict, do not translate")
-            footerLabel.text = String.localizedStringWithFormat(identifier, 1)
+            footerLabel.text = String.localizedStringWithFormat(identifier, model.videosCount(in: 0))
         } else {
             footerLabel.text = nil
         }
