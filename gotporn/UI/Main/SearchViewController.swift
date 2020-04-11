@@ -118,6 +118,7 @@ class SearchViewController: KeyboardObserverViewController {
 extension SearchViewController: SettingsViewControllerDelegate {
     func settingsViewController(_ controller: SettingsViewController, completedWith changes: Bool) {
         if changes {
+            showsLoading = true
             model.reload()
         }
     }

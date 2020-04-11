@@ -4,9 +4,18 @@
 /* Class = "UILabel"; text = "Found 1 video"; ObjectID = "8Dp-QE-b24"; Note = "Do not translate"; */
 "8Dp-QE-b24.text" = "Найдена 1 видеозапись";
 
+/* Class = "UILabel"; text = "Switch property"; ObjectID = "M5H-YO-5Su"; Note = "Do not localize, not used"; */
+"M5H-YO-5Su.text" = "Переключатель";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "NQ3-Cy-HXJ"; */
+"NQ3-Cy-HXJ.text" = "Выйти";
+
 /* Class = "UILabel"; text = "Video title"; ObjectID = "RkG-9e-AGR"; Note = "Do not translate"; */
 "RkG-9e-AGR.text" = "Название видео";
 
 /* Class = "UISearchBar"; placeholder = "Search by title"; ObjectID = "uaJ-5L-2VR"; */
 "uaJ-5L-2VR.placeholder" = "Поиск по названию";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "uxi-Xk-cT1"; */
+"uxi-Xk-cT1.title" = "Настройки";
 
