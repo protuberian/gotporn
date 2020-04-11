@@ -36,7 +36,8 @@ class VideoSearchModel {
     
     var query: String {
         didSet {
-            didChangeQuery()
+            print("query updated: \(query)")
+            reload()
         }
     }
     
@@ -160,8 +161,7 @@ class VideoSearchModel {
         })
     }
     
-    func didChangeQuery() {
-        print("query updated: \(query)")
+    func reload() {
         let query = self.query
         
         db.save({ context in

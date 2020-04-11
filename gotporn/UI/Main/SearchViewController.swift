@@ -108,8 +108,18 @@ class SearchViewController: KeyboardObserverViewController {
         additionalSafeAreaInsets.bottom = min(additionalSafeAreaMaxBottomValue, bottom)
     }
     
-    @IBAction func settingsTap(_ sender: Any) {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+    @IBSegueAction func createSettingsController(_ coder: NSCoder) -> SettingsViewController? {
+        let vc = SettingsViewController(coder: coder)
+        vc?.delegate = self
+        return vc
+    }
+}
+
+extension SearchViewController: SettingsViewControllerDelegate {
+    func settingsViewController(_ controller: SettingsViewController, completedWith changes: Bool) {
+        if changes {
+            model.reload()
+        }
     }
 }
 

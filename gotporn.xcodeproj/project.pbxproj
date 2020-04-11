@@ -30,6 +30,8 @@
 		503742EE243CCE2000DC9B66 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 503742F0243CCE2000DC9B66 /* Localizable.stringsdict */; };
 		5079622D243CC64300FDB97A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5079622C243CC64200FDB97A /* LaunchScreen.storyboard */; };
 		507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507C7BB6241FD58F00B44BAE /* AuthResponse.swift */; };
+		507F2FB12441EE6D0077A8C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507F2FB02441EE6D0077A8C1 /* SettingsViewController.swift */; };
+		507F2FB32441F8980077A8C1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507F2FB22441F8980077A8C1 /* SwitchCell.swift */; };
 		50A3CA16243CBAC30072EE64 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A3CA18243CBAC30072EE64 /* Player.storyboard */; };
 		50A3CA1D243CBB490072EE64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A3CA1F243CBB490072EE64 /* Main.storyboard */; };
 		50A3CA26243CBC4D0072EE64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50A3CA24243CBC4D0072EE64 /* InfoPlist.strings */; };
@@ -66,6 +68,8 @@
 		503742EF243CCE2000DC9B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		5079622C243CC64200FDB97A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		507C7BB6241FD58F00B44BAE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		507F2FB02441EE6D0077A8C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		507F2FB22441F8980077A8C1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		50A3CA17243CBAC30072EE64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Player.storyboard; sourceTree = "<group>"; };
 		50A3CA1C243CBACB0072EE64 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Player.strings; sourceTree = "<group>"; };
 		50A3CA1E243CBB490072EE64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				50A3CA1F243CBB490072EE64 /* Main.storyboard */,
 				50104BAA2412E64F00D6E658 /* SearchViewController.swift */,
+				507F2FB02441EE6D0077A8C1 /* SettingsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				50104BC22415306600D6E658 /* VideoCell.swift */,
+				507F2FB22441F8980077A8C1 /* SwitchCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 				50104BB224151F4100D6E658 /* SearchResult.swift in Sources */,
 				50104BC62415486100D6E658 /* PlayerViewController.swift in Sources */,
 				50104BA42412B49C00D6E658 /* Settings.swift in Sources */,
+				507F2FB12441EE6D0077A8C1 /* SettingsViewController.swift in Sources */,
 				50104BA62412D19200D6E658 /* RestoreSessionViewController.swift in Sources */,
 				507C7BB7241FD58F00B44BAE /* AuthResponse.swift in Sources */,
 				50104BBA2415272E00D6E658 /* Model.xcdatamodeld in Sources */,
@@ -311,6 +318,7 @@
 				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,
 				50104BAE2412E78200D6E658 /* KeyboardObserverViewController.swift in Sources */,
 				50104BA22412B2E500D6E658 /* Globals.swift in Sources */,
+				507F2FB32441F8980077A8C1 /* SwitchCell.swift in Sources */,
 				5021038B24377AC000BBC68F /* VideoSearchModel.swift in Sources */,
 				50210392243B49C300BBC68F /* PlayerView.swift in Sources */,
 				50104B812412A94400D6E658 /* AppDelegate.swift in Sources */,

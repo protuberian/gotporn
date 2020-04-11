@@ -26,6 +26,35 @@ enum SettingsKey: String {
     case searchSort
     case searchMinimumDuration
     case searchMaximumDuration
+    
+    var localizedTitle: String? {
+        switch self {
+        case .token:
+            return nil
+        case .searchText:
+            return nil
+        case .volume:
+            return nil
+        case .minimizeStalling:
+            return NSLocalizedString("Minimize stalling", comment: "Settings key description")
+        case .rightHandedPlayerControls:
+            return NSLocalizedString("Right-handed controls", comment: "Settings key description")
+        case .keyboardJumpSeconds:
+            return nil
+        case .keyboardJumpVolume:
+            return nil
+        case .searchHD:
+            return NSLocalizedString("Search in HD", comment: "Settings key description")
+        case .searchAdult:
+            return NSLocalizedString("Show 18+ content", comment: "Settings key description")
+        case .searchSort:
+            return NSLocalizedString("Search order", comment: "Settings key description")
+        case .searchMinimumDuration:
+            return nil
+        case .searchMaximumDuration:
+            return nil
+        }
+    }
 }
 
 enum SearchSort: String {
