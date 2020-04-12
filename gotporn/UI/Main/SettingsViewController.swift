@@ -122,6 +122,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         handleError("can't apply bool value for settings key \(key)")
     }
     
+    private func searchDurationFilterString(range: ClosedRange<Double>, max: Double) -> String {
+        let formatter = DateComponentsFormatter()
+        let unlimited = NSLocalizedString("Unlimited", comment: "maximum search video duration")
+        let from = formatter.string(from: range.lowerBound)!
+        let to = range.upperBound <= max ? formatter.string(from: range.upperBound)! : unlimited
+        return "\(from) - \(to)"
+    }
+    
     //MARK: - TableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -145,13 +153,21 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
         case .searchMinimumDuration:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RangeCell") as? RangeCell else { break }
-            cell.rangeControl.minimum = 0
-            cell.rangeControl.maximum = 3600
-            cell.rangeControl.lowerValue = Double(Settings.searchMinimumDuration ?? 0)
-            cell.rangeControl.upperValue = Double(Settings.searchMaximumDuration ?? 3600)
+            let max = Double(7200)
             
-            cell.onValueChanged = { [weak cell] range in
-                cell?.labelValue.text = "\(Int(range.lowerBound)) - \(Int(range.upperBound))"
+            cell.labelTitle.text = NSLocalizedString("Filter by duration", comment: "Time range settings description")
+            cell.rangeControl.minimum = 0
+            cell.rangeControl.maximum = max
+            cell.rangeControl.lowerValue = Double(Settings.searchMinimumDuration ?? 0)
+            cell.rangeControl.upperValue = Double(Settings.searchMaximumDuration ?? UInt(max))
+            
+            cell.labelValue.text = searchDurationFilterString(range: cell.rangeControl.lowerValue...cell.rangeControl.upperValue, max: max)
+            
+            cell.onValueChanged = { [unowned self, weak cell] range in
+                cell?.labelValue.text = self.searchDurationFilterString(range: range, max: max)
+                Settings.searchMinimumDuration = range.lowerBound > 0 ? UInt(range.lowerBound) : nil
+                Settings.searchMaximumDuration = range.upperBound < max ? UInt(range.upperBound) : nil
+                self.searchParamsChanged = true
             }
             
             return cell

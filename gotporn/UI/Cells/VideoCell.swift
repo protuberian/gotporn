@@ -21,11 +21,15 @@ class VideoCell: UITableViewCell {
         thumbLoadingTask?.cancel()
     }
     
-    func updateWith(imageURL: URL, title: String, duration: Int) {
-        let min = duration/60
-        let sec = duration % 60
+    func updateWith(imageURL: URL, title: String, duration: Double) {
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.minute, .second]
+        if duration >= 3600 {
+            formatter.allowedUnits.insert(.hour)
+        }
         
-        titleLabel.text = String(format: "[%02i:%02i] %@", min, sec, title)
+        titleLabel.text = "[\(formatter.string(from: duration) ?? "-")] \(title)"
         
         thumbLoadingTask?.cancel()
         thumbLoadingTask = api.getImage(url: imageURL) { [weak self] image in

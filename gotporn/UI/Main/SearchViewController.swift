@@ -253,7 +253,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
 //MARK: - Extensions
 extension VideoCell {
     func updateWith(video: Video) {
-        updateWith(imageURL: video.photo320!, title: video.title!, duration: Int(video.duration))
+        updateWith(imageURL: video.photo320!, title: video.title!, duration: Double(video.duration))
     }
 }
 
