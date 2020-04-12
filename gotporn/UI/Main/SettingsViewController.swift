@@ -35,28 +35,32 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let properties: [SettingsKey]
     }
     
-    let sections = [
-        SettingsSection(type: .search, properties: [
+    let sections: [SettingsSection] = {
+        let search: [SettingsKey] = [
+            .searchSort,
             .searchHD,
             .searchAdult,
-            .searchSort
-        ]),
-        playerSection,
-        SettingsSection(type: .logout, properties: [
-            .token
-        ])
-    ]
-    
-    private static let playerSection: SettingsSection = {
-        var properties: [SettingsKey] = [
+            .searchMinimumDuration,
+            .searchMaximumDuration
+        ]
+        
+        var player: [SettingsKey] = [
             .minimizeStalling,
             .rightHandedPlayerControls
         ]
+        
+        let logout: [SettingsKey] = [
+            .token
+        ]
+        
         #if targetEnvironment(macCatalyst)
-        properties.append(.keyboardJumpSeconds)
-        properties.append(.keyboardJumpVolume)
+        playerProperties.append(.keyboardJumpSeconds)
+        playerProperties.append(.keyboardJumpVolume)
         #endif
-        return SettingsSection(type: .player, properties: properties)
+        
+        return [SettingsSection(type: .search, properties: search),
+                SettingsSection(type: .player, properties: player),
+                SettingsSection(type: .logout, properties: logout)]
     }()
     
     private(set) var searchParamsChanged = false
@@ -137,6 +141,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.label.text = property.localizedTitle
             cell.switcher.isOn = getBoolSettings(property)
             cell.switcherAction = { [unowned self] in self.setBoolSettings(value: $0, for: property) }
+            return cell
+            
+        case .searchMinimumDuration:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RangeCell") as? RangeCell else { break }
+            cell.rangeControl.minimum = 0
+            cell.rangeControl.maximum = 3600
+            cell.rangeControl.lowerValue = Double(Settings.searchMinimumDuration ?? 0)
+            cell.rangeControl.upperValue = Double(Settings.searchMaximumDuration ?? 3600)
+            
+            cell.onValueChanged = { [weak cell] range in
+                cell?.labelValue.text = "\(Int(range.lowerBound)) - \(Int(range.upperBound))"
+            }
+            
             return cell
             
         case .token:
