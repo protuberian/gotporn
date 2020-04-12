@@ -126,7 +126,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let formatter = DateComponentsFormatter()
         let unlimited = NSLocalizedString("Unlimited", comment: "maximum search video duration")
         let from = formatter.string(from: range.lowerBound)!
-        let to = range.upperBound <= max ? formatter.string(from: range.upperBound)! : unlimited
+        let to = range.upperBound < max ? formatter.string(from: range.upperBound)! : unlimited
         return "\(from) - \(to)"
     }
     

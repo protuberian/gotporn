@@ -1,3 +1,6 @@
+/* Time range settings description */
+"Filter by duration" = "Длительность";
+
 /* Settings key description */
 "Minimize stalling" = "Ждать заполнения буфера";
 
@@ -18,4 +21,7 @@
 
 /* Settings key description */
 "Show 18+ content" = "Показывать контент 18+";
+
+/* maximum search video duration */
+"Unlimited" = "♾";
 

@@ -17,12 +17,6 @@ class RangeCell: UITableViewCell {
     
     var onValueChanged: ((ClosedRange<Double>) -> Void)?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        labelValue.font = UIFont.monospacedSystemFont(ofSize: 15, weight: .regular)
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         onValueChanged = nil
