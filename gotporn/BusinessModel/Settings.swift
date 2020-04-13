@@ -64,7 +64,7 @@ struct Settings {
     }
     
     static var keyboardJumpSeconds: Int {
-        get { return value(.keyboardJumpSeconds) ?? 10 }
+        get { return value(.keyboardJumpSeconds) ?? 15 }
         set { set(value: newValue, for: .keyboardJumpSeconds) }
     }
     

@@ -212,9 +212,34 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutCell") as? LogoutCell else { break }
             cell.labelTitle.text = property.localizedTitle
             return cell
+
+        case .searchSort:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StandardCell") ?? UITableViewCell(style: .default, reuseIdentifier: "StandardCell")
+            cell.textLabel?.text = property.localizedTitle
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
+            return cell
             
-        default:
-            break
+        case .keyboardJumpSeconds:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SliderCell") as? SliderCell else { break }
+            let min = Float(1)
+            let max = Float(300)
+            
+            cell.labelTitle.text = property.localizedTitle
+            cell.slider.minimumValue = min
+            cell.slider.maximumValue = max
+            cell.slider.value = Float(Settings.keyboardJumpSeconds)
+            let formatter = DateComponentsFormatter()
+            formatter.unitsStyle = .full
+            cell.labelValue.text = formatter.string(from: Double(Settings.keyboardJumpSeconds))
+            
+            cell.onValueChanged = { cell, value in
+                let roundedValue = Int(round(value))
+                Settings.keyboardJumpSeconds = roundedValue
+                cell.labelValue.text = formatter.string(from: Double(roundedValue))
+            }
+            
+            return cell
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -232,7 +257,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let property = sections[indexPath.section].properties[indexPath.row]
         
         if property == .logout {
-            print("Logout tap")
+            (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator.logout()
         }
     }
     

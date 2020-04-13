@@ -54,4 +54,10 @@ class AppCoordinator {
             UIView.transition(from: source, to: target, duration: 0.25, options: [], completion: nil)
         }
     }
+    
+    func logout() {
+        Settings.token = nil
+        Settings.searchText = nil
+        openApplicationInitialScreen()
+    }
 }

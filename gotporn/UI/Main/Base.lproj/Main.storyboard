@@ -202,7 +202,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Switch property" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5H-YO-5Su">
                                                     <rect key="frame" x="20" y="10.999999999999998" width="122" height="21.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <attributedString key="userComments">
@@ -231,26 +231,26 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RangeCell" id="2VF-oh-bgZ" customClass="RangeCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98.666664123535156" width="414" height="51.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="98.666664123535156" width="414" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2VF-oh-bgZ" id="95m-su-JXn">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="51.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Range property title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFP-Ie-2sP">
                                                     <rect key="frame" x="20" y="11" width="152" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range property value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNR-7j-ugt">
-                                                    <rect key="frame" x="247.66666666666663" y="13" width="146.33333333333337" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNR-7j-ugt">
+                                                    <rect key="frame" x="325" y="16" width="69" height="14.333333333333336"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odc-Aj-2Fk" customClass="RangeControl" customModule="gotporn" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="40" width="374" height="0.3333333333333357"/>
+                                                    <rect key="frame" x="20" y="40" width="374" height="32"/>
                                                     <connections>
                                                         <action selector="valueChanged:" destination="2VF-oh-bgZ" eventType="valueChanged" id="xji-Vb-HWH"/>
                                                     </connections>
@@ -274,16 +274,60 @@
                                             <outlet property="rangeControl" destination="odc-Aj-2Fk" id="R3a-uM-qC8"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SliderCell" id="lfQ-f3-RDl" customClass="SliderCell" customModule="gotporn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="181.66666412353516" width="414" height="80.666664123535156"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lfQ-f3-RDl" id="cH0-Wu-VIS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80.666664123535156"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Slider property title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ay9-NA-NRh">
+                                                    <rect key="frame" x="20" y="10.999999999999998" width="147" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="slider value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbA-gl-LvQ">
+                                                    <rect key="frame" x="329.66666666666669" y="16" width="64.333333333333314" height="13.333333333333336"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9fo-aK-acr">
+                                                    <rect key="frame" x="18" y="39.333333333333336" width="378" height="31.333333333333336"/>
+                                                    <connections>
+                                                        <action selector="valueChanged:" destination="lfQ-f3-RDl" eventType="valueChanged" id="46T-1u-nZb"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ay9-NA-NRh" firstAttribute="leading" secondItem="cH0-Wu-VIS" secondAttribute="leadingMargin" id="8oy-p4-74f"/>
+                                                <constraint firstItem="9fo-aK-acr" firstAttribute="leading" secondItem="cH0-Wu-VIS" secondAttribute="leadingMargin" id="IeA-Gv-yqV"/>
+                                                <constraint firstItem="tbA-gl-LvQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ay9-NA-NRh" secondAttribute="trailing" constant="8" symbolic="YES" id="MHb-Pq-qdx"/>
+                                                <constraint firstItem="tbA-gl-LvQ" firstAttribute="firstBaseline" secondItem="ay9-NA-NRh" secondAttribute="firstBaseline" id="XMk-SO-K5e"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9fo-aK-acr" secondAttribute="bottom" id="bat-rt-40S"/>
+                                                <constraint firstItem="tbA-gl-LvQ" firstAttribute="trailing" secondItem="cH0-Wu-VIS" secondAttribute="trailingMargin" id="ey6-qn-vEw"/>
+                                                <constraint firstItem="9fo-aK-acr" firstAttribute="top" secondItem="ay9-NA-NRh" secondAttribute="bottom" constant="8" symbolic="YES" id="fOR-qt-n70"/>
+                                                <constraint firstItem="9fo-aK-acr" firstAttribute="trailing" secondItem="cH0-Wu-VIS" secondAttribute="trailingMargin" id="iN7-dR-v5Y"/>
+                                                <constraint firstItem="ay9-NA-NRh" firstAttribute="top" secondItem="cH0-Wu-VIS" secondAttribute="topMargin" id="lWz-nC-dmo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="labelTitle" destination="ay9-NA-NRh" id="uYf-wz-ISV"/>
+                                            <outlet property="labelValue" destination="tbA-gl-LvQ" id="bjf-Ij-iTl"/>
+                                            <outlet property="slider" destination="9fo-aK-acr" id="mYT-aJ-86N"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LogoutCell" id="iXS-Qe-8Lx" customClass="LogoutCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="149.99999618530273" width="414" height="43.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="262.33332824707031" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iXS-Qe-8Lx" id="CRQ-1x-lRt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQ3-Cy-HXJ">
-                                                    <rect key="frame" x="179" y="10.999999999999998" width="56" height="21.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <rect key="frame" x="179" y="11" width="56" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -325,7 +369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5vZ-y2-BLk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33.75" y="375"/>
+            <point key="canvasLocation" x="33.333333333333336" y="374.18478260869568"/>
         </scene>
     </scenes>
     <resources>
