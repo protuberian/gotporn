@@ -2,7 +2,7 @@
 "0tY-Dd-zdq.title" = "Видеозаписи";
 
 /* Class = "UILabel"; text = "Found 1 video"; ObjectID = "8Dp-QE-b24"; Note = "Do not translate"; */
-"8Dp-QE-b24.text" = "Найдена 1 видеозапись";
+"8Dp-QE-b24.text" = "";
 
 /* Class = "UILabel"; text = "Switch property"; ObjectID = "M5H-YO-5Su"; Note = "Do not localize, not used"; */
 "M5H-YO-5Su.text" = "Переключатель";

@@ -1,25 +1,34 @@
-/* Time range settings description */
-"Filter by duration" = "Длительность";
+/* Fallback cell text if unexpected error occured */
+"can't configure cell" = "";
 
-/* Settings key description */
+/* Settings property title */
+"Duration filter" = "Длительность";
+
+/* Settings property title */
+"Jump with arrows" = "Перемотка клавиатурой";
+
+/* Settings property title */
+"Logout" = "Выйти";
+
+/* Settings property title */
 "Minimize stalling" = "Ждать заполнения буфера";
 
 /* Setting section title */
 "Player" = "Проигрыватель";
 
-/* Settings key description */
+/* Settings property title */
 "Right-handed controls" = "Управление для правой руки";
 
 /* Setting section title */
 "Search" = "Поиск";
 
-/* Settings key description */
+/* Settings property title */
 "Search in HD" = "Искать только в HD";
 
-/* Settings key description */
+/* Settings property title */
 "Search order" = "Сортировка поиска";
 
-/* Settings key description */
+/* Settings property title */
 "Show 18+ content" = "Показывать контент 18+";
 
 /* maximum search video duration */

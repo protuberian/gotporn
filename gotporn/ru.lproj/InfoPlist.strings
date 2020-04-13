@@ -1,3 +1,6 @@
 /* Bundle display name */
 "CFBundleDisplayName" = "ггнуха";
 
+/* Bundle name */
+"CFBundleName" = "";
+

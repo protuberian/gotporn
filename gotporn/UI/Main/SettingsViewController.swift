@@ -14,6 +14,41 @@ protocol SettingsViewControllerDelegate {
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    enum SettingsProperty {
+        case searchSort
+        case searchHD
+        case searchAdult
+        case searchDuration
+        
+        case minimizeStalling
+        case rightHandedPlayerControls
+        case keyboardJumpSeconds
+//        case keyboardJumpVolume //not available
+        
+        case logout
+        
+        var localizedTitle: String {
+            switch self {
+            case .searchSort:
+                return NSLocalizedString("Search order", comment: "Settings property title")
+            case .searchHD:
+                return NSLocalizedString("Search in HD", comment: "Settings property title")
+            case .searchAdult:
+                return NSLocalizedString("Show 18+ content", comment: "Settings property title")
+            case .searchDuration:
+                return NSLocalizedString("Duration filter", comment: "Settings property title")
+            case .minimizeStalling:
+                return NSLocalizedString("Minimize stalling", comment: "Settings property title")
+            case .rightHandedPlayerControls:
+                return NSLocalizedString("Right-handed controls", comment: "Settings property title")
+            case .keyboardJumpSeconds:
+                return NSLocalizedString("Jump with arrows", comment: "Settings property title")
+            case .logout:
+                return NSLocalizedString("Logout", comment: "Settings property title")
+            }
+        }
+    }
+    
     struct SettingsSection {
         enum SectionType {
             case search
@@ -31,31 +66,31 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
+        
+        
         let type: SectionType
-        let properties: [SettingsKey]
+        let properties: [SettingsProperty]
     }
     
     let sections: [SettingsSection] = {
-        let search: [SettingsKey] = [
+        let search: [SettingsProperty] = [
             .searchSort,
             .searchHD,
             .searchAdult,
-            .searchMinimumDuration,
-            .searchMaximumDuration
+            .searchDuration
         ]
         
-        var player: [SettingsKey] = [
+        var player: [SettingsProperty] = [
             .minimizeStalling,
             .rightHandedPlayerControls
         ]
         
-        let logout: [SettingsKey] = [
-            .token
+        let logout: [SettingsProperty] = [
+            .logout
         ]
         
         #if targetEnvironment(macCatalyst)
         player.append(.keyboardJumpSeconds)
-        player.append(.keyboardJumpVolume)
         #endif
         
         return [SettingsSection(type: .search, properties: search),
@@ -77,7 +112,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //MARK: - Private helpers
-    func getBoolSettings(_ key: SettingsKey) -> Bool {
+    func getBoolSettings(_ key: SettingsProperty) -> Bool {
         switch key {
             
         case .searchHD:
@@ -99,7 +134,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return false
     }
     
-    func setBoolSettings(value: Bool, for key: SettingsKey) {
+    func setBoolSettings(value: Bool, for key: SettingsProperty) {
         switch key {
             
         case .searchHD:
@@ -151,11 +186,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.switcherAction = { [unowned self] in self.setBoolSettings(value: $0, for: property) }
             return cell
             
-        case .searchMinimumDuration:
+        case .searchDuration:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RangeCell") as? RangeCell else { break }
             let max = Double(3600)
             
-            cell.labelTitle.text = NSLocalizedString("Filter by duration", comment: "Time range settings description")
+            cell.labelTitle.text = property.localizedTitle
             cell.rangeControl.minimum = 0
             cell.rangeControl.maximum = max
             cell.rangeControl.lowerValue = Double(Settings.searchMinimumDuration ?? 0)
@@ -173,8 +208,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             return cell
             
-        case .token:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutCell") else { break }
+        case .logout:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutCell") as? LogoutCell else { break }
+            cell.labelTitle.text = property.localizedTitle
             return cell
             
         default:
@@ -195,7 +231,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let property = sections[indexPath.section].properties[indexPath.row]
         
-        if property == .token {
+        if property == .logout {
             print("Logout tap")
         }
     }

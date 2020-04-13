@@ -38,6 +38,7 @@
 		50A3CA2A243CBD130072EE64 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A3CA2C243CBD130072EE64 /* Auth.storyboard */; };
 		50F0DA6E24435B6B00CC29D3 /* RangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F0DA6D24435B6B00CC29D3 /* RangeCell.swift */; };
 		50F0DA712443629600CC29D3 /* RangeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F0DA702443629600CC29D3 /* RangeControl.swift */; };
+		50F0DA7324446DFB00CC29D3 /* LogoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F0DA7224446DFB00CC29D3 /* LogoutCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		50A3CA30243CBD180072EE64 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Auth.strings; sourceTree = "<group>"; };
 		50F0DA6D24435B6B00CC29D3 /* RangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeCell.swift; sourceTree = "<group>"; };
 		50F0DA702443629600CC29D3 /* RangeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeControl.swift; sourceTree = "<group>"; };
+		50F0DA7224446DFB00CC29D3 /* LogoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				50104BC22415306600D6E658 /* VideoCell.swift */,
 				507F2FB22441F8980077A8C1 /* SwitchCell.swift */,
 				50F0DA6D24435B6B00CC29D3 /* RangeCell.swift */,
+				50F0DA7224446DFB00CC29D3 /* LogoutCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				50104BB024151B0F00D6E658 /* SearchParameters.swift in Sources */,
 				50104BA02412B2CC00D6E658 /* ApiManager.swift in Sources */,
 				50104BB52415246100D6E658 /* Database.swift in Sources */,
+				50F0DA7324446DFB00CC29D3 /* LogoutCell.swift in Sources */,
 				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
 				50104BB7241524BA00D6E658 /* ErrorHandling.swift in Sources */,
 				50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */,
