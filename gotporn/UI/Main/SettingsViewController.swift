@@ -54,8 +54,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         ]
         
         #if targetEnvironment(macCatalyst)
-        playerProperties.append(.keyboardJumpSeconds)
-        playerProperties.append(.keyboardJumpVolume)
+        player.append(.keyboardJumpSeconds)
+        player.append(.keyboardJumpVolume)
         #endif
         
         return [SettingsSection(type: .search, properties: search),
@@ -153,13 +153,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
         case .searchMinimumDuration:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RangeCell") as? RangeCell else { break }
-            let max = Double(7200)
+            let max = Double(3600)
             
             cell.labelTitle.text = NSLocalizedString("Filter by duration", comment: "Time range settings description")
             cell.rangeControl.minimum = 0
             cell.rangeControl.maximum = max
             cell.rangeControl.lowerValue = Double(Settings.searchMinimumDuration ?? 0)
             cell.rangeControl.upperValue = Double(Settings.searchMaximumDuration ?? UInt(max))
+            cell.rangeControl.stepValue = 5
             
             cell.labelValue.text = searchDurationFilterString(range: cell.rangeControl.lowerValue...cell.rangeControl.upperValue, max: max)
             

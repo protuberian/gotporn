@@ -58,6 +58,8 @@ class RangeControl: UIControl {
         }
     }
     
+    var stepValue: Double?
+    
     let track = UIView()
     let thumbLower = UIImageView()
     let thumbUpper = UIImageView()
@@ -237,7 +239,14 @@ class RangeControl: UIControl {
     
     func value(for locationX: CGFloat) -> Double {
         let locationX = clamp(locationX, 0, frame.width)
-        return minimum + Double(locationX) / Double(frame.width) * (maximum - minimum)
+        let accurateValue = minimum + Double(locationX) / Double(frame.width) * (maximum - minimum)
+        
+        if let stepValue = stepValue {
+            let calibratedValue = round(accurateValue / stepValue) * stepValue
+            return calibratedValue
+        } else {
+            return accurateValue
+        }
     }
 }
 
