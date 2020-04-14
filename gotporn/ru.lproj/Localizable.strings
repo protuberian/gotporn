@@ -1,6 +1,15 @@
 /* Fallback cell text if unexpected error occured */
 "can't configure cell" = "";
 
+/* Alert action text */
+"Cancel" = "Отменить";
+
+/* Logout confirmation title */
+"Confirmation" = "Подтверждение";
+
+/* Logout confirmation description */
+"Do you want to sign out?" = "Вы действительно хотите выйти?";
+
 /* Settings property title */
 "Duration filter" = "Длительность";
 
@@ -30,6 +39,9 @@
 
 /* Settings property title */
 "Show 18+ content" = "Показывать контент 18+";
+
+/* Alert action text */
+"Sign out" = "Выйти";
 
 /* maximum search video duration */
 "Unlimited" = "♾";

@@ -7,7 +7,7 @@
 /* Class = "UILabel"; text = "Switch property"; ObjectID = "M5H-YO-5Su"; Note = "Do not localize, not used"; */
 "M5H-YO-5Su.text" = "Переключатель";
 
-/* Class = "UILabel"; text = "Logout"; ObjectID = "NQ3-Cy-HXJ"; */
+/* Class = "UILabel"; text = "Sign out"; ObjectID = "NQ3-Cy-HXJ"; */
 "NQ3-Cy-HXJ.text" = "Выйти";
 
 /* Class = "UILabel"; text = "Video title"; ObjectID = "RkG-9e-AGR"; Note = "Do not translate"; */
