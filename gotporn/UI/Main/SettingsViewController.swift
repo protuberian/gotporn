@@ -182,6 +182,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                    style: .default,
                                    handler: nil))
         
+        let feedback = UINotificationFeedbackGenerator()
+        feedback.prepare()
+        feedback.notificationOccurred(.warning)
+        
         DispatchQueue.main.async {
             self.present(vc, animated: true, completion: nil)
         }

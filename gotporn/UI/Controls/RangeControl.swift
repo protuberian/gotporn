@@ -80,8 +80,18 @@ class RangeControl: UIControl {
     
     private let hitDistance: CGFloat = 22
     private let panRecognizer = UIPanGestureRecognizer()
-    private var activeThumb: Thumb?
+    private var activeThumb: Thumb? {
+        didSet {
+            if activeThumb != nil {
+                feedbackGenerator = UISelectionFeedbackGenerator()
+                feedbackGenerator?.prepare()
+            } else {
+                feedbackGenerator = nil
+            }
+        }
+    }
     private var touchActive: Bool { return activeThumb != nil }
+    private var feedbackGenerator: UISelectionFeedbackGenerator?
     
     //MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -216,17 +226,32 @@ class RangeControl: UIControl {
     private func touchContinuesWith(location: CGPoint) {
         print("move \(location)")
         
+        var valueChanged = false
         switch activeThumb {
         case .lower:
-            lowerValue = value(for: location.x)
+            let newValue = value(for: location.x)
+            if newValue != lowerValue {
+                lowerValue = newValue
+                valueChanged = true
+            }
         case .upper:
-            upperValue = value(for: location.x)
+            let newValue = value(for: location.x)
+            if newValue != upperValue {
+                upperValue = newValue
+                valueChanged = true
+            }
+            
         default:
             assertionFailure("should not continue touch without active thumb")
         }
         
-        if isContinuous {
-            sendActions(for: .valueChanged)
+        if valueChanged {
+            feedbackGenerator?.selectionChanged()
+            feedbackGenerator?.prepare()
+            
+            if isContinuous {
+                sendActions(for: .valueChanged)
+            }
         }
     }
     
