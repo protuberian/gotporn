@@ -165,6 +165,28 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return "\(from) - \(to)"
     }
     
+    private func logout() {
+        let vc = UIAlertController(
+            title: NSLocalizedString("Confirmation", comment: "Logout confirmation title"),
+            message: NSLocalizedString("Do you want to sign out?", comment: "Logout confirmation description"),
+            preferredStyle: .alert)
+        
+        vc.addAction(UIAlertAction(
+            title: NSLocalizedString("Sign out", comment: "Alert action text"),
+            style: .destructive,
+            handler: { _ in
+                (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator.logout()
+        }))
+        
+        vc.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Alert action text"),
+                                   style: .default,
+                                   handler: nil))
+        
+        DispatchQueue.main.async {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: - TableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -256,8 +278,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let property = sections[indexPath.section].properties[indexPath.row]
         
-        if property == .logout {
-            (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator.logout()
+        switch property {
+        case .searchSort:
+            performSegue(withIdentifier: "SortOrder", sender: self)
+        case .logout:
+            logout()
+        default:
+            break
         }
     }
     

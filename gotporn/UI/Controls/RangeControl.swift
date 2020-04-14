@@ -78,6 +78,7 @@ class RangeControl: UIControl {
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
     
+    private let hitDistance: CGFloat = 22
     private let panRecognizer = UIPanGestureRecognizer()
     private var activeThumb: Thumb?
     private var touchActive: Bool { return activeThumb != nil }
@@ -145,7 +146,12 @@ class RangeControl: UIControl {
     
     //MARK: - Track movements
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return bounds.insetBy(dx: -22, dy: -22).contains(point) ? self : nil
+        if distance(point, thumbLower.center) < hitDistance ||
+            distance(point, thumbUpper.center) < hitDistance {
+            return self
+        } else {
+            return nil
+        }
     }
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -189,8 +195,8 @@ class RangeControl: UIControl {
     //MARK: - Handle movements
     private func touchShouldBeganWith(location: CGPoint) -> Bool {
         print("began \(location)")
-        let nearLower = distance(location, thumbLower.center) < 22
-        let nearUpper = distance(location, thumbUpper.center) < 22
+        let nearLower = distance(location, thumbLower.center) < hitDistance
+        let nearUpper = distance(location, thumbUpper.center) < hitDistance
         
         switch (nearLower, nearUpper) {
         case (true, true):
