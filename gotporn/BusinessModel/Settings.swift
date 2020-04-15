@@ -19,6 +19,7 @@ enum SettingsKey: String {
     case rightHandedPlayerControls
     case keyboardJumpSeconds
     case keyboardJumpVolume
+    case videoQuality
     
     //search
     case searchHD
@@ -41,6 +42,32 @@ enum SearchSort: String, CaseIterable {
             return NSLocalizedString("by duration", comment: "Search sort description")
         case .relevance:
             return NSLocalizedString("by relevance", comment: "Search sort description")
+        }
+    }
+}
+
+enum VideoQuality: String, CaseIterable {
+    case q1080
+    case q720
+    case q480
+    case q360
+    case q240
+    case qhls
+    
+    var localizedTitle: String {
+        switch self {
+        case .q1080:
+            return "1080p"
+        case .q720:
+            return "720p"
+        case .q480:
+            return "480p"
+        case .q360:
+            return "360p"
+        case .q240:
+            return "240p"
+        case .qhls:
+            return "HLS"
         }
     }
 }
@@ -82,6 +109,18 @@ struct Settings {
     static var keyboardJumpVolume: Float {
         get { return value(.keyboardJumpVolume) ?? 0.1 }
         set { set(value: newValue, for: .keyboardJumpVolume) }
+    }
+    
+    static var videoQuality: [VideoQuality] {
+        get {
+            guard let rawValues = value(.videoQuality) as [String]? else {
+                return VideoQuality.allCases
+            }
+            return rawValues.compactMap({VideoQuality(rawValue: $0)})
+        }
+        set {
+            set(value: newValue.map({$0.rawValue}), for: .videoQuality)
+        }
     }
     
     //MARK: Search request related

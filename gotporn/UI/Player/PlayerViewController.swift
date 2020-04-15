@@ -18,6 +18,7 @@ class PlayerViewController: UIViewController {
     }
     
     let url: URL
+    let quality: VideoQuality
     
     @IBOutlet var playerView: PlayerView!
     @IBOutlet var controlView: UIView!
@@ -27,6 +28,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var loadingIndicatorContainer: UIView!
+    @IBOutlet var labelQuality: UILabel!
     
     var mirrorMode: Bool = false {
         didSet {
@@ -54,8 +56,9 @@ class PlayerViewController: UIViewController {
     private var panBehavior: PanControlBehavior?
     
     //MARK: - Lifecycle & inherited
-    init?(coder: NSCoder, url: URL) {
+    init?(coder: NSCoder, url: URL, quality: VideoQuality) {
         self.url = url
+        self.quality = quality
         self.player = AVPlayer(url: url)
         super.init(coder: coder)
         
@@ -63,7 +66,7 @@ class PlayerViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("use init?(coder: url:)")
+        fatalError("use init?(coder: url: quality:)")
     }
     
     deinit {
@@ -76,6 +79,7 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        labelQuality.text = quality.localizedTitle
         
         view.semanticContentAttribute = Settings.rightHandedPlayerControls ? .forceLeftToRight : .forceRightToLeft
         controlView.semanticContentAttribute = Settings.rightHandedPlayerControls ? .forceLeftToRight : .forceRightToLeft

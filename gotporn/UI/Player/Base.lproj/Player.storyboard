@@ -96,6 +96,32 @@
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FoF-sc-Fl2">
                                         <rect key="frame" x="341" y="274" width="227" height="2"/>
                                     </progressView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Po1-Vw-xPW">
+                                        <rect key="frame" x="259" y="17.5" width="50" height="29"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmE-fT-bMb">
+                                                <rect key="frame" x="4" y="4" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="VideoOverlay"/>
+                                        <constraints>
+                                            <constraint firstItem="WmE-fT-bMb" firstAttribute="centerY" secondItem="Po1-Vw-xPW" secondAttribute="centerY" id="6JL-LS-dOU"/>
+                                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="WmE-fT-bMb" secondAttribute="trailing" id="9sM-Vr-NWM"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="WmE-fT-bMb" secondAttribute="bottom" id="BhV-Ze-ink"/>
+                                            <constraint firstItem="WmE-fT-bMb" firstAttribute="centerX" secondItem="Po1-Vw-xPW" secondAttribute="centerX" id="KCg-BX-1d8"/>
+                                            <constraint firstItem="WmE-fT-bMb" firstAttribute="leading" secondItem="Po1-Vw-xPW" secondAttribute="leadingMargin" id="PGg-ic-ANc"/>
+                                            <constraint firstItem="WmE-fT-bMb" firstAttribute="top" secondItem="Po1-Vw-xPW" secondAttribute="topMargin" id="izz-Si-HRN"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="4" left="4" bottom="4" right="4"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -103,11 +129,13 @@
                                     <constraint firstItem="10x-wq-CXe" firstAttribute="top" secondItem="Yd7-Gc-CEu" secondAttribute="top" id="37z-gt-mdb"/>
                                     <constraint firstItem="FoF-sc-Fl2" firstAttribute="leading" secondItem="Yd7-Gc-CEu" secondAttribute="trailing" constant="8" id="4DX-cF-ULH"/>
                                     <constraint firstItem="FoF-sc-Fl2" firstAttribute="width" secondItem="YRf-WA-ejx" secondAttribute="width" multiplier="2:5" id="59x-bp-EB5"/>
+                                    <constraint firstItem="qRK-nB-FIH" firstAttribute="centerY" secondItem="Po1-Vw-xPW" secondAttribute="centerY" id="8Lt-Nj-d9o"/>
                                     <constraint firstItem="10x-wq-CXe" firstAttribute="leading" secondItem="Yd7-Gc-CEu" secondAttribute="leading" constant="-4" id="APp-kk-ejp"/>
                                     <constraint firstItem="b1c-gh-HOQ" firstAttribute="leading" secondItem="p89-B1-xR7" secondAttribute="leading" id="GNC-Hq-T3t"/>
                                     <constraint firstItem="b1c-gh-HOQ" firstAttribute="top" secondItem="p89-B1-xR7" secondAttribute="top" id="HfH-z6-GcW"/>
                                     <constraint firstItem="10x-wq-CXe" firstAttribute="trailing" secondItem="Yd7-Gc-CEu" secondAttribute="trailing" constant="4" id="OiP-gI-xov"/>
                                     <constraint firstItem="qRK-nB-FIH" firstAttribute="top" secondItem="p89-B1-xR7" secondAttribute="top" id="S1H-ae-4CZ"/>
+                                    <constraint firstItem="Po1-Vw-xPW" firstAttribute="centerX" secondItem="YRf-WA-ejx" secondAttribute="centerX" id="TED-Gc-as5"/>
                                     <constraint firstItem="qRK-nB-FIH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b1c-gh-HOQ" secondAttribute="trailing" id="YAw-ly-oDD"/>
                                     <constraint firstItem="p89-B1-xR7" firstAttribute="trailing" secondItem="FoF-sc-Fl2" secondAttribute="trailing" id="iQR-43-r8Z"/>
                                     <constraint firstItem="p89-B1-xR7" firstAttribute="trailing" secondItem="qRK-nB-FIH" secondAttribute="trailing" id="iUp-pM-FLe"/>
@@ -148,6 +176,7 @@
                     </view>
                     <connections>
                         <outlet property="controlView" destination="YRf-WA-ejx" id="Rzb-xJ-e4E"/>
+                        <outlet property="labelQuality" destination="WmE-fT-bMb" id="bUn-To-Oj8"/>
                         <outlet property="loadingIndicator" destination="xck-S3-Wfj" id="s4k-fr-PLn"/>
                         <outlet property="loadingIndicatorContainer" destination="N8E-5J-YuA" id="PkJ-ef-grC"/>
                         <outlet property="panRecognizer" destination="Rpn-76-pfV" id="AEZ-vC-BEf"/>

@@ -215,13 +215,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
         view.endEditing(false)
         let video = model.video(at: indexPath)
         
-        guard let url = video.videoURL else {
+        guard let info = video.videoInfo else {
             handleError("video unavailable")
             return
         }
         
         let playerViewController = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
-            return PlayerViewController(coder: coder, url: url)
+            return PlayerViewController(coder: coder, url: info.0, quality: info.1)
         })
         
         guard let vc = playerViewController else {
@@ -262,21 +262,27 @@ extension Video {
         return photo320!
     }
     
-    var videoURL: URL? {
+    var videoInfo: (URL, VideoQuality)? {
 //        let url = "https://vk.com/video\(video.ownerId)_\(video.id)"
-        var variants = [
-//            qhls,
-//            q1080,
-            q720,
-            q480,
-            q360,
-            q240
-            ].compactMap({$0})
         
-        //fallback
-        if variants.count == 0 {
-            variants = [q1080, qhls].compactMap({$0})
-        }
-        return variants.first
+        let preferredQuality = Settings.videoQuality
+        let availableInfo = preferredQuality.compactMap({ quality -> (URL?, VideoQuality) in
+            switch quality {
+            case .q1080: return (q1080, quality)
+            case .q720: return (q720,quality)
+            case .q480: return (q480,quality)
+            case .q360: return (q360,quality)
+            case .q240: return (q240,quality)
+            case .qhls: return (qhls,quality)
+            }
+        }).compactMap({ info -> (URL, VideoQuality)? in
+            if let url = info.0 {
+                return (url, info.1)
+            } else {
+                return nil
+            }
+        })
+        
+        return availableInfo.first
     }
 }
