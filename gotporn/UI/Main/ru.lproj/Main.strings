@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Found 1 video"; ObjectID = "8Dp-QE-b24"; Note = "Do not translate"; */
 "8Dp-QE-b24.text" = "";
 
+/* Class = "UINavigationItem"; title = "Quality priority"; ObjectID = "gQm-e5-MeT"; */
+"gQm-e5-MeT.title" = "Приоритет качества";
+
 /* Class = "UINavigationItem"; title = "Sort results"; ObjectID = "k1M-aQ-sK7"; */
 "k1M-aQ-sK7.title" = "Сортировка поиска";
 

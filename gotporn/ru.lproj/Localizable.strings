@@ -34,6 +34,12 @@
 /* Setting section title */
 "Player" = "Проигрыватель";
 
+/* Settings video quality table header */
+"Priority" = "Приоритет";
+
+/* Settings property title */
+"Quality priority" = "Приоритет качества";
+
 /* Settings property title */
 "Right-handed controls" = "Управление для правой руки";
 
@@ -51,6 +57,9 @@
 
 /* Alert action text */
 "Sign out" = "Выйти";
+
+/* Settings video quality table description */
+"The application will select the video quality in this order (if available)" = "Приложение будет выбирать качество видео в указанном порядке (если доступно)";
 
 /* maximum search video duration */
 "Unlimited" = "♾";

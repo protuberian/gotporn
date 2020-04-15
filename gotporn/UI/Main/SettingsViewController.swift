@@ -20,6 +20,7 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         case searchAdult
         case searchDuration
         
+        case qualityPriority
         case minimizeStalling
         case rightHandedPlayerControls
         case keyboardJumpSeconds
@@ -37,6 +38,8 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
                 return NSLocalizedString("Show 18+ content", comment: "Settings property title")
             case .searchDuration:
                 return NSLocalizedString("Duration filter", comment: "Settings property title")
+            case .qualityPriority:
+                return NSLocalizedString("Quality priority", comment: "Settings property title")
             case .minimizeStalling:
                 return NSLocalizedString("Minimize stalling", comment: "Settings property title")
             case .rightHandedPlayerControls:
@@ -81,6 +84,7 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         ]
         
         var player: [SettingsProperty] = [
+            .qualityPriority,
             .minimizeStalling,
             .rightHandedPlayerControls
         ]
@@ -256,6 +260,13 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
             cell.selectionStyle = .none
             return cell
             
+        case .qualityPriority:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StandardCell") ?? UITableViewCell(style: .default, reuseIdentifier: "StandardCell")
+            cell.textLabel?.text = property.localizedTitle
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
+            return cell
+            
         case .keyboardJumpSeconds:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SliderCell") as? SliderCell else { break }
             let min = Float(1)
@@ -295,6 +306,8 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         switch property {
         case .searchSort:
             performSegue(withIdentifier: "SortOrder", sender: self)
+        case .qualityPriority:
+            performSegue(withIdentifier: "QualityPriority", sender: self)
         case .logout:
             logout()
         default:

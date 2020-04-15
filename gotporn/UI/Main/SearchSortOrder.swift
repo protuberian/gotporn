@@ -39,6 +39,10 @@ class SearchSortOrder: UIViewController, UITableViewDelegate, UITableViewDataSou
         Settings.searchSort = SearchSort.allCases[indexPath.row]
         delegate?.sortOrderChanged()
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return " "
+    }
 }
 
 class SearchSortCell: UITableViewCell {

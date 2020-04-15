@@ -191,7 +191,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-bj-Zgg">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchCell" id="2MQ-zc-8ko" customClass="SwitchCell" customModule="gotporn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
@@ -368,6 +368,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="T4s-Nc-WEG" kind="show" identifier="SortOrder" id="aNs-YI-Nja"/>
+                        <segue destination="ggR-mq-2cp" kind="show" identifier="QualityPriority" id="kFi-DJ-HuE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5vZ-y2-BLk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -384,7 +385,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Kvl-2Q-R9v">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="T4s-Nc-WEG" id="AZZ-1q-jzl"/>
                                     <outlet property="delegate" destination="T4s-Nc-WEG" id="m4w-yY-WOa"/>
@@ -407,7 +408,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEV-B9-Fnz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878" y="377"/>
+            <point key="canvasLocation" x="945" y="41"/>
+        </scene>
+        <!--Quality priority-->
+        <scene sceneID="ae6-hR-IgU">
+            <objects>
+                <viewController id="ggR-mq-2cp" customClass="QualityPriority" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hk5-5P-PHR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="wjz-bU-74L">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ggR-mq-2cp" id="dYq-Io-r7Y"/>
+                                    <outlet property="delegate" destination="ggR-mq-2cp" id="cKl-Yg-vCd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="wjz-bU-74L" secondAttribute="bottom" id="Tvc-WU-30y"/>
+                            <constraint firstItem="wjz-bU-74L" firstAttribute="leading" secondItem="Hk5-5P-PHR" secondAttribute="leading" id="WDf-cH-kLA"/>
+                            <constraint firstAttribute="trailing" secondItem="wjz-bU-74L" secondAttribute="trailing" id="uC9-Gu-MwZ"/>
+                            <constraint firstItem="wjz-bU-74L" firstAttribute="top" secondItem="Hk5-5P-PHR" secondAttribute="top" id="v1D-2P-nDw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="r8g-A9-DAQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Quality priority" id="gQm-e5-MeT"/>
+                    <connections>
+                        <outlet property="tableView" destination="wjz-bU-74L" id="1Fk-kD-4cI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bi4-LU-gvi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="945" y="743"/>
         </scene>
     </scenes>
     <resources>
