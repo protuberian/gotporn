@@ -15,3 +15,22 @@ struct AuthResponse: Codable {
         case accessToken = "access_token"
     }
 }
+
+struct AuthResponseCaptchaNeeded: Codable {
+    enum Error: String, Codable {
+        case needCaptcha = "need_captcha"
+    }
+    
+    let error: Error
+    let captchaSid: String
+    let captchaImage: URL
+    
+    enum CodingKeys: String, CodingKey {
+        case error
+        case captchaSid = "captcha_sid"
+        case captchaImage = "captcha_img"
+    }
+}
+enum AuthError: Error {
+    case captchaNeeded(sid: String, img: URL)
+}

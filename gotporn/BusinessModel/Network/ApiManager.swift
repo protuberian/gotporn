@@ -29,21 +29,23 @@ class ApiManager {
         URLCache.shared = URLCache(memoryCapacity: 512*1024*1024, diskCapacity: 512*1024*1024)
     }
     
-    func signIn(login: String, password: String, completion: @escaping (Bool) -> Void) {
+    func signIn(login: String, password: String, captcha: (String, String)? = nil, completion: @escaping (Result<Void>) -> Void) {
         let safeLogin = login.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let safePassword = password.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let url: String = authURL
+        var url: String = authURL
             .replacingOccurrences(of: "{USERNAME}", with: safeLogin!)
             .replacingOccurrences(of: "{PASSWORD}", with: safePassword!)
         
+        if let (sid, key) = captcha {
+            url.append("&captcha_sid=\(sid)&captcha_key=\(key)")
+        }
+        
         let task = urlSession.dataTask(with: URL(string: url)!) { (data, response, error) in
-            
             if let error = error {
                 handleError(error)
             }
-            
             guard let data = data else {
-                completion(false)
+                completion(.failure(CustomError(location: location(), body: "no response data")))
                 return
             }
             
@@ -53,13 +55,17 @@ class ApiManager {
             }
             #endif
             
+            if let dto = try? JSONDecoder().decode(AuthResponseCaptchaNeeded.self, from: data) {
+                completion(.failure(AuthError.captchaNeeded(sid: dto.captchaSid, img: dto.captchaImage)))
+                return
+            }
+            
             do {
                 let dto = try JSONDecoder().decode(AuthResponse.self, from: data)
                 Settings.token = dto.accessToken
-                completion(true)
+                completion(.success(()))
             } catch {
-                handleError(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
         task.resume()
