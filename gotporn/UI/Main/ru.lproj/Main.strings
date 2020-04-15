@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Found 1 video"; ObjectID = "8Dp-QE-b24"; Note = "Do not translate"; */
 "8Dp-QE-b24.text" = "";
 
+/* Class = "UINavigationItem"; title = "Sort results"; ObjectID = "k1M-aQ-sK7"; */
+"k1M-aQ-sK7.title" = "Сортировка поиска";
+
 /* Class = "UILabel"; text = "Switch property"; ObjectID = "M5H-YO-5Su"; Note = "Do not localize, not used"; */
 "M5H-YO-5Su.text" = "Переключатель";
 

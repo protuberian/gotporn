@@ -1,3 +1,12 @@
+/* Search sort description */
+"by date" = "по дате";
+
+/* Search sort description */
+"by duration" = "по длительности";
+
+/* Search sort description */
+"by relevance" = "по релевантности";
+
 /* Fallback cell text if unexpected error occured */
 "can't configure cell" = "";
 
