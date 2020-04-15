@@ -12,7 +12,7 @@ protocol SettingsViewControllerDelegate {
     func settingsViewController(_ controller: SettingsViewController, completedWith changes: Bool)
 }
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITableViewDelegate, UITableViewDataSource {
     
     enum SettingsProperty {
         case searchSort
@@ -111,6 +111,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         delegate?.settingsViewController(self, completedWith: searchParamsChanged)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        (segue.destination as? SearchSortOrder)?.delegate = self
+    }
+    
     //MARK: - Private helpers
     func getBoolSettings(_ key: SettingsProperty) -> Bool {
         switch key {
@@ -189,6 +194,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         DispatchQueue.main.async {
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    //MARK: - SearchSortOrderDelegate
+    func sortOrderChanged() {
+        searchParamsChanged = true
     }
     
     //MARK: - TableView

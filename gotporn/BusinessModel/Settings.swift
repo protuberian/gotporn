@@ -28,10 +28,21 @@ enum SettingsKey: String {
     case searchMaximumDuration
 }
 
-enum SearchSort: String {
+enum SearchSort: String, CaseIterable {
     case added = "0"
     case duration = "1"
     case relevance = "2"
+    
+    var localizedTitle: String {
+        switch self {
+        case .added:
+            return NSLocalizedString("by date", comment: "Search sort description")
+        case .duration:
+            return NSLocalizedString("by duration", comment: "Search sort description")
+        case .relevance:
+            return NSLocalizedString("by relevance", comment: "Search sort description")
+        }
+    }
 }
 
 struct Settings {
@@ -85,8 +96,14 @@ struct Settings {
     }
     
     static var searchSort: SearchSort {
-        get { return value(.searchSort) ?? .added }
-        set { set(value: newValue, for: .searchSort) }
+        get {
+            if let rawValue = value(.searchSort) as String?, let sort = SearchSort(rawValue: rawValue) {
+                return sort
+            } else {
+                return .added
+            }
+        }
+        set { set(value: newValue.rawValue, for: .searchSort) }
     }
     
     static var searchMinimumDuration: UInt? {

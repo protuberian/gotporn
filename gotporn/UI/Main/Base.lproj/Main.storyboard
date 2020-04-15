@@ -194,14 +194,14 @@
                                 <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchCell" id="2MQ-zc-8ko" customClass="SwitchCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2MQ-zc-8ko" id="FsN-Ff-7AB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Switch property" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5H-YO-5Su">
-                                                    <rect key="frame" x="16" y="11" width="122" height="21.5"/>
+                                                    <rect key="frame" x="16" y="11" width="122" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -210,7 +210,7 @@
                                                     </attributedString>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIL-L7-7d7">
-                                                    <rect key="frame" x="255" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="255" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="switchValueChanged:" destination="2MQ-zc-8ko" eventType="valueChanged" id="Jdt-gq-VSi"/>
                                                     </connections>
@@ -231,7 +231,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RangeCell" id="2VF-oh-bgZ" customClass="RangeCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="83.5"/>
+                                        <rect key="frame" x="0.0" y="98.5" width="320" height="83.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2VF-oh-bgZ" id="95m-su-JXn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="83.5"/>
@@ -275,7 +275,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SliderCell" id="lfQ-f3-RDl" customClass="SliderCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="182.5" width="320" height="81"/>
+                                        <rect key="frame" x="0.0" y="182" width="320" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lfQ-f3-RDl" id="cH0-Wu-VIS">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
@@ -319,14 +319,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LogoutCell" id="iXS-Qe-8Lx" customClass="LogoutCell" customModule="gotporn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="263.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="263" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iXS-Qe-8Lx" id="CRQ-1x-lRt">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQ3-Cy-HXJ">
-                                                    <rect key="frame" x="127" y="11" width="66" height="21"/>
+                                                    <rect key="frame" x="127" y="11" width="66" height="21.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -374,17 +374,36 @@
             </objects>
             <point key="canvasLocation" x="33.333333333333336" y="374.18478260869568"/>
         </scene>
-        <!--View Controller-->
+        <!--Sort results-->
         <scene sceneID="tz9-yP-NIc">
             <objects>
-                <viewController id="T4s-Nc-WEG" sceneMemberID="viewController">
+                <viewController id="T4s-Nc-WEG" customClass="SearchSortOrder" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6g2-Cw-QyC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Kvl-2Q-R9v">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="T4s-Nc-WEG" id="AZZ-1q-jzl"/>
+                                    <outlet property="delegate" destination="T4s-Nc-WEG" id="m4w-yY-WOa"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="yot-05-Qpo"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Kvl-2Q-R9v" secondAttribute="bottom" id="Fs3-ce-TfM"/>
+                            <constraint firstItem="Kvl-2Q-R9v" firstAttribute="leading" secondItem="6g2-Cw-QyC" secondAttribute="leading" id="GJf-pN-SBS"/>
+                            <constraint firstItem="Kvl-2Q-R9v" firstAttribute="top" secondItem="6g2-Cw-QyC" secondAttribute="top" id="GXs-mt-0Zp"/>
+                            <constraint firstAttribute="trailing" secondItem="Kvl-2Q-R9v" secondAttribute="trailing" id="lDf-On-9Wv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eZC-St-9XN"/>
                     </view>
-                    <navigationItem key="navigationItem" id="k1M-aQ-sK7"/>
+                    <navigationItem key="navigationItem" title="Sort results" id="k1M-aQ-sK7"/>
+                    <connections>
+                        <outlet property="tableView" destination="Kvl-2Q-R9v" id="pcM-de-WH0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEV-B9-Fnz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
