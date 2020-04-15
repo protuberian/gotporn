@@ -29,7 +29,7 @@ func handleError(_ error: Error) {
     DispatchQueue.main.async {
         let vc = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         vc.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-        UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true, completion: nil)
+        UIApplication.shared.delegate?.window??.rootViewController?.present(vc, animated: true, completion: nil)
     }
 }
 

@@ -26,7 +26,7 @@ class Database {
             }
             //has error, drop database
             guard let path = description.url?.path else {
-                handleError(error ?? CustomError.init(location: location(), body: "datb"))
+                handleError(error ?? CustomError(location: location(), body: "database error"))
                 return
             }
             

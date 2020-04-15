@@ -41,9 +41,6 @@ class ApiManager {
         }
         
         let task = urlSession.dataTask(with: URL(string: url)!) { (data, response, error) in
-            if let error = error {
-                handleError(error)
-            }
             guard let data = data else {
                 completion(.failure(CustomError(location: location(), body: "no response data")))
                 return
