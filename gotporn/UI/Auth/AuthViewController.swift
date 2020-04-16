@@ -11,8 +11,8 @@ import Combine
 
 class AuthViewController: UIViewController {
     
-    @IBOutlet var login: UITextField!
-    @IBOutlet var password: UITextField!
+    @IBOutlet var loginField: UITextField!
+    @IBOutlet var passwordField: UITextField!
     @IBOutlet var button: UIButton!
     
     @IBOutlet var captchaView: UIView!
@@ -20,8 +20,10 @@ class AuthViewController: UIViewController {
     @IBOutlet var captchaField: UITextField!
     
     private let completion: () -> Void
-    
     private var bag: [AnyCancellable] = []
+    
+    @Published private var login: String = ""
+    @Published private var password: String = ""
     private var captchaSid: String?
     
     init?(coder: NSCoder, completion: @escaping () -> Void) {
@@ -33,27 +35,28 @@ class AuthViewController: UIViewController {
         fatalError("use init?(coder: completion:)")
     }
     
-    deinit {
-        print("deinit")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        button.isEnabled = false
         captchaView.translatesAutoresizingMaskIntoConstraints = false
         
-        let hasLogin = NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification, object: login)
-            .map { ($0.object as? UITextField)?.text?.count ?? 0 > 0 }
+        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: loginField).map {
+            ($0.object as? UITextField)?.text ?? ""
+        }
+        .assign(to: \.login, on: self)
+        .store(in: &bag)
         
-        let hasPassword = NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification, object: password)
-            .map { ($0.object as? UITextField)?.text?.count ?? 0 > 0 }
+        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: passwordField).map {
+            ($0.object as? UITextField)?.text ?? ""
+        }
+        .assign(to: \.password, on: self)
+        .store(in: &bag)
         
-        hasLogin.combineLatest(hasPassword)
-            .map { $0 && $1 }
-            .assign(to: \.isEnabled, on: button)
-            .store(in: &bag)
+        
+        Publishers.CombineLatest($login, $password).map {
+            return $0.0.count > 0 && $0.1.count > 0
+        }
+        .assign(to: \.isEnabled, on: button)
+        .store(in: &bag)
     }
     
     func didReceiveError(_ error: Error) {
@@ -80,7 +83,7 @@ class AuthViewController: UIViewController {
     
     private func signIn(captcha: (String, String)? = nil) {
         view.isUserInteractionEnabled = false
-        api.signIn(login: login.text!, password: password.text!) { [weak self] result in
+        api.signIn(login: login, password: password) { [weak self] result in
             DispatchQueue.main.async {
                 self?.view.isUserInteractionEnabled = true
                 switch result {
@@ -109,5 +112,6 @@ class AuthViewController: UIViewController {
     
     @IBAction func cancelCaptcha(_ sender: Any) {
         captchaView.removeFromSuperview()
+        captchaSid = nil
     }
 }

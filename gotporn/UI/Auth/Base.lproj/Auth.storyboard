@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSl-jF-sDM">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,11 +12,11 @@
             <objects>
                 <viewController id="lSl-jF-sDM" customClass="RestoreSessionViewController" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Mm-GD-pLO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="3pi-Nh-7q7">
-                                <rect key="frame" x="141.5" y="265.5" width="37" height="37"/>
+                                <rect key="frame" x="281.5" y="281.5" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -37,14 +36,14 @@
             <objects>
                 <viewController storyboardIdentifier="AuthViewController" id="IFB-HR-xVC" customClass="AuthViewController" customModule="gotporn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="edu-LZ-wfF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="czi-Ik-Bv3">
-                                <rect key="frame" x="40" y="210" width="240" height="148"/>
+                                <rect key="frame" x="40" y="226" width="520" height="148"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="phone or email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VYd-gP-aQM">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="AVU-mL-XW0"/>
                                         </constraints>
@@ -52,7 +51,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mS8-iP-Iqe">
-                                        <rect key="frame" x="0.0" y="52" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="52" width="520" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="kzo-ZO-maz"/>
                                         </constraints>
@@ -60,7 +59,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="send" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j42-yt-8dX">
-                                        <rect key="frame" x="0.0" y="104" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="104" width="520" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="qeS-9x-C4Z"/>
                                         </constraints>
@@ -88,8 +87,8 @@
                         <outlet property="captchaField" destination="gyI-ON-GnR" id="nE8-C1-kdY"/>
                         <outlet property="captchaImageView" destination="AbV-7O-l9z" id="vUo-bO-Qf6"/>
                         <outlet property="captchaView" destination="GEn-Lu-i7X" id="EUg-YP-Uxv"/>
-                        <outlet property="login" destination="VYd-gP-aQM" id="UpM-Oj-SC5"/>
-                        <outlet property="password" destination="mS8-iP-Iqe" id="zZF-kn-E1H"/>
+                        <outlet property="loginField" destination="VYd-gP-aQM" id="UpM-Oj-SC5"/>
+                        <outlet property="passwordField" destination="mS8-iP-Iqe" id="zZF-kn-E1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQy-Fa-rlJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
