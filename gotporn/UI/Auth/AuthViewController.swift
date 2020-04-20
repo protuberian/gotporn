@@ -35,10 +35,26 @@ class AuthViewController: UIViewController {
         fatalError("use init?(coder: completion:)")
     }
     
+    deinit {
+        print("deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         captchaView.translatesAutoresizingMaskIntoConstraints = false
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bindUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        bag.removeAll()
+    }
+    
+    private func bindUI() {
         NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: loginField).map {
             ($0.object as? UITextField)?.text ?? ""
         }
@@ -51,11 +67,22 @@ class AuthViewController: UIViewController {
         .assign(to: \.password, on: self)
         .store(in: &bag)
         
-        
         Publishers.CombineLatest($login, $password).map {
             return $0.0.count > 0 && $0.1.count > 0
         }
         .assign(to: \.isEnabled, on: button)
+        .store(in: &bag)
+        
+        NotificationCenter.default.publisher(for: UIControl.keyboardWillChangeFrameNotification).compactMap {
+            $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        }
+        .sink { [unowned self] rect in
+            let kbFrame = self.view.convert(rect, from: UIScreen.main.coordinateSpace)
+            let overlap = self.view.frame.inset(by: self.view.safeAreaInsets).maxY + self.additionalSafeAreaInsets.bottom - kbFrame.minY
+            
+            self.additionalSafeAreaInsets.bottom = max(0, overlap)
+            self.view.layoutIfNeeded()
+        }
         .store(in: &bag)
     }
     
