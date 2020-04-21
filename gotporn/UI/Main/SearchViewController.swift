@@ -140,7 +140,7 @@ class SearchViewController: KeyboardObserverViewController {
 
 extension SearchViewController: SettingsViewControllerDelegate {
     func settingsViewController(_ controller: SettingsViewController, completedWith changes: Bool) {
-        if changes {
+        if changes, model.queryValid {
             showsLoading = true
             model.reload()
         }
@@ -202,6 +202,10 @@ extension SearchViewController: VideoSearchModelDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+        let lastRow = tableView.numberOfRows(inSection: 0) - 1
+        if tableView.indexPathsForVisibleRows?.max()?.row == lastRow {
+            model.loadMore()
+        }
     }
     
     func videoSearchModelDidLoadAllResults(_ model: VideoSearchModel) {

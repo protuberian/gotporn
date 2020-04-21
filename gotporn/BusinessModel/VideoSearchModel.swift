@@ -51,6 +51,9 @@ class VideoSearchModel {
             }
         }
     }
+    var queryValid: Bool {
+        return query.count > 0
+    }
     
     //MARK: - Private properties
     private let fetchedResultsController: NSFetchedResultsController<Video>
@@ -168,15 +171,14 @@ class VideoSearchModel {
             let request: NSFetchRequest<Video> = Video.fetchRequest()
             db.fetch(request, inContext: context).forEach { context.delete($0) }
         }, completion: { _ in
-            
+            guard self.query == query else { return } //changed async
             self.parameters.offset = 0
             self.parameters.query = query
             
             self.allResultsLoaded = false
             self.ignoredErrors = 0
             
-            let queryValid = query.count > 0
-            self.readyToLoadMore = queryValid
+            self.readyToLoadMore = self.queryValid
             
             self.loadMore()
         })
