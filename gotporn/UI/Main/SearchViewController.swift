@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVKit
 
 class SearchViewController: KeyboardObserverViewController {
     @IBOutlet var tableView: UITableView!
@@ -112,6 +113,28 @@ class SearchViewController: KeyboardObserverViewController {
         let vc = SettingsViewController(coder: coder)
         vc?.delegate = self
         return vc
+    }
+    
+    private func playVideoWithNativePlayer(url: URL) {
+        let standardPlayer = AVPlayerViewController()
+        standardPlayer.player = AVPlayer(playerItem: AVPlayerItem(url: url))
+        self.present(standardPlayer, animated: true, completion: {
+            standardPlayer.player?.play()
+        })
+    }
+    
+    private func playVideoWithApplicationPlayer(url: URL, quality: VideoQuality) {
+        let playerViewController = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
+            return PlayerViewController(coder: coder, url: url, quality: quality)
+        })
+        
+        guard let vc = playerViewController else {
+            handleError("Error initializing PlayerViewController")
+            return
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -220,18 +243,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
             return
         }
         
-        let playerViewController = UIStoryboard(name: "Player", bundle: nil).instantiateInitialViewController(creator: { coder -> PlayerViewController? in
-            return PlayerViewController(coder: coder, url: info.0, quality: info.1)
-        })
-        
-        guard let vc = playerViewController else {
-            handleError("Error initializing PlayerViewController")
-            return
-        }
-        
         DispatchQueue.main.async {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            if Settings.nativePlayerEnabled {
+                self.playVideoWithNativePlayer(url: info.0)
+            } else {
+                self.playVideoWithApplicationPlayer(url: info.0, quality: info.1)
+            }
         }
     }
     

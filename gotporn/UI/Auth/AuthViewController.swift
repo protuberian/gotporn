@@ -35,10 +35,6 @@ class AuthViewController: UIViewController {
         fatalError("use init?(coder: completion:)")
     }
     
-    deinit {
-        print("deinit")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         captchaView.translatesAutoresizingMaskIntoConstraints = false

@@ -58,9 +58,15 @@
 /* Alert action text */
 "Sign out" = "Выйти";
 
+/* Setting section title */
+"Standard player" = "Стандартный проигрыватель";
+
 /* Settings video quality table description */
 "The application will select the video quality in this order (if available)" = "Приложение будет выбирать качество видео в указанном порядке (если доступно)";
 
 /* maximum search video duration */
 "Unlimited" = "♾";
+
+/* Settings property title */
+"Use standard player" = "Использовать стандартный проигрыватель";
 

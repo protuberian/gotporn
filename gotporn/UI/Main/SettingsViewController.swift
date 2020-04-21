@@ -26,6 +26,8 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         case keyboardJumpSeconds
 //        case keyboardJumpVolume //not available
         
+        case useNativePlayer
+        
         case logout
         
         var localizedTitle: String {
@@ -46,6 +48,8 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
                 return NSLocalizedString("Right-handed controls", comment: "Settings property title")
             case .keyboardJumpSeconds:
                 return NSLocalizedString("Jump with arrows", comment: "Settings property title")
+            case .useNativePlayer:
+                return NSLocalizedString("Use standard player", comment: "Settings property title")
             case .logout:
                 return NSLocalizedString("Logout", comment: "Settings property title")
             }
@@ -56,6 +60,7 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         enum SectionType {
             case search
             case player
+            case nativePlayer
             case logout
             
             var localizedTitle: String? {
@@ -64,6 +69,8 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
                     return NSLocalizedString("Search", comment: "Setting section title")
                 case .player:
                     return NSLocalizedString("Player", comment: "Setting section title")
+                case .nativePlayer:
+                    return NSLocalizedString("Standard player", comment: "Setting section title")
                 case .logout:
                     return nil
                 }
@@ -89,6 +96,8 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
             .rightHandedPlayerControls
         ]
         
+        var nativePlayer: [SettingsProperty] = [.useNativePlayer]
+        
         let logout: [SettingsProperty] = [
             .logout
         ]
@@ -99,6 +108,7 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         
         return [SettingsSection(type: .search, properties: search),
                 SettingsSection(type: .player, properties: player),
+                SettingsSection(type: .nativePlayer, properties: nativePlayer),
                 SettingsSection(type: .logout, properties: logout)]
     }()
     
@@ -136,6 +146,9 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         case .rightHandedPlayerControls:
             return Settings.rightHandedPlayerControls
             
+        case .useNativePlayer:
+            return Settings.nativePlayerEnabled
+            
         default:
             assertionFailure("not handled")
         }
@@ -160,10 +173,14 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         case .rightHandedPlayerControls:
             Settings.rightHandedPlayerControls = value
             
+        case .useNativePlayer:
+            Settings.nativePlayerEnabled = value
+            
         default:
             assertionFailure("not handled")
+            handleError("can't apply bool value for settings key \(key)")
         }
-        handleError("can't apply bool value for settings key \(key)")
+        
     }
     
     private func searchDurationFilterString(range: ClosedRange<Double>, max: Double) -> String {
@@ -219,9 +236,10 @@ class SettingsViewController: UIViewController, SearchSortOrderDelegate, UITable
         let property = sections[indexPath.section].properties[indexPath.row]
         
         switch property {
-        case .searchHD, .searchAdult, .minimizeStalling, .rightHandedPlayerControls:
+        case .searchHD, .searchAdult, .minimizeStalling, .rightHandedPlayerControls, .useNativePlayer:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell else { break }
             cell.label.text = property.localizedTitle
+            cell.label.numberOfLines = 0
             cell.switcher.isOn = getBoolSettings(property)
             cell.switcherAction = { [unowned self] in self.setBoolSettings(value: $0, for: property) }
             return cell

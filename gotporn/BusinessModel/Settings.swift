@@ -21,6 +21,9 @@ enum SettingsKey: String {
     case keyboardJumpVolume
     case videoQuality
     
+    //native player
+    case nativePlayerEnabled
+    
     //search
     case searchHD
     case searchAdult
@@ -121,6 +124,12 @@ struct Settings {
         set {
             set(value: newValue.map({$0.rawValue}), for: .videoQuality)
         }
+    }
+    
+    //MARK: Native player
+    static var nativePlayerEnabled: Bool {
+        get { return value(.nativePlayerEnabled) ?? false }
+        set { set(value: newValue, for: .nativePlayerEnabled) }
     }
     
     //MARK: Search request related

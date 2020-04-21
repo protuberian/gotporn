@@ -1,8 +1,17 @@
+/* Class = "UITextField"; placeholder = "enter captcha"; ObjectID = "gyI-ON-GnR"; */
+"gyI-ON-GnR.placeholder" = "введите текст с картинки";
+
 /* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "j42-yt-8dX"; */
 "j42-yt-8dX.normalTitle" = "Войти";
 
 /* Class = "UITextField"; placeholder = "password"; ObjectID = "mS8-iP-Iqe"; */
 "mS8-iP-Iqe.placeholder" = "пароль";
+
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "U3n-9S-Kie"; */
+"U3n-9S-Kie.normalTitle" = "Подтвердить";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "uwB-Hy-rOv"; */
+"uwB-Hy-rOv.normalTitle" = "Отменить";
 
 /* Class = "UITextField"; placeholder = "phone or email"; ObjectID = "VYd-gP-aQM"; */
 "VYd-gP-aQM.placeholder" = "телефон или email";
