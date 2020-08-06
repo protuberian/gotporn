@@ -29,6 +29,7 @@ class HistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchedResultsController.delegate = self
         try? fetchedResultsController.performFetch()
     }
     
@@ -57,6 +58,18 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         
         didSelectQuery?(model.text!)
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        let id = fetchedResultsController.fetchedObjects![indexPath.row].objectID
+        db.save { moc in
+            moc.delete(try! moc.existingObject(with: id))
+        }
+    }
 }
 
 extension HistoryViewController: NSFetchedResultsControllerDelegate {
@@ -72,6 +85,8 @@ extension HistoryViewController: NSFetchedResultsControllerDelegate {
         switch type {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .top)
+        case .update:
+            break
         default:
             fatalError("not implemented")
         }
