@@ -77,6 +77,11 @@ class SearchViewController: KeyboardObserverViewController {
         view.layoutIfNeeded()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        view.endEditing(true)
+        super.prepare(for: segue, sender: nil)
+    }
+    
     func updateLoadingState() {
         loadViewIfNeeded()
         footerLabel.isHidden = showsLoading
@@ -138,6 +143,7 @@ class SearchViewController: KeyboardObserverViewController {
     }
     
     private func performSearch() {
+        view.endEditing(true)
         guard let query = searchBar.text, query.count > 0 else { return }
         showsLoading = true
         Settings.searchText = query
@@ -175,11 +181,11 @@ extension SearchViewController: UISearchBarDelegate {
             self.dismiss(animated: true, completion: nil)
         }
         
+        view.endEditing(true)
         present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(false)
         performSearch()
     }
 }
@@ -250,7 +256,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        view.endEditing(false)
+        view.endEditing(true)
         let video = model.video(at: indexPath)
         
         guard let info = video.videoInfo else {
