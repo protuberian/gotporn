@@ -136,6 +136,13 @@ class SearchViewController: KeyboardObserverViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
+    
+    private func performSearch() {
+        guard let query = searchBar.text, query.count > 0 else { return }
+        showsLoading = true
+        Settings.searchText = query
+        model.query = query
+    }
 }
 
 extension SearchViewController: SettingsViewControllerDelegate {
@@ -160,16 +167,20 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        let vc = UIStoryboard(name: "History", bundle: nil).instantiateInitialViewController() as! HistoryViewController
+        vc.didSelectQuery = { [weak self] query in
+            guard let self = self else { return }
+            self.searchBar.text = query
+            self.performSearch()
+            self.dismiss(animated: true, completion: nil)
+        }
         
+        present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(false)
-        guard let query = searchBar.text, query.count > 0 else { return }
-        
-        showsLoading = true
-        Settings.searchText = query
-        model.query = query
+        performSearch()
     }
 }
 

@@ -97,6 +97,7 @@ class VideoSearchModel {
         
         assert(currentSearchTask == nil, "search in progress")
         currentSearchTask?.cancel()
+        willBeginSearch(text: parameters.query)
         currentSearchTask = api.search(parameters: parameters, completion: { [weak self] result in
             guard let self = self else { return }
             self.currentSearchTask = nil
@@ -114,6 +115,23 @@ class VideoSearchModel {
     }
     
     //MARK: - Private functions
+    func willBeginSearch(text: String) {
+        db.save { moc in
+            
+            let request: NSFetchRequest<SearchQuery> = SearchQuery.fetchRequest()
+            request.predicate = NSPredicate(format: "text = %@", text)
+            
+            let query: SearchQuery
+            if let savedQuery = db.fetch(request, inContext: moc).first {
+                query = savedQuery
+            } else {
+                query = SearchQuery(context: moc)
+                query.text = text
+            }
+            query.lastUsed = Date()
+        }
+    }
+    
     func didLoadResults(_ dto: SearchResult) {
         parameters.offset += parameters.count
         let lastPageLoaded = parameters.offset > dto.total
