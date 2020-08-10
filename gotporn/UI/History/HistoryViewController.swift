@@ -85,10 +85,10 @@ extension HistoryViewController: NSFetchedResultsControllerDelegate {
         switch type {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .top)
-        case .update:
+        case .update, .move:
             break
         default:
-            fatalError("not implemented")
+            assertionFailure("not handled")
         }
     }
     
