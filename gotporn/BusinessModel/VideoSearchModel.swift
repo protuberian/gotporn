@@ -37,6 +37,8 @@ class VideoSearchModel {
     var query: String {
         didSet {
             print("query updated: \(query)")
+            currentSearchTask?.cancel()
+            currentSearchTask = nil
             reload()
         }
     }
@@ -103,7 +105,12 @@ class VideoSearchModel {
             self.currentSearchTask = nil
             
             switch result {
-            case .failure:
+            case .failure(let error):
+                let nsError = error as NSError
+                if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorCancelled {
+                    break
+                }
+
                 self.ignoredErrors += 1
                 if self.ignoredErrors < 3 {
                     DispatchQueue.main.async { self.loadMore() }
