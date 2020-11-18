@@ -181,6 +181,7 @@ class VideoSearchModel {
                 video.q720 = dto.files?.q720
                 video.q1080 = dto.files?.q1080
                 video.qhls = dto.files?.qhls
+                video.external = dto.files?.external
                 
 //                print("\(video.sortIndex): \(dto.uid) - \(dto.title)")
             }

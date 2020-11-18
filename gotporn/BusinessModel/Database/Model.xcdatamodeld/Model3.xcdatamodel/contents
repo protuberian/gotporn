@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SearchQuery" representedClassName="SearchQuery" syncable="YES" codeGenerationType="class">
+        <attribute name="lastUsed" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" attributeType="String"/>
+    </entity>
+    <entity name="Video" representedClassName="Video" syncable="YES" codeGenerationType="class">
+        <attribute name="accessKey" optional="YES" attributeType="String"/>
+        <attribute name="duration" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="external" optional="YES" attributeType="URI"/>
+        <attribute name="id" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="ownerId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="photo320" attributeType="URI"/>
+        <attribute name="player" attributeType="URI"/>
+        <attribute name="q240" optional="YES" attributeType="URI"/>
+        <attribute name="q360" optional="YES" attributeType="URI"/>
+        <attribute name="q480" optional="YES" attributeType="URI"/>
+        <attribute name="q720" optional="YES" attributeType="URI"/>
+        <attribute name="q1080" optional="YES" attributeType="URI"/>
+        <attribute name="qhls" optional="YES" attributeType="URI"/>
+        <attribute name="sortIndex" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="uid" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="SearchQuery" positionX="-54" positionY="108" width="128" height="73"/>
+        <element name="Video" positionX="-63" positionY="-18" width="128" height="283"/>
+    </elements>
+</model>

@@ -77,7 +77,8 @@ struct VideoSearchResultDTO: Codable {
             let q480: URL?
             let q720: URL?
             let q1080: URL?
-            let qhls: URL
+            let qhls: URL?
+            let external: URL?
             
             enum CodingKeys: String, CodingKey {
                 case q240 = "mp4_240"
@@ -86,6 +87,7 @@ struct VideoSearchResultDTO: Codable {
                 case q720 = "mp4_720"
                 case q1080 = "mp4_1080"
                 case qhls = "hls"
+                case external
             }
         }
         

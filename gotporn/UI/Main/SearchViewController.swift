@@ -261,6 +261,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UITa
         
         guard let info = video.videoInfo else {
             handleError("video unavailable")
+            if let playerURL = video.external ?? video.player {
+                UIApplication.shared.open(playerURL, options: [:], completionHandler: nil)
+            }
             return
         }
         
