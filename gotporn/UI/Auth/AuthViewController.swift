@@ -11,6 +11,7 @@ import Combine
 
 class AuthViewController: UIViewController {
     
+    // MARK: - UI Elements
     @IBOutlet var loginField: UITextField!
     @IBOutlet var passwordField: UITextField!
     @IBOutlet var button: UIButton!
@@ -19,6 +20,7 @@ class AuthViewController: UIViewController {
     @IBOutlet var captchaImageView: UIImageView!
     @IBOutlet var captchaField: UITextField!
     
+    // MARK: - Properties
     private let completion: () -> Void
     private var bag: [AnyCancellable] = []
     
@@ -26,6 +28,7 @@ class AuthViewController: UIViewController {
     @Published private var password: String = ""
     private var captchaSid: String?
     
+    // MARK: - Init
     init?(coder: NSCoder, completion: @escaping () -> Void) {
         self.completion = completion
         super.init(coder: coder)
@@ -35,10 +38,12 @@ class AuthViewController: UIViewController {
         fatalError("use init?(coder: completion:)")
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         captchaView.translatesAutoresizingMaskIntoConstraints = false
+        addSecurePasswordTFToggle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +56,12 @@ class AuthViewController: UIViewController {
         bag.removeAll()
     }
     
+    // MARK: - Add secure password TF toggle
+    private func addSecurePasswordTFToggle() {
+        passwordField.enablePasswordToggle()
+    }
+    
+    // MARK: - Bind UI
     private func bindUI() {
         NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: loginField).map {
             ($0.object as? UITextField)?.text ?? ""
@@ -83,6 +94,7 @@ class AuthViewController: UIViewController {
         .store(in: &bag)
     }
     
+    // MARK: - Error handlers
     func didReceiveError(_ error: Error) {
         
         if case AuthError.needValidation( _, _, _, let validationType) = error {
@@ -136,6 +148,7 @@ class AuthViewController: UIViewController {
         }
     }
     
+    // MARK: - Auth logic
     private func signIn(captcha: (String, String)? = nil, validationCode: String? = nil) {
         view.isUserInteractionEnabled = false
         api.signIn(login: login, password: password, captcha: captcha, validationCode: validationCode) { [weak self] result in
