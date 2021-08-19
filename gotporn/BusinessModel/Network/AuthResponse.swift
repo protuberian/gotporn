@@ -33,4 +33,25 @@ struct AuthResponseCaptchaNeeded: Codable {
 }
 enum AuthError: Error {
     case captchaNeeded(sid: String, img: URL)
+    case needValidation(sid: String, redirectUrl: URL, phoneMask: String, validationType: String)
+}
+
+struct AuthResponse2FAAuthNeeded: Codable {
+    enum Error: String, Codable {
+        case needValidation = "need_validation"
+    }
+    
+    let error: Error
+    let validationSid: String
+    let phoneMask: String
+    let redirectUri: URL
+    let validationType: String
+    
+    enum CodingKeys: String, CodingKey {
+        case error
+        case validationSid = "validation_sid"
+        case phoneMask = "phone_mask"
+        case redirectUri = "redirect_uri"
+        case validationType = "validation_type"
+    }
 }

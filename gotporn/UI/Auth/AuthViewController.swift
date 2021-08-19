@@ -83,6 +83,37 @@ class AuthViewController: UIViewController {
     }
     
     func didReceiveError(_ error: Error) {
+        
+        if case AuthError.needValidation( _, _, _, let validationType) = error {
+            
+            var messageString = ""
+            let commonMessageString = NSLocalizedString(". Enter it in the field below", comment: "common message confirmation alert")
+            if validationType.contains("2fa_app") {
+                messageString = NSLocalizedString("You have been sent a confirmation code in the VK app", comment: "2fa app message confirmation alert")
+            } else if validationType.contains("2fa_sms") {
+                messageString = NSLocalizedString("An SMS was sent to you with a confirmation code", comment: "2fa sms message confirmation alert")
+            } else {
+                messageString = NSLocalizedString("A confirmation code has been sent to you", comment: "2fa message confirmation alert")
+            }
+            
+            let alertController = UIAlertController(title: NSLocalizedString("Two-factor authentification", comment: "two-auth confirmation title alert"), message: messageString + commonMessageString, preferredStyle: .alert)
+            alertController.addTextField { (textField) in
+                textField.placeholder = NSLocalizedString("Validation code", comment: "2fa confirmation alert text field placeholder")
+                textField.textContentType = .oneTimeCode
+                textField.keyboardType = .numberPad
+            }
+            let cancelButton = UIAlertAction(title: NSLocalizedString("Cancel", comment: "2fa confirmation alert action cancel"), style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: NSLocalizedString("Done", comment: "2fa confirmation alert action done"), style: .default) { [weak self] _ in
+                let codeTextField = alertController.textFields![0] as UITextField
+                self?.signIn(validationCode: codeTextField.text)
+            }
+            
+            alertController.addAction(cancelButton)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        
         guard case AuthError.captchaNeeded(let sid, let img) = error else {
             handleError(error)
             return
@@ -104,9 +135,9 @@ class AuthViewController: UIViewController {
         }
     }
     
-    private func signIn(captcha: (String, String)? = nil) {
+    private func signIn(captcha: (String, String)? = nil, validationCode: String? = nil) {
         view.isUserInteractionEnabled = false
-        api.signIn(login: login, password: password) { [weak self] result in
+        api.signIn(login: login, password: password, captcha: captcha, validationCode: validationCode) { [weak self] result in
             DispatchQueue.main.async {
                 self?.view.isUserInteractionEnabled = true
                 switch result {

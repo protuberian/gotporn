@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSl-jF-sDM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSl-jF-sDM">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,12 +22,12 @@
                                 <rect key="frame" x="141.5" y="265.5" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Kky-DA-Ib6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3pi-Nh-7q7" firstAttribute="centerY" secondItem="2Mm-GD-pLO" secondAttribute="centerY" id="C2f-oL-RbT"/>
                             <constraint firstItem="3pi-Nh-7q7" firstAttribute="centerX" secondItem="2Mm-GD-pLO" secondAttribute="centerX" id="xKq-Ki-KvF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kky-DA-Ib6"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0T-tT-99A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -43,8 +45,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjQ-M9-Esb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="czi-Ik-Bv3">
-                                        <rect key="frame" x="40" y="210" width="240" height="148"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="czi-Ik-Bv3">
+                                        <rect key="frame" x="40" y="202" width="240" height="164"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="phone or email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VYd-gP-aQM">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
@@ -55,19 +57,27 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" textContentType="email"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mS8-iP-Iqe">
-                                                <rect key="frame" x="0.0" y="52" width="240" height="44"/>
+                                                <rect key="frame" x="0.0" y="60" width="240" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="kzo-ZO-maz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="send" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j42-yt-8dX">
-                                                <rect key="frame" x="0.0" y="104" width="240" height="44"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j42-yt-8dX">
+                                                <rect key="frame" x="0.0" y="120" width="240" height="44"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="qeS-9x-C4Z"/>
                                                 </constraints>
-                                                <state key="normal" title="Sign in"/>
+                                                <state key="normal" title="Sign in">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="signInButtonTap:" destination="IFB-HR-xVC" eventType="touchUpInside" id="whp-fp-Xl5"/>
                                                 </connections>
@@ -75,7 +85,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="czi-Ik-Bv3" firstAttribute="leading" secondItem="kjQ-M9-Esb" secondAttribute="leadingMargin" id="AST-4m-Lkk"/>
                                     <constraint firstItem="czi-Ik-Bv3" firstAttribute="centerX" secondItem="kjQ-M9-Esb" secondAttribute="centerX" id="N3w-UO-Ssj"/>
@@ -85,7 +95,8 @@
                                 <edgeInsets key="layoutMargins" top="0.0" left="40" bottom="0.0" right="40"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="NJp-bc-vSr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kjQ-M9-Esb" firstAttribute="leading" secondItem="NJp-bc-vSr" secondAttribute="leading" id="2Pm-TD-wi5"/>
                             <constraint firstItem="kjQ-M9-Esb" firstAttribute="trailing" secondItem="NJp-bc-vSr" secondAttribute="trailing" id="NtW-9k-OMi"/>
@@ -93,7 +104,6 @@
                             <constraint firstItem="kjQ-M9-Esb" firstAttribute="top" secondItem="NJp-bc-vSr" secondAttribute="top" id="YmN-FF-z52"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="20" left="40" bottom="20" right="40"/>
-                        <viewLayoutGuide key="safeArea" id="NJp-bc-vSr"/>
                     </view>
                     <navigationItem key="navigationItem" id="uRB-Ks-hS2"/>
                     <connections>
@@ -127,14 +137,14 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3n-9S-Kie">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3n-9S-Kie">
                                             <rect key="frame" x="0.0" y="112" width="130" height="30"/>
                                             <state key="normal" title="Confirm"/>
                                             <connections>
                                                 <action selector="confirmCaptchaTap:" destination="IFB-HR-xVC" eventType="touchUpInside" id="Kk1-Da-pPp"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwB-Hy-rOv">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwB-Hy-rOv">
                                             <rect key="frame" x="0.0" y="156" width="130" height="30"/>
                                             <state key="normal" title="Cancel"/>
                                             <connections>
@@ -147,7 +157,7 @@
                                     </constraints>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="Rpj-DP-xwP" secondAttribute="bottom" constant="20" id="aAr-5k-1if"/>
                                 <constraint firstItem="Rpj-DP-xwP" firstAttribute="top" secondItem="VHh-Zk-bxt" secondAttribute="top" constant="20" id="bBK-bz-Q74"/>
@@ -161,12 +171,12 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="Nqx-Di-reu"/>
                     <color key="backgroundColor" name="VideoOverlay"/>
                     <constraints>
                         <constraint firstItem="VHh-Zk-bxt" firstAttribute="top" secondItem="Nqx-Di-reu" secondAttribute="top" constant="50" id="9NQ-8e-Qa9"/>
                         <constraint firstItem="VHh-Zk-bxt" firstAttribute="centerX" secondItem="GEn-Lu-i7X" secondAttribute="centerX" id="jLj-dJ-rDK"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="Nqx-Di-reu"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="-275.625" y="-525"/>
@@ -176,5 +186,11 @@
         <namedColor name="VideoOverlay">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
