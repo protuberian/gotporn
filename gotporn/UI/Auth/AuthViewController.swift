@@ -37,6 +37,7 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         captchaView.translatesAutoresizingMaskIntoConstraints = false
     }
     
