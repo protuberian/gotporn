@@ -36,6 +36,7 @@ enum SearchSort: String, CaseIterable {
     case added = "0"
     case duration = "1"
     case relevance = "2"
+    case viewed = "3"
     
     var localizedTitle: String {
         switch self {
@@ -45,6 +46,8 @@ enum SearchSort: String, CaseIterable {
             return NSLocalizedString("by duration", comment: "Search sort description")
         case .relevance:
             return NSLocalizedString("by relevance", comment: "Search sort description")
+        case .viewed:
+            return NSLocalizedString("by views", comment: "Search sort description")
         }
     }
 }

@@ -7,6 +7,9 @@
 /* Search sort description */
 "by relevance" = "по релевантности";
 
+/* Search sort description */
+"by views" = "по просмотрам";
+
 /* Fallback cell text if unexpected error occured */
 "can't configure cell" = "";
 
