@@ -12,7 +12,8 @@ class VideoCell: UITableViewCell {
 
     @IBOutlet var thumb: UIImageView!
     @IBOutlet var titleLabel: UILabel!
-    
+    @IBOutlet var youtubeMark: UIImageView!
+
     private var thumbLoadingTask: URLSessionDataTask?
     
     override func prepareForReuse() {
@@ -21,7 +22,7 @@ class VideoCell: UITableViewCell {
         thumbLoadingTask?.cancel()
     }
     
-    func updateWith(imageURL: URL, title: String, duration: Double) {
+    func updateWith(imageURL: URL, title: String, duration: Double, isYoutubeVideo: Bool) {
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.minute, .second]
@@ -35,5 +36,7 @@ class VideoCell: UITableViewCell {
         thumbLoadingTask = api.getImage(url: imageURL) { [weak self] image in
             self?.thumb.image = image
         }
+
+        youtubeMark.isHidden = !isYoutubeVideo
     }
 }
