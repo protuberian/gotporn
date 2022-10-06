@@ -228,6 +228,21 @@ extension SearchViewController: VideoSearchModelDelegate {
     func videoSearchModelDidLoadAllResults(_ model: VideoSearchModel) {
         showsLoading = false
     }
+
+    func videoSearchModel(model: VideoSearchModel, didFailWith error: Error) {
+        showsLoading = false
+        #if DEBUG
+        let nsError = error as NSError
+
+        let alert = UIAlertController(
+            title: nsError.domain,
+            message: "code \(nsError.code), \(nsError.localizedDescription), \(nsError.userInfo)",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Close", style: .default))
+        present(alert, animated: true)
+        #endif
+    }
 }
 
 // MARK: - UITableView

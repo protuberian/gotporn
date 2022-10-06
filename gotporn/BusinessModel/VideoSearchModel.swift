@@ -11,10 +11,7 @@ import CoreData
 
 protocol VideoSearchModelDelegate: NSFetchedResultsControllerDelegate {
     func videoSearchModelDidLoadAllResults(_ model: VideoSearchModel)
-}
-
-extension VideoSearchModelDelegate {
-    func videoSearchModelDidLoadAllResults(_ model: VideoSearchModel) {}
+    func videoSearchModel(model: VideoSearchModel, didFailWith error: Error)
 }
 
 class VideoSearchModel {
@@ -112,8 +109,12 @@ class VideoSearchModel {
                 }
 
                 self.ignoredErrors += 1
-                if self.ignoredErrors < 3 {
+                if self.ignoredErrors < 3 && !(error is DecodingError) {
                     DispatchQueue.main.async { self.loadMore() }
+                } else {
+                    DispatchQueue.main.async {
+                        self.delegate?.videoSearchModel(model: self, didFailWith: error)
+                    }
                 }
             case .success(let dto):
                 self.didLoadResults(dto)

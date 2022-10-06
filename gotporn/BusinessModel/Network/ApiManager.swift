@@ -83,8 +83,13 @@ class ApiManager {
         print(request)
 
         let task = self.urlSession.dataTask(with: request) { (data, response, error) in
-            if let data = data, let result = SearchResult(response: data) {
-                completion(.success(result))
+            if let data = data {
+                if let result = SearchResult(response: data) {
+                    completion(.success(result))
+                } else {
+                    let description = String(data: data, encoding: .utf8) ?? "unknown"
+                    completion(.failure(CustomError(location: location(), body: description)))
+                }
             } else {
                 completion(.failure(error ?? CustomError(location: location(), body: "Unhandled error")))
             }
@@ -100,7 +105,7 @@ class ApiManager {
         
         var items = [
             URLQueryItem(name: "access_token", value: Settings.token),
-            URLQueryItem(name: "v", value: "5.103"),
+            URLQueryItem(name: "v", value: "5.131"),
             URLQueryItem(name: "filters", value: "mp4"),
             
             URLQueryItem(name: "sort", value: Settings.searchSort.rawValue),
