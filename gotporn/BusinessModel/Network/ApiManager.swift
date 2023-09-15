@@ -106,7 +106,7 @@ class ApiManager {
         var items = [
             URLQueryItem(name: "access_token", value: Settings.token),
             URLQueryItem(name: "v", value: "5.131"),
-            URLQueryItem(name: "filters", value: "mp4"),
+//            URLQueryItem(name: "filters", value: "youtube"),
             
             URLQueryItem(name: "sort", value: Settings.searchSort.rawValue),
             URLQueryItem(name: "hd", value: asString(Settings.searchHD)),
