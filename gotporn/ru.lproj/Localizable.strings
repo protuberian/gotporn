@@ -73,3 +73,24 @@
 /* Settings property title */
 "Use standard player" = "Использовать стандартный проигрыватель";
 
+
+/* Alert Two-Auth title*/
+"Two-factor authentification" = "Двухфакторная аутентификация";
+
+/* Message validation app code */
+"You have been sent a confirmation code in the VK app" = "Вам был выслан код поддверждения в приложении ВК";
+
+/* Message validation sms code */
+"An SMS was sent to you with a confirmation code" = "Вам было выслано смс с кодом подтверждения";
+
+/* Message validation code */
+"A confirmation code has been sent to you" = "Вам был отправлен код подтверждения";
+
+/* Commont validation message */
+". Enter it in the field below" = ". Введите его в поле ниже";
+
+/* Done */
+"Done" = "Готово";
+
+/* Valication code placeholder */
+"Validation code" = "Код подтверждения";

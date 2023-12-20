@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		447C498D26CF077700D35745 /* UITextFIeld + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447C498C26CF077700D35745 /* UITextFIeld + Extension.swift */; };
 		50104B812412A94400D6E658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B802412A94400D6E658 /* AppDelegate.swift */; };
 		50104B8A2412A94600D6E658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50104B892412A94600D6E658 /* Assets.xcassets */; };
 		50104B972412ADD100D6E658 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50104B962412ADD100D6E658 /* AppCoordinator.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		447C498C26CF077700D35745 /* UITextFIeld + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFIeld + Extension.swift"; sourceTree = "<group>"; };
 		50104B7D2412A94400D6E658 /* gotporn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gotporn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50104B802412A94400D6E658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50104B892412A94600D6E658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		447C498B26CF075D00D35745 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				447C498C26CF077700D35745 /* UITextFIeld + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		50104B742412A94400D6E658 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 		50104B942412AD9400D6E658 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				447C498B26CF075D00D35745 /* Extensions */,
 				E40D339724DC0455002A4740 /* History */,
 				50F0DA6F2443628900CC29D3 /* Controls */,
 				50104BBF2415304000D6E658 /* Cells */,
@@ -370,6 +381,7 @@
 				50104BB52415246100D6E658 /* Database.swift in Sources */,
 				50F0DA7324446DFB00CC29D3 /* LogoutCell.swift in Sources */,
 				50104B9A2412B04400D6E658 /* AuthViewController.swift in Sources */,
+				447C498D26CF077700D35745 /* UITextFIeld + Extension.swift in Sources */,
 				50104BB7241524BA00D6E658 /* ErrorHandling.swift in Sources */,
 				50F0DA952444836800CC29D3 /* SliderCell.swift in Sources */,
 				E40D339924DC0473002A4740 /* HistoryViewController.swift in Sources */,

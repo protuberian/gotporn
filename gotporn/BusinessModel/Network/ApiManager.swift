@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
-let authURL = "https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username={USERNAME}&password={PASSWORD}&scope=video"
+let authURL = "https://oauth.vk.com/token?grant_type=password&client_id=2274003&client_secret=hHbZxrka2uZ6jB1inYsH&username={USERNAME}&password={PASSWORD}&scope=video&2fa_supported=1&v=5.131"
 
 class ApiManager {
     
@@ -29,7 +29,7 @@ class ApiManager {
         URLCache.shared = URLCache(memoryCapacity: 512*1024*1024, diskCapacity: 512*1024*1024)
     }
     
-    func signIn(login: String, password: String, captcha: (String, String)? = nil, completion: @escaping (Result<Void>) -> Void) {
+    func signIn(login: String, password: String, captcha: (String, String)? = nil, validationCode: String? = nil, completion: @escaping (Result<Void>) -> Void) {
         let safeLogin = login.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let safePassword = password.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         var url: String = authURL
@@ -38,6 +38,8 @@ class ApiManager {
         
         if let (sid, key) = captcha {
             url.append("&captcha_sid=\(sid)&captcha_key=\(key)")
+        } else if let validationCode = validationCode {
+            url.append("&code=\(validationCode)")
         }
         
         let task = urlSession.dataTask(with: URL(string: url)!) { (data, response, error) in
@@ -54,6 +56,11 @@ class ApiManager {
             
             if let dto = try? JSONDecoder().decode(AuthResponseCaptchaNeeded.self, from: data) {
                 completion(.failure(AuthError.captchaNeeded(sid: dto.captchaSid, img: dto.captchaImage)))
+                return
+            }
+            
+            if let dto = try? JSONDecoder().decode(AuthResponse2FAAuthNeeded.self, from: data) {
+                completion(.failure(AuthError.needValidation(sid: dto.validationSid, redirectUrl: dto.redirectUri, phoneMask: dto.phoneMask, validationType: dto.validationType)))
                 return
             }
             
