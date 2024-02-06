@@ -13,7 +13,8 @@ class VideoCell: UITableViewCell {
     @IBOutlet var thumb: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var youtubeMark: UIImageView!
-
+    @IBOutlet var labelLikes: UILabel!
+    
     private var thumbLoadingTask: URLSessionDataTask?
     
     override func prepareForReuse() {
@@ -21,8 +22,19 @@ class VideoCell: UITableViewCell {
         thumb.image = nil
         thumbLoadingTask?.cancel()
     }
-    
-    func updateWith(imageURL: URL, title: String, duration: Double, isYoutubeVideo: Bool) {
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        labelLikes.layer.cornerRadius = labelLikes.frame.height/2
+    }
+
+    func updateWith(
+        imageURL: URL,
+        title: String,
+        duration: Double,
+        isYoutubeVideo: Bool,
+        likes: Int64
+    ) {
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.minute, .second]
@@ -38,5 +50,12 @@ class VideoCell: UITableViewCell {
         }
 
         youtubeMark.isHidden = !isYoutubeVideo
+
+        if likes > 0 {
+            labelLikes.text = "♥ \(likes)"
+            labelLikes.isHidden = false
+        } else {
+            labelLikes.isHidden = true
+        }
     }
 }

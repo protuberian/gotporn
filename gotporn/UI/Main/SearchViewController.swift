@@ -313,7 +313,8 @@ extension VideoCell {
             imageURL: video.photo320!,
             title: video.title!,
             duration: Double(video.duration),
-            isYoutubeVideo: video.videoInfo == nil
+            isYoutubeVideo: video.videoInfo == nil,
+            likes: video.likes
         )
     }
 }

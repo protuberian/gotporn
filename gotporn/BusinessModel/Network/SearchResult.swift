@@ -47,7 +47,8 @@ struct VideoSearchResultDTO: Codable {
             let player: URL?
             let contentRestricted: Int?
             let files: Files?
-            
+            let likes: Likes?
+
             enum CodingKeys: String, CodingKey {
                 case id = "id"
                 case ownerId = "owner_id"
@@ -59,6 +60,7 @@ struct VideoSearchResultDTO: Codable {
                 case player = "player"
                 case contentRestricted = "content_restricted"
                 case files = "files"
+                case likes = "likes"
             }
             
             var thumb: URL {
@@ -70,7 +72,11 @@ struct VideoSearchResultDTO: Codable {
                 return "\(ownerId)_\(id)"
             }
         }
-        
+
+        struct Likes: Codable {
+            let count: Int
+        }
+
         struct Files: Codable {
             let q240: URL?
             let q360: URL?

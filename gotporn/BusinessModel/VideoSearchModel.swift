@@ -17,7 +17,7 @@ protocol VideoSearchModelDelegate: NSFetchedResultsControllerDelegate {
 class VideoSearchModel {
     
     struct Constants {
-        static let pageSize: UInt = 20
+        static let pageSize: UInt = 200
     }
     
     //MARK: - Public properties
@@ -183,7 +183,8 @@ class VideoSearchModel {
                 video.q1080 = dto.files?.q1080
                 video.qhls = dto.files?.qhls
                 video.external = dto.files?.external
-                
+                video.likes = Int64(dto.likes?.count ?? 0)
+
 //                print("\(video.sortIndex): \(dto.uid) - \(dto.title)")
             }
         }, completion: { success in

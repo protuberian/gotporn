@@ -91,6 +91,7 @@
 		50F0DA702443629600CC29D3 /* RangeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeControl.swift; sourceTree = "<group>"; };
 		50F0DA7224446DFB00CC29D3 /* LogoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCell.swift; sourceTree = "<group>"; };
 		50F0DA942444836800CC29D3 /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
+		62D4F9A22B726B2000DD47BB /* Model4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model4.xcdatamodel; sourceTree = "<group>"; };
 		E40D339824DC0473002A4740 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		E46A29362565260B0089AB62 /* Model3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model3.xcdatamodel; sourceTree = "<group>"; };
 		E4BFC70724DC0A0D001EBC06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/History.storyboard; sourceTree = "<group>"; };
@@ -642,11 +643,12 @@
 		50104BB82415272E00D6E658 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				62D4F9A22B726B2000DD47BB /* Model4.xcdatamodel */,
 				E46A29362565260B0089AB62 /* Model3.xcdatamodel */,
 				E4BFC70A24DC0C23001EBC06 /* Model2.xcdatamodel */,
 				50104BB92415272E00D6E658 /* Model.xcdatamodel */,
 			);
-			currentVersion = E46A29362565260B0089AB62 /* Model3.xcdatamodel */;
+			currentVersion = 62D4F9A22B726B2000DD47BB /* Model4.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

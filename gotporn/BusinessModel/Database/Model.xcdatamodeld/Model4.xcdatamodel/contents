@@ -9,6 +9,7 @@
         <attribute name="duration" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="external" optional="YES" attributeType="URI"/>
         <attribute name="id" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="likes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="ownerId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="photo320" attributeType="URI"/>
         <attribute name="player" attributeType="URI"/>
